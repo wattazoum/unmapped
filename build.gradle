@@ -1,0 +1,52 @@
+/**
+ * @author Patrick Wong
+ *
+ * To make Eclipse project files, just run "gradle eclipse"
+ *
+ */
+
+apply plugin: "groovy"
+apply plugin: "application"
+apply plugin: "eclipse"
+
+defaultTasks "clean", "installApp", "distZip"
+
+group = "patrickwong"
+version = "1.0.0-SNAPSHOT"
+mainClassName = "patrickwong.unmapped.UnmappedMain"
+
+configurations {
+	resourcesConfig
+	resourcesConfig.transitive = false
+}
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+
+dependencies {
+	groovy group: "org.codehaus.groovy", name: "groovy-all", version: "2.0.6"
+	
+	compile group: "com.googlecode.lanterna", name: "lanterna", version: "2.1.2"
+	compile group: "com.googlecode.soundlibs", name: "jorbis", version: "0.0.17-1"
+	compile group: "org.slf4j", name: "slf4j-api", version: "1.7.2"
+	// TODO - explain how I made this build and how I got it mavened
+	compile group: "org.newdawn", name: "easyogg", version: "0.7"
+	
+	runtime group: "org.slf4j", name: "slf4j-simple", version: "1.7.2"
+	resourcesConfig files("src/main/resources")
+}
+
+startScripts {
+	
+}
+
+eclipse {
+	classpath {
+		plusConfigurations += configurations.resourcesConfig
+		
+		downloadSources = true
+		downloadJavadoc = true
+	}
+}
