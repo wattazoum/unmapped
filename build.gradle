@@ -12,7 +12,7 @@ apply plugin: "eclipse"
 defaultTasks "clean", "installApp", "distZip"
 
 group = "patrickwong"
-version = "1.0.0-SNAPSHOT"
+version = "0.0.1-SNAPSHOT"
 mainClassName = "patrickwong.unmapped.UnmappedMain"
 
 configurations {
