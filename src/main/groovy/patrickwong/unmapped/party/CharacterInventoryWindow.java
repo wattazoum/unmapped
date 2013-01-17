@@ -2,19 +2,20 @@ package patrickwong.unmapped.party;
 
 import java.util.List;
 
-import patrickwong.unmapped.UnmappedMain;
-import patrickwong.unmapped.equipment.GameItem;
 import patrickwong.unmapped.model.PlayerCharacter;
+import patrickwong.unmapped.model.equipment.GameItem;
 
 import com.googlecode.lanterna.gui.Action;
 import com.googlecode.lanterna.gui.Window;
 import com.googlecode.lanterna.gui.component.Button;
+import com.googlecode.lanterna.gui.component.Label;
 import com.googlecode.lanterna.gui.component.Panel;
 
 public class CharacterInventoryWindow extends Window {
+	public static final int MAX_ITEMS_ON_SCREEN = 60;
 	private List<GameItem> inventory;
 	
-	public CharacterInventoryWindow(PlayerCharacter pc) {
+	public CharacterInventoryWindow(PlayerCharacter pc, Action returnAction) {
 		super(pc.getName() + " - Inventory");
 		inventory = pc.getInventory();
 		
@@ -22,14 +23,14 @@ public class CharacterInventoryWindow extends Window {
 		Panel leftColumn = new Panel(Panel.Orientation.VERTICAL);
 		Panel centerColumn = new Panel(Panel.Orientation.VERTICAL);
 		Panel rightColumn = new Panel(Panel.Orientation.VERTICAL);
-		for (int i = 0; (i < UnmappedMain.MAX_INVENTORY_SIZE) && (i < inventory.size()); i++) {
+		for (int i = 0; (i < MAX_ITEMS_ON_SCREEN) && (i < inventory.size()); i++) {
 			GameItem gi = inventory.get(i);
 			if (i < 20) {
-				leftColumn.addComponent(new Button(gi.getReadableName(), new ItemAction(gi, pc)));
+				leftColumn.addComponent(new Button(gi.getReadableName(), new ItemAction(gi, pc, returnAction)));
 			} else if (i < 40) {
-				centerColumn.addComponent(new Button(gi.getReadableName(), new ItemAction(gi, pc)));
+				centerColumn.addComponent(new Button(gi.getReadableName(), new ItemAction(gi, pc, returnAction)));
 			} else {
-				rightColumn.addComponent(new Button(gi.getReadableName(), new ItemAction(gi, pc)));
+				rightColumn.addComponent(new Button(gi.getReadableName(), new ItemAction(gi, pc, returnAction)));
 			}
 		}
 		mainPanel.addComponent(leftColumn);
@@ -37,11 +38,10 @@ public class CharacterInventoryWindow extends Window {
 		mainPanel.addComponent(rightColumn);
 		addComponent(mainPanel);
 		
-		addComponent(new Button("Cancel", new Action() {
-			@Override
-			public void doAction() {
-				UnmappedMain.getGUI().getActiveWindow().close();
-			}
-		}));
+		if (inventory.size() > MAX_ITEMS_ON_SCREEN) {
+			addComponent(new Label("(too many items to list)"));
+		}
+		
+		addComponent(new Button("Cancel", new CharacterMenuAction(pc, returnAction)));
 	}
 }

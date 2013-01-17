@@ -1,15 +1,12 @@
 package patrickwong.unmapped.party;
 
-import groovy.lang.Closure;
+import patrickwong.unmapped.UnmappedMain
+import patrickwong.unmapped.model.GameState
+import patrickwong.unmapped.model.PlayerCharacter
 
-import java.util.List;
-
-import patrickwong.unmapped.model.GameState;
-import patrickwong.unmapped.model.PlayerCharacter;
-
-import com.googlecode.lanterna.gui.Action;
-import com.googlecode.lanterna.gui.Window;
-import com.googlecode.lanterna.gui.component.Button;
+import com.googlecode.lanterna.gui.Action
+import com.googlecode.lanterna.gui.Window
+import com.googlecode.lanterna.gui.component.Button
 
 public class WhoWillWindow extends Window {
 	private List<PlayerCharacter> party;

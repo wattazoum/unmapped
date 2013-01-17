@@ -1,10 +1,11 @@
 package patrickwong.unmapped.newcharacter;
 
+import patrickwong.unmapped.InterfaceState;
+import patrickwong.unmapped.UnmappedMain;
 import patrickwong.unmapped.model.GameState;
 import patrickwong.unmapped.model.PlayerCharacter;
 
 import com.googlecode.lanterna.gui.Action;
-import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.gui.Window;
 import com.googlecode.lanterna.gui.component.ActionListBox;
 
@@ -27,14 +28,18 @@ public class BackgroundSelectWindow extends Window {
 		addComponent(chooseBackgroundList);
 	}
 	
+	private static void endBackground() {
+		InterfaceState.nextWindow = new ChildhoodSelectWindow();
+		UnmappedMain.closeCurrent();
+	}
+	
 	class LowSlaveAction implements Action {
 		@Override
 		public void doAction() {
 			tempCharacter.setBackground("low slave");
 			String[] bonuses = {"STR", "TGH", "END", "HLT", "VER"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new ChildhoodSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endBackground();
 		}
 	}
 	
@@ -43,9 +48,8 @@ public class BackgroundSelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setBackground("high slave");
 			String[] bonuses = {"STR", "VER", "END", "HLT", "TGH"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new ChildhoodSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endBackground();
 		}
 	}
 	
@@ -54,9 +58,8 @@ public class BackgroundSelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setBackground("servant");
 			String[] bonuses = {"DEX", "AGI", "END", "HLT", "VER"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new ChildhoodSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endBackground();
 		}
 	}
 	
@@ -65,9 +68,8 @@ public class BackgroundSelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setBackground("tenant");
 			String[] bonuses = {"STR", "LOG", "END", "REF", "DEX"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new ChildhoodSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endBackground();
 		}
 	}
 	
@@ -76,9 +78,8 @@ public class BackgroundSelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setBackground("landowner");
 			String[] bonuses = {"LOG", "MEM", "VER", "REF", "END"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new ChildhoodSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endBackground();
 		}
 	}
 	
@@ -87,9 +88,8 @@ public class BackgroundSelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setBackground("nobility");
 			String[] bonuses = {"WIT", "REF", "VER", "AGI", "DEX"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new ChildhoodSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endBackground();
 		}
 	}
 	
@@ -98,9 +98,8 @@ public class BackgroundSelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setBackground("traveller");
 			String[] bonuses = {"TGH", "END", "HLT", "REF", "LOG"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new ChildhoodSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endBackground();
 		}
 	}
 }

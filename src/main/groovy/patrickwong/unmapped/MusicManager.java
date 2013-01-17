@@ -16,34 +16,31 @@ public class MusicManager {
 		
 	}
 	
-	public static MusicManager getInstance() {
-		return musicManager;
-	}
-	
-	public void play(String song) {
+	public static void play(String song) {
 		boolean changeSong = false;
 		if (UnmappedMain.MUTE_MUSIC) {
 			return;
 		}
-		if (ogg == null) {
+		if (musicManager.ogg == null) {
 			changeSong = true;
-		} else if (!song.equalsIgnoreCase(currentSong)) {
+		} else if (!song.equalsIgnoreCase(musicManager.currentSong)) {
 			changeSong = true;
 		}
 		if (changeSong) {
-			if (ogg != null) {
-				ogg.stop();
+			if (musicManager.ogg != null) {
+				musicManager.ogg.stop();
+				musicManager.ogg.close();
 			}
 			try {
-				ogg = new OggClip("music" + File.separatorChar + song + ".ogg");
+				musicManager.ogg = new OggClip("music" + File.separatorChar + song + ".ogg");
 			} catch (IOException e) {
 				UnmappedMain.log.error(e.getMessage());
 				UnmappedMain.log.error("Error trying to play " + song);
 				UnmappedMain.log.error("You may need to install the music pack.");
 				return;
 			}
-			currentSong = song;
-			ogg.loop();
+			musicManager.currentSong = song;
+			musicManager.ogg.loop();
 		}
 	}
 }

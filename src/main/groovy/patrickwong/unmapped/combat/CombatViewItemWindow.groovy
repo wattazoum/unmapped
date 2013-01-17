@@ -1,8 +1,9 @@
 package patrickwong.unmapped.combat
 
+import patrickwong.unmapped.InterfaceState
 import patrickwong.unmapped.UnmappedMain
-import patrickwong.unmapped.equipment.GameItem
 import patrickwong.unmapped.model.PlayerCharacter
+import patrickwong.unmapped.model.equipment.GameItem
 
 import com.googlecode.lanterna.gui.Action
 import com.googlecode.lanterna.gui.Window
@@ -31,11 +32,12 @@ public class CombatViewItemWindow extends Window {
 		cd.setClosure {
 			return gi.useInCombat(pc, state)
 		}
-		CombatProcessUtil.toNextDecision(cd, state)
+		Closure toNextDecision = CombatProcessUtil.genToNextDecisionClosure()
+		toNextDecision(cd, state)
 	} as Action
 	
 	def cancelAction = {
+		InterfaceState.nextWindow = new CombatInventoryWindow(pc, state)
 		UnmappedMain.closeCurrent()
-		UnmappedMain.showWindow(new CombatInventoryWindow(pc, state))
 	} as Action
 }

@@ -1,10 +1,11 @@
 package patrickwong.unmapped.newcharacter;
 
+import patrickwong.unmapped.InterfaceState;
+import patrickwong.unmapped.UnmappedMain;
 import patrickwong.unmapped.model.GameState;
 import patrickwong.unmapped.model.PlayerCharacter;
 
 import com.googlecode.lanterna.gui.Action;
-import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.gui.Window;
 import com.googlecode.lanterna.gui.component.ActionListBox;
 
@@ -26,14 +27,18 @@ public class AdulthoodSelectWindow extends Window {
 		addComponent(chooseAdulthoodList);
 	}
 	
+	private static void endAdulthoodSelect() {
+		InterfaceState.nextWindow = new JobSelectWindow();
+		UnmappedMain.closeCurrent();
+	}
+	
 	class KillingAction implements Action {
 		@Override
 		public void doAction() {
 			tempCharacter.setAdulthood("taking a life");
 			String[] bonuses = {"STR", "TGH", "END", "AGI", "DEX"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new JobSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endAdulthoodSelect();
 		}
 	}
 	
@@ -42,9 +47,8 @@ public class AdulthoodSelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setAdulthood("losing virginity");
 			String[] bonuses = {"DEX", "VER", "END", "WIT", "MEM"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new JobSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endAdulthoodSelect();
 		}
 	}
 	
@@ -53,9 +57,8 @@ public class AdulthoodSelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setAdulthood("war");
 			String[] bonuses = {"STR", "REF", "END", "AGI", "HLT"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new JobSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endAdulthoodSelect();
 		}
 	}
 	
@@ -64,9 +67,8 @@ public class AdulthoodSelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setAdulthood("independence");
 			String[] bonuses = {"VER", "WIT", "REF", "TGH", "HLT"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new JobSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endAdulthoodSelect();
 		}
 	}
 	
@@ -75,9 +77,8 @@ public class AdulthoodSelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setAdulthood("graduation");
 			String[] bonuses = {"LOG", "MEM", "VER", "DEX", "STR"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new JobSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endAdulthoodSelect();
 		}
 	}
 	
@@ -86,9 +87,8 @@ public class AdulthoodSelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setAdulthood("responsibility");
 			String[] bonuses = {"LOG", "VER", "MEM", "DEX", "WIT"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new JobSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endAdulthoodSelect();
 		}
 	}
 	
@@ -97,9 +97,8 @@ public class AdulthoodSelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setAdulthood("ritual");
 			String[] bonuses = {"DEX", "END", "HLT", "TGH", "SIX"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new JobSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endAdulthoodSelect();
 		}
 	}
 }

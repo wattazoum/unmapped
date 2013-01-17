@@ -2,11 +2,13 @@ package patrickwong.unmapped.combat;
 
 import java.util.List;
 
+import patrickwong.unmapped.InterfaceState;
+import patrickwong.unmapped.UnmappedMain;
+import patrickwong.unmapped.mainmenu.MainMenuWindow;
 import patrickwong.unmapped.model.GameState;
 import patrickwong.unmapped.model.PlayerCharacter;
 
 import com.googlecode.lanterna.gui.Action;
-import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.gui.Window;
 import com.googlecode.lanterna.gui.component.Button;
 import com.googlecode.lanterna.gui.component.Label;
@@ -35,13 +37,25 @@ public class CombatStatusWindow extends Window {
 		}
 		addComponent(new Label(enemyStatusString));
 		
+		if (!(gs.isPartyAlive())) {
+			addComponent(new Label("The party has perished!"));
+			addComponent(new Button("This is the end...", new Action() {
+				@Override
+				public void doAction() {
+					GameState.wipeGameState();
+					InterfaceState.nextWindow = new MainMenuWindow();
+					UnmappedMain.closeCurrent();
+				}
+			}));
+		}
+		
 		addComponent(new Button("OK", new Action() {
 			@Override
 			public void doAction() {
-				getOwner().getActiveWindow().close();
 				if (!pop) {
-					getOwner().showWindow(new CombatWindow(state), GUIScreen.Position.CENTER);
+					InterfaceState.nextWindow = new CombatWindow(state);
 				}
+				UnmappedMain.closeCurrent();
 			}
 		}));
 	}

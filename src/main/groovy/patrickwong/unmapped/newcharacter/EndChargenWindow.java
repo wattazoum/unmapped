@@ -1,5 +1,6 @@
 package patrickwong.unmapped.newcharacter;
 
+import patrickwong.unmapped.InterfaceState;
 import patrickwong.unmapped.UnmappedMain;
 import patrickwong.unmapped.mainmenu.MainMenuAction;
 import patrickwong.unmapped.model.GameState;
@@ -8,7 +9,6 @@ import patrickwong.unmapped.town.TavernAction;
 import patrickwong.unmapped.town.TavernWindow;
 
 import com.googlecode.lanterna.gui.Action;
-import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.gui.Window;
 import com.googlecode.lanterna.gui.component.Button;
 import com.googlecode.lanterna.gui.component.Label;
@@ -36,8 +36,8 @@ public class EndChargenWindow extends Window {
 		@Override
 		public void doAction() {
 			gameState.addToParty(gameState.getTempCharacter());
-			UnmappedMain.getGUI().getActiveWindow().close();
-			UnmappedMain.getGUI().showWindow(new TavernWindow(), GUIScreen.Position.CENTER);
+			InterfaceState.nextWindow = new TavernWindow();
+			UnmappedMain.closeCurrent();
 		}
 	}
 }

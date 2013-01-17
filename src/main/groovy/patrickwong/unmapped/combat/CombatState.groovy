@@ -1,13 +1,30 @@
 package patrickwong.unmapped.combat
 
 import patrickwong.unmapped.DiceRoller
-import patrickwong.unmapped.model.GameState;
+import patrickwong.unmapped.model.GameState
+import patrickwong.unmapped.model.PlayerCharacter
 
 public class CombatState {
 	List<EnemyGroup> enemyGroups
 	List<CombatDecision> decisions
 	Integer currentCharacter
 	Boolean inMelee
+	Closure doVictory = {
+		String victoryMessage = "The sociopaths lie dead before you.\n"
+		int money = DiceRoller.binaryPool(100)
+		GameState.getInstance().partyMoney += money
+		victoryMessage += "They had $money worth of money and gear on them.\n"
+		for (PlayerCharacter pc : GameState.getInstance().getParty()) {
+			pc.removeShock(100)
+		}
+		return victoryMessage
+	}
+	Closure afterVictory = {
+		
+	}
+	Closure afterRunning = {
+		
+	}
 	
 	public CombatState() {
 		enemyGroups = new Vector<EnemyGroup>()
@@ -58,11 +75,27 @@ public class CombatState {
 		return meleeGroups.get(rand)
 	}
 	
-	public String doVictory() {
-		String victoryMessage = "The sociopaths lie dead before you.\n"
-		int money = DiceRoller.binaryPool(100)
-		GameState.getInstance().partyMoney += money
-		victoryMessage += "They had $money worth of money and gear on them.\n"
-		return victoryMessage
+	public void addRange(int rangeMod) {
+		for (EnemyGroup eg : enemyGroups) {
+			eg.distance += rangeMod
+		}
+	}
+	
+	public void decreaseRange(int rangeMod) {
+		for (EnemyGroup eg : enemyGroups) {
+			eg.distance -= rangeMod
+			if (eg.distance <= 0) {
+				eg.distance = 0
+			}
+		}
+	}
+	
+	public void setRange(int range) {
+		for (EnemyGroup eg : enemyGroups) {
+			eg.distance = range
+			if (eg.distance <= 0) {
+				eg.distance = 0
+			}
+		}
 	}
 }

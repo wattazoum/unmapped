@@ -1,9 +1,10 @@
 package patrickwong.unmapped.newcharacter;
 
+import patrickwong.unmapped.InterfaceState;
+import patrickwong.unmapped.UnmappedMain;
 import patrickwong.unmapped.model.GameState;
 
 import com.googlecode.lanterna.gui.Action;
-import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.gui.Window;
 import com.googlecode.lanterna.gui.component.ActionListBox;
 
@@ -19,12 +20,16 @@ public class GenderSelectWindow extends Window {
 		addComponent(chooseGenderList);
 	}
 	
+	private static void endGenderSelect() {
+		InterfaceState.nextWindow = new BackgroundSelectWindow();
+		UnmappedMain.closeCurrent();
+	}
+	
 	class ChooseMaleAction implements Action {
 		@Override
 		public void doAction() {
 			GameState.getInstance().getTempCharacter().setGender("male");
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new BackgroundSelectWindow(), GUIScreen.Position.CENTER);
+			endGenderSelect();
 		}
 	}
 	
@@ -32,8 +37,7 @@ public class GenderSelectWindow extends Window {
 		@Override
 		public void doAction() {
 			GameState.getInstance().getTempCharacter().setGender("female");
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new BackgroundSelectWindow(), GUIScreen.Position.CENTER);
+			endGenderSelect();
 		}
 	}
 	
@@ -41,8 +45,7 @@ public class GenderSelectWindow extends Window {
 		@Override
 		public void doAction() {
 			GameState.getInstance().getTempCharacter().setGender("plural");
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new BackgroundSelectWindow(), GUIScreen.Position.CENTER);
+			endGenderSelect();
 		}
 	}
 	
@@ -50,8 +53,7 @@ public class GenderSelectWindow extends Window {
 		@Override
 		public void doAction() {
 			GameState.getInstance().getTempCharacter().setGender("neuter");
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new BackgroundSelectWindow(), GUIScreen.Position.CENTER);
+			endGenderSelect();
 		}
 	}
 }

@@ -2,17 +2,18 @@ package patrickwong.unmapped.model
 
 import patrickwong.unmapped.DiceRoller
 import patrickwong.unmapped.UnmappedMain
-import patrickwong.unmapped.equipment.GameItem
+import patrickwong.unmapped.model.equipment.GameItem;
 import patrickwong.unmapped.town.TavernAction
 
 import com.googlecode.lanterna.gui.Action
 
 public class GameState {
+	private boolean hello = false
 	Boolean gameInProgress = false
 	PlayerCharacter tempCharacter = new PlayerCharacter()
 	List<PlayerCharacter> party = new Vector<PlayerCharacter>()
 	List<GameItem> stash = new Vector<GameItem>()
-	Long partyMoney = 0
+	Long partyMoney = 100
 	String currentLocation = "default location"
 	String currentRegion = "default region"
 	Long currentTime = 0
@@ -27,6 +28,10 @@ public class GameState {
 	
 	public static void wipeGameState() {
 		gameState = new GameState()
+	}
+	
+	public String getMoneyString() {
+		return UnmappedMain.moneyAsString(partyMoney)
 	}
 	
 	public PlayerCharacter getCharacter(String charName) {

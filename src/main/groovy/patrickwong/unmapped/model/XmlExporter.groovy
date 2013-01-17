@@ -1,7 +1,7 @@
 package patrickwong.unmapped.model
 
 import groovy.xml.MarkupBuilder
-import patrickwong.unmapped.equipment.GameItem
+import patrickwong.unmapped.model.equipment.GameItem;
 
 public class XmlExporter {
 	public static String makeXml() {

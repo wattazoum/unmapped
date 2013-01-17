@@ -1,15 +1,20 @@
 package patrickwong.unmapped.party;
 
+import patrickwong.unmapped.InterfaceState;
 import patrickwong.unmapped.UnmappedMain;
 
 import com.googlecode.lanterna.gui.Action;
-import com.googlecode.lanterna.gui.GUIScreen;
 
 public class PartyMenuAction implements Action {
-
+	private Action returnAction;
+	public PartyMenuAction(Action returnAction) {
+		this.returnAction = returnAction;
+	}
+	
 	@Override
 	public void doAction() {
-		UnmappedMain.getGUI().showWindow(new PartyMenuWindow(), GUIScreen.Position.CENTER);
+		InterfaceState.nextWindow = new PartyMenuWindow(returnAction);
+		UnmappedMain.closeCurrent();
 	}
 
 }

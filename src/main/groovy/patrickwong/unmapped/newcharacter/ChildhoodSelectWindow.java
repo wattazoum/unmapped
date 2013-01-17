@@ -1,10 +1,11 @@
 package patrickwong.unmapped.newcharacter;
 
+import patrickwong.unmapped.InterfaceState;
+import patrickwong.unmapped.UnmappedMain;
 import patrickwong.unmapped.model.GameState;
 import patrickwong.unmapped.model.PlayerCharacter;
 
 import com.googlecode.lanterna.gui.Action;
-import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.gui.Window;
 import com.googlecode.lanterna.gui.component.ActionListBox;
 
@@ -27,14 +28,18 @@ public class ChildhoodSelectWindow extends Window {
 		addComponent(chooseChildhoodList);
 	}
 	
+	private static void endChildhood() {
+		InterfaceState.nextWindow = new TeenageSelectWindow();
+		UnmappedMain.closeCurrent();
+	}
+	
 	class StarvingAction implements Action {
 		@Override
 		public void doAction() {
 			tempCharacter.setChildhood("starving");
 			String[] bonuses = {"STR", "TGH", "END", "HLT", "WIT"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new TeenageSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endChildhood();
 		}
 	}
 	
@@ -43,9 +48,8 @@ public class ChildhoodSelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setChildhood("begging");
 			String[] bonuses = {"VER", "REF", "END", "HLT", "WIT"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new TeenageSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endChildhood();
 		}
 	}
 	
@@ -54,9 +58,8 @@ public class ChildhoodSelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setChildhood("stealing");
 			String[] bonuses = {"DEX", "AGI", "END", "HLT", "MEM"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new TeenageSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endChildhood();
 		}
 	}
 	
@@ -65,9 +68,8 @@ public class ChildhoodSelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setChildhood("working");
 			String[] bonuses = {"DEX", "TGH", "END", "VER", "MEM"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new TeenageSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endChildhood();
 		}
 	}
 	
@@ -76,9 +78,8 @@ public class ChildhoodSelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setChildhood("learning");
 			String[] bonuses = {"LOG", "MEM", "VER", "DEX", "STR"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new TeenageSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endChildhood();
 		}
 	}
 	
@@ -87,9 +88,8 @@ public class ChildhoodSelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setChildhood("playing");
 			String[] bonuses = {"AGI", "DEX", "STR", "HLT", "REF"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new TeenageSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endChildhood();
 		}
 	}
 	
@@ -98,9 +98,8 @@ public class ChildhoodSelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setChildhood("wrestling");
 			String[] bonuses = {"STR", "TGH", "END", "HLT", "REF"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new TeenageSelectWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endChildhood();
 		}
 	}
 }

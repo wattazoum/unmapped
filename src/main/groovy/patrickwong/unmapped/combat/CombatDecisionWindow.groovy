@@ -1,14 +1,13 @@
 package patrickwong.unmapped.combat
 
+import patrickwong.unmapped.InterfaceState
 import patrickwong.unmapped.UnmappedMain
-import patrickwong.unmapped.enemy.Enemy
 import patrickwong.unmapped.model.GameState
 import patrickwong.unmapped.model.PlayerCharacter
 
 import com.googlecode.lanterna.gui.Action
 import com.googlecode.lanterna.gui.GUIScreen
 import com.googlecode.lanterna.gui.Window
-import com.googlecode.lanterna.gui.GUIScreen.Position
 import com.googlecode.lanterna.gui.component.Button
 
 public class CombatDecisionWindow extends Window {
@@ -40,8 +39,8 @@ public class CombatDecisionWindow extends Window {
 		}
 		
 		def cancelAction = {
+			InterfaceState.nextWindow = new CombatWindow(state)
 			UnmappedMain.closeCurrent()
-			UnmappedMain.showWindow(new CombatWindow(state))
 		} as Action
 		addComponent(new Button("Cancel", cancelAction))
 	}
@@ -57,7 +56,8 @@ public class CombatDecisionWindow extends Window {
 			action = DefaultCombatUtil.doAttack(pc, target)
 			return action
 		}
-		CombatProcessUtil.toNextDecision(cd, state)
+		Closure toNextDecision = CombatProcessUtil.genToNextDecisionClosure()
+		toNextDecision(cd, state)
 	} as Action
 	
 	def defendAction = {
@@ -65,7 +65,8 @@ public class CombatDecisionWindow extends Window {
 			String action = pc.getName() + " defends (not implemented)"
 			return action
 		}
-		CombatProcessUtil.toNextDecision(cd, state)
+		Closure toNextDecision = CombatProcessUtil.genToNextDecisionClosure()
+		toNextDecision(cd, state)
 	} as Action
 
 	def specialAction = {
@@ -73,12 +74,13 @@ public class CombatDecisionWindow extends Window {
 			String action = pc.getName() + " does a special action (not implemented)"
 			return action
 		}
-		CombatProcessUtil.toNextDecision(cd, state)
+		Closure toNextDecision = CombatProcessUtil.genToNextDecisionClosure()
+		toNextDecision(cd, state)
 	} as Action
 
 	def useItemAction = {
+		InterfaceState.nextWindow = new CombatInventoryWindow(pc, state)
 		UnmappedMain.closeCurrent()
-		UnmappedMain.showWindow(new CombatInventoryWindow(pc, state))
 	} as Action
 	
 	def passAction = {
@@ -86,7 +88,8 @@ public class CombatDecisionWindow extends Window {
 			String action = pc.getName() + " passes"
 			return action
 		}
-		CombatProcessUtil.toNextDecision(cd, state)
+		Closure toNextDecision = CombatProcessUtil.genToNextDecisionClosure()
+		toNextDecision(cd, state)
 	} as Action
 
 	def assessAction = {
@@ -95,7 +98,7 @@ public class CombatDecisionWindow extends Window {
 	
 	def previousAction = {
 		state.currentCharacter -= 1
+		InterfaceState.nextWindow = new CombatDecisionWindow(state, gs.getCharacter(state.getCurrentCharacter()))
 		UnmappedMain.closeCurrent()
-		UnmappedMain.showWindow(new CombatDecisionWindow(state, gs.getCharacter(state.getCurrentCharacter())))
 	} as Action
 }

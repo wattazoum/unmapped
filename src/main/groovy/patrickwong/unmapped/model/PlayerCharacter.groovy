@@ -4,12 +4,16 @@ import patrickwong.unmapped.DiceRoller
 import patrickwong.unmapped.UnmappedMain
 import patrickwong.unmapped.combat.Combatant
 import patrickwong.unmapped.combat.DefaultCombatUtil
-import patrickwong.unmapped.equipment.GameItem
+import patrickwong.unmapped.model.equipment.Equippable
+import patrickwong.unmapped.model.equipment.GameItem
+import patrickwong.unmapped.model.equipment.Grippable
+
+import com.googlecode.lanterna.gui.dialog.MessageBox
 
 
 public class PlayerCharacter implements Comparable, Combatant {
 	Integer order = 0
-	String name = new String("Default Name")
+	String name = "Default Name"
 	String gender = "male"
 	String background = "default background"
 	String childhood = "default childhood"
@@ -26,6 +30,9 @@ public class PlayerCharacter implements Comparable, Combatant {
 	List<CharacterStat> stats = CharacterStat.getDefaultStats()
 	List<CharacterSkill> skills = CharacterSkill.getDefaultSkills()
 	List<GameItem> inventory = new Vector<GameItem>()
+	List<EquipSlot> equipment = EquipSlot.getDefaultEquipSlots()
+	Grippable rightHand = Grippable.getRightFist()
+	Grippable leftHand = Grippable.getLeftFist()
 	
 	public String summaryString() {
 		String summaryString = """${name}
@@ -40,15 +47,24 @@ Hobby: ${hobby}"""
 		summaryString += getStatus()
 	}
 	
+	// NOTE - FUNCTIONS FOR STATS
+	
 	public void statAddValue(String shortName, Integer amount) {
 		CharacterStat stat = getStat(shortName)
 		stat.value += amount
+		if (!(UnmappedMain.suppressLevelupMessages)) {
+			MessageBox.showMessageBox(UnmappedMain.getGUI(), "$name improved a stat!", (name + " " + stat.levelupMessage))
+		}
 	}
 	
 	public void statAddExp(String shortName, Integer amount) {
 		UnmappedMain.log.debug("statAddExp(" + shortName + ", "+ amount + ")")
 		CharacterStat stat = getStat(shortName)
-		stat.addExp(amount)
+		if (stat.addExp(amount)) {
+			if (!(UnmappedMain.suppressLevelupMessages)) {
+				MessageBox.showMessageBox(UnmappedMain.getGUI(), "$name improved a stat!", (name + " " + stat.levelupMessage))
+			}
+		}
 	}
 	
 	public void statAddExp(String shortName) {
@@ -85,6 +101,8 @@ Hobby: ${hobby}"""
 		return DiceRoller.binaryPool(getStatValue(shortName))
 	}
 	
+	// NOTE - FUNCTIONS FOR SKILLS
+	
 	public CharacterSkill getSkill(String codeName) {
 		for (CharacterSkill skill : skills) {
 			if (codeName.equalsIgnoreCase(skill.codeName)) {
@@ -105,25 +123,39 @@ Hobby: ${hobby}"""
 	public void skillAddExp(String codeName, Integer amount) {
 		CharacterSkill skill = getSkill(codeName)
 		if (skill != null) {
-			skill.addExp(amount)
+			if (skill.addExp(amount)) {
+				if (!(UnmappedMain.suppressLevelupMessages)) {
+					MessageBox.showMessageBox(UnmappedMain.getGUI(), "$name improved a skill!", (name + " " + skill.levelupMessage))
+				}
+			}
 		}
+	}
+	public void skillAddExp(String codeName) {
+		skillAddExp(codeName, 1)
 	}
 	
 	public void skillsAddExp(String[] codeNames, Integer amount) {
 		for (String codeName : codeNames) {
-			skillAddExp(codeName)
+			skillAddExp(codeName, amount)
 		}
 	}
 	
 	public void skillsAllAddExp(Integer amount) {
 		for (CharacterSkill skill : skills) {
-			skill.addExp(amount)
+			if (skill.addExp(amount)) {
+				if (!(UnmappedMain.suppressLevelupMessages)) {
+					MessageBox.showMessageBox(UnmappedMain.getGUI(), "$name improved a skill!", (name + " " + skill.levelupMessage))
+				}
+			}
 		}
 	}
 	
 	public Integer rollSkill(String codeName) {
+		skillAddExp(codeName)
 		return DiceRoller.binaryPool(getSkillValue(codeName))
 	}
+	
+	// NOTE - FUNCTIONS FOR INVENTORY AND EQUIPMENT
 	
 	public GameItem getItem(String key) {
 		for (GameItem gi : inventory) {
@@ -137,8 +169,22 @@ Hobby: ${hobby}"""
 		GameItem possibleMatch = getItem(gi.key)
 		if (possibleMatch != null) {
 			if (possibleMatch.stackable) {
-				UnmappedMain.log.info("adding to item stack")
+				UnmappedMain.log.debug("adding to item stack")
 				possibleMatch.stackSize += 1
+			} else {
+				inventory.add(gi)
+			}
+		} else {
+			inventory.add(gi)
+		}
+		inventory = inventory.sort()
+	}
+	public void addItemStack(GameItem gi) {
+		GameItem possibleMatch = getItem(gi.key)
+		if (possibleMatch != null) {
+			if (possibleMatch.stackable) {
+				UnmappedMain.log.debug("adding an item stack to another item stack")
+				possibleMatch.stackSize += gi.stackSize
 			} else {
 				inventory.add(gi)
 			}
@@ -157,35 +203,118 @@ Hobby: ${hobby}"""
 			}
 		}
 	}
+	public void removeItemStack(String key) {
+		GameItem gi = getItem(key)
+		inventory.remove(gi)
+	}
+	
+	public GameItem takeItem(String key) {
+		GameItem gi = getItem(key)
+		if (gi != null) {
+			if (gi.stackable && (gi.stackSize > 1)) {
+				gi.stackSize -= 1
+			} else {
+				inventory.remove(gi)
+			}
+		}
+		GameItem newItem = gi.clone()
+		newItem.stackSize = 1
+		return newItem
+	}
+	
+	// NOTE - EQUIPMENT MANAGEMENT
+	public List<Equippable> getEquippablesFromInventory(String slotType) {
+		List<Equippable> matches = new Vector<Equippable>()
+		for (GameItem gi : inventory) {
+			if (gi instanceof Equippable) {
+				Equippable possibleMatch = ((Equippable)gi)
+				if (slotType.equalsIgnoreCase(possibleMatch.slotType)) {
+					matches.add(possibleMatch)
+				}
+			}
+		}
+		if (matches.size() > 0) {
+			return matches
+		} else {
+			return null
+		}
+	}
+	public List<EquipSlot> getPossibleSlots(Equippable gi) {
+		List<EquipSlot> matches = new Vector<EquipSlot>()
+		for (EquipSlot es : equipment) {
+			if (gi.slotType.equalsIgnoreCase(es.slotType)) {
+				matches.add(es)
+			}
+		}
+		return matches
+	}
+	public EquipSlot getEquipSlot(String equipSlotKey) {
+		for (EquipSlot slot : equipment) {
+			if (equipSlotKey.equalsIgnoreCase(slot.key)) {
+				return slot
+			}
+		}
+		return null
+	}
+	public void unequipItem(String equipSlotKey) {
+		EquipSlot equipSlot = getEquipSlot(equipSlotKey)
+		if (equipSlot.slot != null) {
+			addItem(equipSlot.slot)
+			equipSlot.slot = null
+		}
+	}
+	public void equipItem(Equippable item, String equipSlotKey) {
+		EquipSlot equipSlot = getEquipSlot(equipSlotKey)
+		unequipItem(equipSlotKey)
+		equipSlot.slot = item
+	}
+	public void equipItemFromInventory(String itemKey, String equipSlotKey) {
+		EquipSlot equipSlot = getEquipSlot(equipSlotKey)
+		unequipItem(equipSlotKey)
+		Equippable itemToEquip = ((Equippable)(takeItem(itemKey)))
+		equipSlot.slot = itemToEquip
+	}
+	
+	// NOTE - FUNCTIONS FOR EQUIPMENT BONUSES
+	
+	public int getBonusTotal(String bonusKey) {
+		int bonusTotal = 0
+		for (EquipSlot equipSlot : equipment) {
+			if (equipSlot.slot != null) {
+				if (equipSlot.slot.bonuses != null) {
+					Integer possibleBonus = equipSlot.slot.bonuses.get(bonusKey)
+					if (possibleBonus != null) {
+						bonusTotal += possibleBonus
+					}
+				}
+			}
+		}
+		return bonusTotal
+	}
+	
+	public int rollBonuses(String bonusKey) {
+		int result = 0
+		result += DiceRoller.binaryPool(getBonusTotal(bonusKey))
+		return result
+	}
+	
+	// NOTE - FUNCTIONS FOR COMBAT
 	
 	public String getAttackVerb() {
 		String attackString = " attacks "
 		return attackString
 	}
 	
-	public int compareTo(Object o) {
-		if (o instanceof PlayerCharacter) {
-			return order.compareTo(((PlayerCharacter)o).getOrder())
-		}
-		return order.compareTo(o)
-	}
-	
-	public int compareTo(PlayerCharacter pc) {
-		return order.compareTo(pc.order)
-	}
-	
 	public Integer rollAttackAccuracy() {
 		int result = 0
-		result += rollStat("DEX")
-		result += rollSkill("fighting")
-		result += rollSkill("melee_fighting")
-		result += rollSkill("unarmed")
+		result += rightHand.rollAttackAccuracy(this);
+		result -= shock
 		return result
 	}
 	
 	public Integer rollAttackDamage() {
 		int result = 0
-		result += rollStat("STR")
+		result += rightHand.rollAttackDamage(this)
 		return result
 	}
 	
@@ -199,6 +328,7 @@ Hobby: ${hobby}"""
 		result += rollSkill("fighting")
 		result += rollSkill("melee_defense")
 		result += rollSkill("melee_evasion")
+		result -= shock
 		return result
 	}
 	public Integer rollRangeEvade() {
@@ -207,6 +337,7 @@ Hobby: ${hobby}"""
 		result += rollSkill("fighting")
 		result += rollSkill("ranged_defense")
 		result += rollSkill("ranged_evasion")
+		result -= shock
 		return result
 	}
 	public void addShock(Integer shock) {
@@ -247,29 +378,34 @@ Hobby: ${hobby}"""
 			this.wounds = 0
 		}
 	}
-	public Integer getCuttingResistance() {
+	public Integer rollCuttingResistance() {
 		Integer resistance = 0
 		resistance += rollStat("TGH")
+		resistance += rollBonuses("resist_cutting")
 		return resistance;
 	}
-	public Integer getPiercingResistance() {
+	public Integer rollPiercingResistance() {
 		Integer resistance = 0
 		resistance += rollStat("TGH")
+		resistance += rollBonuses("resist_piercing")
 		return resistance;
 	}
-	public Integer getImpactResistance() {
+	public Integer rollImpactResistance() {
 		Integer resistance = 0
 		resistance += rollStat("TGH")
+		resistance += rollBonuses("resist_impact")
 		return resistance;
 	}
-	public Integer getBulletResistance() {
+	public Integer rollBulletResistance() {
 		Integer resistance = 0
 		resistance += rollStat("TGH")
+		resistance += rollBonuses("resist_bullet")
 		return resistance;
 	}
-	public Integer getElementalResistance() {
+	public Integer rollElementalResistance() {
 		Integer resistance = 0
 		resistance += rollStat("TGH")
+		resistance += rollBonuses("resist_elemental")
 		return resistance;
 	}
 	
@@ -306,7 +442,9 @@ Hobby: ${hobby}"""
 		shock += pain
 	}
 	public void midRoundLogic() {
-		shock -= getStatValue("TGH")
+		if (shock > 0) {
+			shock -= rollStat("END")
+		}
 		if (shock < 0) {
 			shock = 0
 		}
@@ -317,5 +455,18 @@ Hobby: ${hobby}"""
 	
 	public boolean isDead() {
 		return (wounds > getStatValue("HLT"))
+	}
+	
+	// NOTE - FUNCTIONS FOR CODING
+	
+	public int compareTo(Object o) {
+		if (o instanceof PlayerCharacter) {
+			return order.compareTo(((PlayerCharacter)o).getOrder())
+		}
+		return order.compareTo(o)
+	}
+	
+	public int compareTo(PlayerCharacter pc) {
+		return order.compareTo(pc.order)
 	}
 }

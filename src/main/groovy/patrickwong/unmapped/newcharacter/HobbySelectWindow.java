@@ -1,10 +1,11 @@
 package patrickwong.unmapped.newcharacter;
 
+import patrickwong.unmapped.InterfaceState;
+import patrickwong.unmapped.UnmappedMain;
 import patrickwong.unmapped.model.GameState;
 import patrickwong.unmapped.model.PlayerCharacter;
 
 import com.googlecode.lanterna.gui.Action;
-import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.gui.Window;
 import com.googlecode.lanterna.gui.component.ActionListBox;
 
@@ -26,14 +27,18 @@ public class HobbySelectWindow extends Window {
 		addComponent(chooseHobbyList);
 	}
 	
+	private static void endHobbySelect() {
+		InterfaceState.nextWindow = new EndChargenWindow();
+		UnmappedMain.closeCurrent();
+	}
+	
 	class FightingAction implements Action {
 		@Override
 		public void doAction() {
 			tempCharacter.setHobby("fighting");
 			String[] bonuses = {"WIT", "END", "AGI", "DEX", "REF"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new EndChargenWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endHobbySelect();
 		}
 	}
 	
@@ -42,9 +47,8 @@ public class HobbySelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setHobby("carousing");
 			String[] bonuses = {"WIT", "VER", "END", "DEX", "MEM"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new EndChargenWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endHobbySelect();
 		}
 	}
 	
@@ -53,9 +57,8 @@ public class HobbySelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setHobby("athletics");
 			String[] bonuses = {"END", "HLT", "AGI", "REF", "STR"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new EndChargenWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endHobbySelect();
 		}
 	}
 	
@@ -64,9 +67,8 @@ public class HobbySelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setHobby("reading");
 			String[] bonuses = {"LOG", "MEM", "SIX", "DEX", "WIT"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new EndChargenWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endHobbySelect();
 		}
 	}
 	
@@ -75,9 +77,8 @@ public class HobbySelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setHobby("crafting");
 			String[] bonuses = {"DEX", "END", "STR", "MEM", "LOG"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new EndChargenWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endHobbySelect();
 		}
 	}
 	
@@ -86,9 +87,8 @@ public class HobbySelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setHobby("cooking");
 			String[] bonuses = {"END", "DEX", "MEM", "HLT", "SIX"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new EndChargenWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endHobbySelect();
 		}
 	}
 	
@@ -97,9 +97,8 @@ public class HobbySelectWindow extends Window {
 		public void doAction() {
 			tempCharacter.setHobby("ranging");
 			String[] bonuses = {"TGH", "END", "REF", "HLT", "WIT"};
-			tempCharacter.statsAddExp(bonuses, 100);
-			getOwner().getActiveWindow().close();
-			getOwner().showWindow(new EndChargenWindow(), GUIScreen.Position.CENTER);
+			tempCharacter.statsAddExp(bonuses, 200);
+			endHobbySelect();
 		}
 	}
 }

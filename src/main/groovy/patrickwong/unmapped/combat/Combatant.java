@@ -20,11 +20,11 @@ public interface Combatant {
 	public abstract void removePain(Integer pain);
 	public abstract void removeWounds(Integer wounds);
 	
-	public abstract Integer getCuttingResistance();
-	public abstract Integer getPiercingResistance();
-	public abstract Integer getImpactResistance();
-	public abstract Integer getBulletResistance();
-	public abstract Integer getElementalResistance();
+	public abstract Integer rollCuttingResistance();
+	public abstract Integer rollPiercingResistance();
+	public abstract Integer rollImpactResistance();
+	public abstract Integer rollBulletResistance();
+	public abstract Integer rollElementalResistance();
 	
 	public abstract void addCuttingDamage(Integer damage);
 	public abstract void addPiercingDamage(Integer damage);

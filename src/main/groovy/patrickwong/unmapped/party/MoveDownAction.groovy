@@ -1,5 +1,6 @@
 package patrickwong.unmapped.party
 
+import patrickwong.unmapped.InterfaceState
 import patrickwong.unmapped.UnmappedMain
 import patrickwong.unmapped.model.GameState
 import patrickwong.unmapped.model.PlayerCharacter
@@ -8,8 +9,10 @@ import com.googlecode.lanterna.gui.Action
 
 public class MoveDownAction implements Action {
 	private PlayerCharacter pc;
-	public MoveDownAction(PlayerCharacter pc) {
+	private Action returnAction;
+	public MoveDownAction(PlayerCharacter pc, Action returnAction) {
 		this.pc = pc
+		this.returnAction = returnAction
 	}
 	@Override
 	public void doAction() {
@@ -28,7 +31,8 @@ public class MoveDownAction implements Action {
 		party.add(charToSwap);
 		party = party.sort();
 		GameState.getInstance().setParty(party)
+		
+		InterfaceState.nextWindow = new CharacterMenuWindow(pc.getName(), returnAction)
 		UnmappedMain.closeCurrent()
-		UnmappedMain.showWindow(new CharacterMenuWindow(pc.getName()))
 	}
 }

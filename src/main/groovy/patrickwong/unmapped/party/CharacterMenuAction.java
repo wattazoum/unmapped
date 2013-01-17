@@ -1,22 +1,29 @@
 package patrickwong.unmapped.party;
 
+import patrickwong.unmapped.InterfaceState;
 import patrickwong.unmapped.UnmappedMain;
+import patrickwong.unmapped.model.PlayerCharacter;
 
 import com.googlecode.lanterna.gui.Action;
-import com.googlecode.lanterna.gui.GUIScreen;
 
 public class CharacterMenuAction implements Action {
 	
 	private String charName;
+	private Action returnAction;
 	
-	public CharacterMenuAction(String charName) {
+	public CharacterMenuAction(String charName, Action returnAction) {
 		this.charName = charName;
+		this.returnAction = returnAction;
+	}
+	public CharacterMenuAction(PlayerCharacter pc, Action returnAction) {
+		this.charName = pc.getName();
+		this.returnAction = returnAction;
 	}
 	
 	@Override
 	public void doAction() {
-		UnmappedMain.getGUI().getActiveWindow().close();
-		UnmappedMain.getGUI().showWindow(new CharacterMenuWindow(charName), GUIScreen.Position.CENTER);
+		InterfaceState.nextWindow = new CharacterMenuWindow(charName, returnAction);
+		UnmappedMain.closeCurrent();
 	}
 
 }

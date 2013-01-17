@@ -1,7 +1,6 @@
 package patrickwong.unmapped.combat;
 
 import patrickwong.unmapped.DiceRoller;
-import patrickwong.unmapped.enemy.Enemy;
 
 
 public class DefaultCombatUtil {
@@ -62,9 +61,13 @@ public class DefaultCombatUtil {
 	}
 	
 	public static void addCuttingDamage(int damage, Combatant target) {
-		int shock = damage;
-		int pain = damage - 10;
-		int wounds = damage - 20;
+		int finalDamage = damage - target.rollCuttingResistance();
+		if (finalDamage <= 0) {
+			return;
+		}
+		int shock = finalDamage;
+		int pain = finalDamage - 10;
+		int wounds = (finalDamage - 20) / 2;
 		if (shock > 0) {
 			target.addShock(shock);
 		}
@@ -76,9 +79,13 @@ public class DefaultCombatUtil {
 		}
 	}
 	public static void addPiercingDamage(int damage, Combatant target) {
-		int shock = damage - 10;
-		int pain = damage - 20;
-		int wounds = (damage - 30) * 2;
+		int finalDamage = damage - target.rollPiercingResistance();
+		if (finalDamage <= 0) {
+			return;
+		}
+		int shock = finalDamage;
+		int pain = finalDamage - 20;
+		int wounds = (finalDamage - 30) * 2;
 		if (shock > 0) {
 			target.addShock(shock);
 		}
@@ -90,9 +97,13 @@ public class DefaultCombatUtil {
 		}
 	}
 	public static void addImpactDamage(int damage, Combatant target) {
-		int shock = damage + 10;
-		int pain = (damage - 20) * 2;
-		int wounds = damage - 40;
+		int finalDamage = damage - target.rollImpactResistance();
+		if (finalDamage <= 0) {
+			return;
+		}
+		int shock = finalDamage + 10;
+		int pain = (finalDamage - 30) * 2;
+		int wounds = finalDamage - 30;
 		if (shock > 0) {
 			target.addShock(shock);
 		}
@@ -104,9 +115,13 @@ public class DefaultCombatUtil {
 		}
 	}
 	public static void addBulletDamage(int damage, Combatant target) {
-		int shock = damage - 20;
-		int pain = damage - 20;
-		int wounds = damage;
+		int finalDamage = damage - target.rollBulletResistance();
+		if (finalDamage <= 0) {
+			return;
+		}
+		int shock = finalDamage;
+		int pain = finalDamage - 10;
+		int wounds = finalDamage - 20;
 		if (shock > 0) {
 			target.addShock(shock);
 		}
@@ -118,9 +133,13 @@ public class DefaultCombatUtil {
 		}
 	}
 	public static void addElementalDamage(int damage, Combatant target) {
-		int shock = (damage / 2);
-		int pain = (damage / 3);
-		int wounds = (damage / 4);
+		int finalDamage = damage - target.rollElementalResistance();
+		if (finalDamage <= 0) {
+			return;
+		}
+		int shock = finalDamage;
+		int pain = (finalDamage / 2);
+		int wounds = (finalDamage / 3);
 		if (shock > 0) {
 			target.addShock(shock);
 		}

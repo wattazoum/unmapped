@@ -1,14 +1,14 @@
 package patrickwong.unmapped.town;
 
+import patrickwong.unmapped.InterfaceState;
 import patrickwong.unmapped.UnmappedMain;
 
 import com.googlecode.lanterna.gui.Action;
-import com.googlecode.lanterna.gui.GUIScreen;
 
 public class MainStreetAction implements Action {
 	@Override
 	public void doAction() {
-		UnmappedMain.getGUI().getActiveWindow().close();
-		UnmappedMain.getGUI().showWindow(new MainStreetWindow(), GUIScreen.Position.CENTER);
+		InterfaceState.nextWindow = new MainStreetWindow();
+		UnmappedMain.closeCurrent();
 	}
 }

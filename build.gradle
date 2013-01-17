@@ -32,14 +32,11 @@ dependencies {
 	compile group: "com.googlecode.soundlibs", name: "jorbis", version: "0.0.17-1"
 	compile group: "org.slf4j", name: "slf4j-api", version: "1.7.2"
 	// TODO - explain how I made this build and how I got it mavened
+	// original easyogg library by Kevin Glass
 	compile group: "org.newdawn", name: "easyogg", version: "0.7"
 	
 	runtime group: "org.slf4j", name: "slf4j-simple", version: "1.7.2"
 	resourcesConfig files("src/main/resources")
-}
-
-startScripts {
-	
 }
 
 eclipse {
