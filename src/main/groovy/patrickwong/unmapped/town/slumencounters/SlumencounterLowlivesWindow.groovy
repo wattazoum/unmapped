@@ -55,11 +55,13 @@ public class SlumencounterLowlivesWindow extends Window {
 		state.enemyGroups = [genEnemyGroup()]
 		state.doVictory = {
 			String victoryMessage = "The lowlives lie dead before you, bleeding out all over the street.\n"
-			int money = DiceRoller.binaryPool(100)
+			int moneyPool = state.countEnemies() * 20
+			int money = DiceRoller.binaryPool(moneyPool)
 			GameState.getInstance().partyMoney += money
-			victoryMessage += "They had $money worth of money and gear on them.\n"
+			String moneyString = UnmappedMain.moneyAsString(money)
+			victoryMessage += "They had " + moneyString + "\nworth of money and gear on them.\n"
 			for (PlayerCharacter pc : GameState.getInstance().getParty()) {
-				pc.removeShock(100)
+				pc.removeShock(1000)
 			}
 			return victoryMessage
 		}

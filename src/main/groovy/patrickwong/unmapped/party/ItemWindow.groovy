@@ -26,6 +26,9 @@ public class ItemWindow extends Window {
 		boolean givingPossible = (GameState.getInstance().getParty().size() > 1)
 		
 		addComponent(new Label(gi.getDesc()))
+		if (gi instanceof Equippable) {
+			addComponent(new Button("Equip", new PutItemInSlotAction(pc, gi, rta)));
+		}
 		if (gi.usableInField()) {
 			addComponent(new Button("Use", new UseItemAction(gi, pc)));
 		}
@@ -41,11 +44,6 @@ public class ItemWindow extends Window {
 			if (givingPossible) {
 				addComponent(new Button("Give", giveAllAction))
 			}
-		}
-		if (gi instanceof Grippable) {
-			addComponent(new Button("Wield"));
-		} else if (gi instanceof Equippable) {
-			addComponent(new Button("Equip"));
 		}
 		addComponent(new Button("Cancel", cancelAction));
 	}
@@ -71,7 +69,7 @@ public class ItemWindow extends Window {
 		InterfaceState.nextWindow = new GiveAllWindow(pc, gi, rta)
 		UnmappedMain.closeCurrent()
 	} as Action
-
+	
 	def cancelAction = {
 		InterfaceState.nextWindow = new CharacterInventoryWindow(pc, rta)
 		UnmappedMain.closeCurrent()

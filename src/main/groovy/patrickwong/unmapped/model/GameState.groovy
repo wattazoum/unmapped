@@ -13,7 +13,7 @@ public class GameState {
 	PlayerCharacter tempCharacter = new PlayerCharacter()
 	List<PlayerCharacter> party = new Vector<PlayerCharacter>()
 	List<GameItem> stash = new Vector<GameItem>()
-	Long partyMoney = 100
+	int partyMoney = 1000000
 	String currentLocation = "default location"
 	String currentRegion = "default region"
 	Long currentTime = 0

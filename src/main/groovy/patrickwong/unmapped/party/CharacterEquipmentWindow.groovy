@@ -28,7 +28,7 @@ public class CharacterEquipmentWindow extends Window {
 			} else {
 				displayString += "(empty)"
 			}
-			Action changeEquipAction = new ChangeEquipInSlotAction(pc, equipSlot)
+			Action changeEquipAction = new ChangeEquipInSlotAction(pc, equipSlot, returnAction)
 			if (i < 25) {
 				leftColumn.addComponent(new Button(displayString, changeEquipAction))
 			} else {

@@ -11,7 +11,7 @@ public class ItemDatabase {
 	
 	private ItemDatabase() {
 		database = [
-			"painkiller":new GameItem(key:"painkiller", name:"Painkiller", desc:"Pill that should relieve pain.",
+			"painkiller":new GameItem(key:"painkiller", name:"Painkiller", desc:"Pill that should relieve pain.", baseValue: 12,
 			actionInField: { PlayerCharacter user ->
 				user.removeItem("painkiller")
 				if (user.getPain() <= 0) {
@@ -28,7 +28,7 @@ public class ItemDatabase {
 				return user.name + " tries to quickly swallow a painkiller"
 			}),
 			
-			"bandage":new GameItem(key:"bandage", name:"Bandage", desc:"For wrapping around wounds.",
+			"bandage":new GameItem(key:"bandage", name:"Bandage", desc:"For wrapping around wounds.", baseValue: 1,
 			actionInField: { PlayerCharacter user ->
 				user.removeItem("bandage")
 				if (user.getWounds() <= 0) {
@@ -45,20 +45,19 @@ public class ItemDatabase {
 				return user.name + " hastily wraps a bandage"
 			}),
 			
+			// NOTE - POTIONS
+			
 			"potion_witcher":new GameItem(key:"potion_witcher", name:"Potion of Witcher"),
 			"potion_hexer":new GameItem(key:"potion_hexer", name:"Potion of Hexer"),
 			"potion_sapkowski":new GameItem(key:"potion_sapkowski", name:"Potion of Sapkowski"),
 			"potion_wiedzmin":new GameItem(key:"potion_wiedzmin", name:"Potion of Wiedzmin"),
 			
-			// NOTE - COMMON CLOTHING
-			
 			// NOTE - FINAL ITEM
 			"last_item":new GameItem(key:"last_item", name:"The very last item in the DB", desc:"So that I avoid errors relating to an extra comma at the end")
 		]
 		equippableDatabase = Equippable.armorDatabase
-		// equippableDatabase.putAll(Equippable.getClothingDatabase())
-		// grippableDatabase = Grippable.getWeaponDatabase()
-		// grippableDatabase.putAll(Grippable.getShieldDatabase())
+		equippableDatabase.putAll(Equippable.clothingDatabase)
+		grippableDatabase = Grippable.weaponDatabase
 	}
 	
 	public static GameItem getItem(String key) {
@@ -66,5 +65,8 @@ public class ItemDatabase {
 	}
 	public static Equippable getEquippableItem(String key) {
 		return databaseInstance.equippableDatabase.get(key).clone()
+	}
+	public static Grippable getGrippableItem(String key) {
+		return databaseInstance.grippableDatabase.get(key).clone()
 	}
 }

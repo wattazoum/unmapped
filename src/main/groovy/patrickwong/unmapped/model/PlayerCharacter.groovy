@@ -33,6 +33,8 @@ public class PlayerCharacter implements Comparable, Combatant {
 	List<EquipSlot> equipment = EquipSlot.getDefaultEquipSlots()
 	Grippable rightHand = Grippable.getRightFist()
 	Grippable leftHand = Grippable.getLeftFist()
+	boolean attackingWithRight = true
+	boolean defendingWithRight = true
 	
 	public String summaryString() {
 		String summaryString = """${name}
@@ -239,6 +241,20 @@ Hobby: ${hobby}"""
 			return null
 		}
 	}
+	public List<Grippable> getGrippablesFromInventory() {
+		List<Grippable> matches = new Vector<Grippable>()
+		for (GameItem gi : inventory) {
+			if (gi instanceof Grippable) {
+				matches.add(gi)
+			}
+		}
+		if (matches.size() > 0) {
+			return matches
+		} else {
+			return null
+		}
+		return matches
+	}
 	public List<EquipSlot> getPossibleSlots(Equippable gi) {
 		List<EquipSlot> matches = new Vector<EquipSlot>()
 		for (EquipSlot es : equipment) {
@@ -246,7 +262,7 @@ Hobby: ${hobby}"""
 				matches.add(es)
 			}
 		}
-		return matches
+		return matches.sort()
 	}
 	public EquipSlot getEquipSlot(String equipSlotKey) {
 		for (EquipSlot slot : equipment) {
@@ -261,6 +277,29 @@ Hobby: ${hobby}"""
 		if (equipSlot.slot != null) {
 			addItem(equipSlot.slot)
 			equipSlot.slot = null
+		}
+	}
+	// If an item is two-handed, then the right hand puts it back in the inventory
+	public void unequipRightHand() {
+		if (rightHand.key.equalsIgnoreCase("right_fist")) {
+			return
+		} else if (rightHand.twoHanded) {
+			addItem(rightHand)
+			rightHand = Grippable.getRightFist()
+			leftHand = Grippable.getLeftFist()
+		} else {
+			addItem(rightHand)
+			rightHand = Grippable.getRightFist()
+		}
+	}
+	public void unequipLeftHand() {
+		if (leftHand.key.equalsIgnoreCase("left_fist")) {
+			return
+		} else if (leftHand.twoHanded) {
+			unequipRightHand()
+		} else {
+			addItem(leftHand)
+			leftHand = Grippable.getLeftFist()
 		}
 	}
 	public void equipItem(Equippable item, String equipSlotKey) {
@@ -300,43 +339,99 @@ Hobby: ${hobby}"""
 	
 	// NOTE - FUNCTIONS FOR COMBAT
 	
+	public void chooseHandForAttack() {
+		int rightHandWeight = rightHand.attackWeight
+		int leftHandWeight = leftHand.attackWeight
+		int total = rightHandWeight + leftHandWeight
+		int rand = DiceRoller.nextInt(total)
+		if (rand < rightHandWeight) {
+			attackingWithRight = true
+		} else {
+			attackingWithRight = false
+		}
+	}
+	
+	public void chooseHandForDefense() {
+		int rightHandWeight = rightHand.defenseWeight
+		int leftHandWeight = leftHand.defenseWeight
+		int total = rightHandWeight + leftHandWeight
+		int rand = DiceRoller.nextInt(total)
+		if (rand < rightHandWeight) {
+			defendingWithRight = true
+		} else {
+			defendingWithRight = false
+		}
+	}
+	
 	public String getAttackVerb() {
-		String attackString = " attacks "
-		return attackString
+		chooseHandForAttack()
+		if (attackingWithRight) {
+			return rightHand.getAttackVerb(this)
+		} else {
+			return leftHand.getAttackVerb(this)
+		}
 	}
 	
 	public Integer rollAttackAccuracy() {
 		int result = 0
-		result += rightHand.rollAttackAccuracy(this);
+		if (attackingWithRight) {
+			result += rightHand.rollAttackAccuracy(this);
+		} else {
+			result += leftHand.rollAttackAccuracy(this);
+		}
 		result -= shock
 		return result
 	}
 	
 	public Integer rollAttackDamage() {
 		int result = 0
-		result += rightHand.rollAttackDamage(this)
+		if (attackingWithRight) {
+			result += rightHand.rollAttackDamage(this)
+		} else {
+			result += leftHand.rollAttackDamage(this)
+		}
 		return result
 	}
 	
 	public String getAttackDamageType() {
-		return "impact"
+		if (attackingWithRight) {
+			return rightHand.getAttackDamageType()
+		} else {
+			return leftHand.getAttackDamageType()
+		}
 	}
 	
 	public Integer rollMeleeEvade() {
+		chooseHandForDefense()
 		int result = 0
 		result += rollStat("AGI")
+		result += rollStat("REF")
 		result += rollSkill("fighting")
 		result += rollSkill("melee_defense")
 		result += rollSkill("melee_evasion")
+		result = (result / 2)
+		if (defendingWithRight) {
+			result += rightHand.rollMeleeDefense(this)
+		} else {
+			result += leftHand.rollMeleeDefense(this)
+		}
 		result -= shock
 		return result
 	}
 	public Integer rollRangeEvade() {
+		chooseHandForDefense()
 		int result = 0
 		result += rollStat("AGI")
+		result += rollStat("REF")
 		result += rollSkill("fighting")
 		result += rollSkill("ranged_defense")
 		result += rollSkill("ranged_evasion")
+		result = (result / 2)
+		if (defendingWithRight) {
+			result += rightHand.rollRangedDefense(this)
+		} else {
+			result += leftHand.rollRangedDefense(this)
+		}
 		result -= shock
 		return result
 	}

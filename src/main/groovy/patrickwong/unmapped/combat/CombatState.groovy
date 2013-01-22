@@ -75,6 +75,14 @@ public class CombatState {
 		return meleeGroups.get(rand)
 	}
 	
+	public int countEnemies() {
+		int total = 0
+		for (EnemyGroup eg : enemyGroups) {
+			total += eg.size()
+		}
+		return total
+	}
+	
 	public void addRange(int rangeMod) {
 		for (EnemyGroup eg : enemyGroups) {
 			eg.distance += rangeMod

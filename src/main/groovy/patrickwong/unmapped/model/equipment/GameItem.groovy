@@ -44,7 +44,7 @@ public class GameItem implements Comparable {
 	
 	@Override
 	public GameItem clone() {
-		GameItem gi = new GameItem(key: this.key, name: this.name, desc: this.desc, actionInField: this.actionInField, actionInCombat: this.actionInCombat, stackSize: 1, stackable: this.stackable)
+		GameItem gi = new GameItem(key: this.key, name: this.name, desc: this.desc, actionInField: this.actionInField, actionInCombat: this.actionInCombat, stackSize: 1, stackable: this.stackable, baseValue: this.baseValue)
 		return gi
 	}
 	
@@ -64,15 +64,11 @@ public class GameItem implements Comparable {
 		return key.equalsIgnoreCase(o.toString())
 	}
 	
-	public int compareTo(GameItem gi) {
-		return key.compareToIgnoreCase(gi.name)
-	}
-	
 	public int compareTo(Object o) {
 		if (o instanceof GameItem) {
-			return compareTo((GameItem)o)
+			return name.compareToIgnoreCase(((GameItem)o).name)
 		} else {
-			return key.compareToIgnoreCase(o.toString())
+			return name.compareToIgnoreCase(o.toString())
 		}
 	}
 }
