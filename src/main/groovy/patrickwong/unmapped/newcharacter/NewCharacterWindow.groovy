@@ -46,30 +46,6 @@ public class NewCharacterWindow extends Window {
 		
 		tempCharacter.statsAllAddExp(400);
 		tempCharacter.skillsAllAddExp(100);
-		tempCharacter.addItem(ItemDatabase.getItem("painkiller"));
-		tempCharacter.addItem(ItemDatabase.getItem("painkiller"));
-		tempCharacter.addItem(ItemDatabase.getItem("painkiller"));
-		tempCharacter.addItem(ItemDatabase.getItem("painkiller"));
-		tempCharacter.addItem(ItemDatabase.getItem("bandage"));
-		tempCharacter.addItem(ItemDatabase.getItem("bandage"));
-		tempCharacter.addItem(ItemDatabase.getItem("bandage"));
-		tempCharacter.addItem(ItemDatabase.getItem("bandage"));
-		
-		tempCharacter.addItem(ItemDatabase.getGrippableItem("shortweapon_knife"))
-		tempCharacter.addItem(ItemDatabase.getGrippableItem("shortweapon_knife"))
-		tempCharacter.addItem(ItemDatabase.getGrippableItem("shortweapon_knife"))
-		tempCharacter.addItem(ItemDatabase.getGrippableItem("swordstraightone_gladius"))
-		tempCharacter.addItem(ItemDatabase.getGrippableItem("swordstraightone_gladius"))
-		tempCharacter.addItem(ItemDatabase.getGrippableItem("swordstraightone_gladius"))
-		tempCharacter.addItem(ItemDatabase.getGrippableItem("swordstraighttwo_longsword"))
-		tempCharacter.addItem(ItemDatabase.getGrippableItem("swordstraighttwo_longsword"))
-		tempCharacter.addItem(ItemDatabase.getGrippableItem("swordstraighttwo_longsword"))
-		tempCharacter.addItem(ItemDatabase.getGrippableItem("shield_buckler"))
-		tempCharacter.addItem(ItemDatabase.getGrippableItem("shield_buckler"))
-		tempCharacter.addItem(ItemDatabase.getGrippableItem("shield_heater"))
-		tempCharacter.addItem(ItemDatabase.getGrippableItem("shield_heater"))
-		tempCharacter.addItem(ItemDatabase.getGrippableItem("shield_scutum"))
-		tempCharacter.addItem(ItemDatabase.getGrippableItem("shield_scutum"))
 		
 		InterfaceState.nextWindow = new GenderSelectWindow()
 		UnmappedMain.closeCurrent()

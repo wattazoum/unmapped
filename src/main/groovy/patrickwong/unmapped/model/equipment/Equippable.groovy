@@ -203,6 +203,7 @@ public class Equippable extends GameItem {
 		
 		"undershirt_sarashi":new Equippable(key:"undershirt_sarashi", name:"Sarashi", desc:"Bandages wrapped around the body", baseValue: 4, slotType:"undershirt"),
 		"undershirt_corset":new Equippable(key:"undershirt_corset", name:"Corset", desc:"Not good for breathing", baseValue: 24, slotType:"undershirt"),
+		"undershirt_lacybra":new Equippable(key:"undershirt_lacybra", name:"Lacy Bra", desc:"Comes in black, red, white, and other colors", baseValue: 48, slotType:"undershirt"),
 		
 		// NOTE - SHIRTS
 		
@@ -212,6 +213,7 @@ public class Equippable extends GameItem {
 		
 		"dress_crystalblue":new Equippable(key:"dress_crystalblue", name:"Crystal Blue Dress", desc:"Good until midnight", baseValue: 5520, slotType:"dress"),
 		"dress_peasant":new Equippable(key:"dress_peasant", name:"Peasant Dress", desc:"Fits a variety of sizes", baseValue: 240, slotType:"dress"),
+		"dress_gothloli":new Equippable(key:"dress_gothloli", name:"Gothloli Dress", desc:"Goes well with creepy eyes", baseValue: 5520, slotType:"dress"),
 		
 		// NOTE - PIERCINGS
 		

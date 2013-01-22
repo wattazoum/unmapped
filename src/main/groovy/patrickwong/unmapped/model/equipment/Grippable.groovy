@@ -101,6 +101,62 @@ public class Grippable extends Equippable {
 			attackWeight: 20,
 			defenseWeight: 10
 		),
+		"spear_spear":new Grippable(key:"spear_spear", name:"Spear", desc:"Simple and cheap stabbing weapon", baseValue: 24,
+			getAttackVerb: { PlayerCharacter pc ->
+				return " thrusts at "
+			},
+			rollAttackAccuracy: { PlayerCharacter pc ->
+				int result = pc.rollStat("DEX") + pc.rollSkill("fighting") + pc.rollSkill("melee_fighting") + pc.rollSkill("spears")
+				return result
+			},
+			rollAttackDamage: { PlayerCharacter pc ->
+				int result = pc.rollStat("DEX") + pc.rollStat("STR")
+				result = (result / 2)
+				result += pc.rollBonuses("cause_piercing") + DiceRoller.binaryPool(10)
+				return result
+			},
+			getAttackDamageType: { return "piercing" },
+			rollMeleeDefense: { PlayerCharacter pc ->
+				int result = pc.rollStat("REF") + pc.rollSkill("fighting") + pc.rollSkill("melee_defense") + pc.rollSkill("parrying")
+				result = (result / 3)
+				return result
+			},
+			rollRangedDefense: { PlayerCharacter pc ->
+				int result = pc.rollStat("REF") + pc.rollSkill("fighting") + pc.rollSkill("ranged_defense") + pc.rollSkill("missile_deflecting")
+				result = (result / 3)
+				return result
+			},
+			attackWeight: 20,
+			defenseWeight: 5
+		),
+		"blunt_warhammer":new Grippable(key:"blunt_warhammer", name:"Warhammer", desc:"Surprisingly small, but still brutal due to its small head", baseValue: 48,
+			getAttackVerb: { PlayerCharacter pc ->
+				return " swings at "
+			},
+			rollAttackAccuracy: { PlayerCharacter pc ->
+				int result = pc.rollStat("DEX") + pc.rollSkill("fighting") + pc.rollSkill("melee_fighting") + pc.rollSkill("blunt_weapons")
+				return result
+			},
+			rollAttackDamage: { PlayerCharacter pc ->
+				int result = pc.rollStat("AGI") + pc.rollStat("STR")
+				result = (result / 2)
+				result += pc.rollBonuses("cause_impact") + DiceRoller.binaryPool(30)
+				return result
+			},
+			getAttackDamageType: { return "piercing" },
+			rollMeleeDefense: { PlayerCharacter pc ->
+				int result = pc.rollStat("REF") + pc.rollSkill("fighting") + pc.rollSkill("melee_defense") + pc.rollSkill("parrying")
+				result = (result / 3)
+				return result
+			},
+			rollRangedDefense: { PlayerCharacter pc ->
+				int result = pc.rollStat("REF") + pc.rollSkill("fighting") + pc.rollSkill("ranged_defense") + pc.rollSkill("missile_deflecting")
+				result = (result / 3)
+				return result
+			},
+			attackWeight: 30,
+			defenseWeight: 5
+		),
 		"swordstraightone_gladius":new Grippable(key:"swordstraightone_gladius", name:"Gladius", desc:"General-purpose light sword for close-up fighting", baseValue: 240,
 			getAttackVerb: { PlayerCharacter pc ->
 				return " swings at "
@@ -157,7 +213,7 @@ public class Grippable extends Equippable {
 		),
 		
 		// NOTE - SHIELDS
-		"shield_buckler":new Grippable(key:"shield_buckler", name:"Buckler", desc:"Small round shield for duelling", baseValue: 120,
+		"shield_buckler":new Grippable(key:"shield_buckler", name:"Buckler", desc:"Small round shield for duelling", baseValue: 60,
 			getAttackVerb: { PlayerCharacter pc ->
 				return " thrusts a buckler at "
 			},
@@ -185,7 +241,7 @@ public class Grippable extends Equippable {
 			attackWeight: 5,
 			defenseWeight: 30
 		),
-		"shield_heater":new Grippable(key:"shield_heater", name:"Heater Shield", desc:"V-shaped shield for mounted combat", baseValue: 480,
+		"shield_heater":new Grippable(key:"shield_heater", name:"Heater Shield", desc:"V-shaped shield for mounted combat", baseValue: 120,
 			getAttackVerb: { PlayerCharacter pc ->
 				return " shield-bashes at "
 			},
@@ -213,7 +269,7 @@ public class Grippable extends Equippable {
 			attackWeight: 5,
 			defenseWeight: 40
 		),
-		"shield_scutum":new Grippable(key:"shield_scutum", name:"Scutum Shield", desc:"Very large shield for excellent protection", baseValue: 960,
+		"shield_scutum":new Grippable(key:"shield_scutum", name:"Scutum Shield", desc:"Very large shield for excellent protection", baseValue: 480,
 			getAttackVerb: { PlayerCharacter pc ->
 				return " shield-bashes at "
 			},

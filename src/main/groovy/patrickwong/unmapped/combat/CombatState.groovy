@@ -78,7 +78,7 @@ public class CombatState {
 	public int countEnemies() {
 		int total = 0
 		for (EnemyGroup eg : enemyGroups) {
-			total += eg.size()
+			total += eg.enemies.size()
 		}
 		return total
 	}
