@@ -12,6 +12,7 @@ public class GameState {
 	Boolean gameInProgress = false
 	PlayerCharacter tempCharacter = new PlayerCharacter()
 	List<PlayerCharacter> party = new Vector<PlayerCharacter>()
+	List<Quest> quests = new Vector<Quest>()
 	List<GameItem> stash = new Vector<GameItem>()
 	int partyMoney = 1000000
 	String currentLocation = "default location"
@@ -103,6 +104,52 @@ public class GameState {
 			}
 		}
 		return false
+	}
+	
+	// NOTE - QUEST MANAGEMENT
+	public boolean hasQuest(String key) {
+		quests.each {
+			if (it.key.equalsIgnoreCase(key)) {
+				return true
+			}
+		}
+		return false
+	}
+	
+	public Quest getQuest(String key) {
+		quests.each {
+			if (it.key.equalsIgnoreCase(key)) {
+				return it
+			}
+		}
+		return null
+	}
+	
+	public boolean hasQuestPhase(String quest, String key) {
+		Quest questToSearch = getQuest(quest)
+		if (questToSearch == null) {
+			return false
+		}
+		questToSearch.phases.each {
+			if (key.equalsIgnoreCase(it.key)) {
+				return true
+			}
+		}
+		return false
+	}
+	
+	public void addQuestPhase(String quest, QuestPhase phase) {
+		Quest questToAddTo = getQuest(quest)
+		if (questToAddTo == null) {
+			questToAddTo = new Quest(key: quest)
+			quests.add(questToAddTo)
+			quests = quests.sort()
+		}
+		if (questToAddTo.hasPhase(phase.key)) {
+			return
+		}
+		questToAddTo.phases.add(phase)
+		questToAddTo.phases = questToAddTo.phases.sort()
 	}
 	
 	public Action currentLocationAction() {

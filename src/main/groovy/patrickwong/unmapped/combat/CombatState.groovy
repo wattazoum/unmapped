@@ -1,6 +1,7 @@
 package patrickwong.unmapped.combat
 
 import patrickwong.unmapped.DiceRoller
+import patrickwong.unmapped.UnmappedMain
 import patrickwong.unmapped.model.GameState
 import patrickwong.unmapped.model.PlayerCharacter
 
@@ -13,7 +14,7 @@ public class CombatState {
 		String victoryMessage = "The sociopaths lie dead before you.\n"
 		int money = DiceRoller.binaryPool(100)
 		GameState.getInstance().partyMoney += money
-		victoryMessage += "They had $money worth of money and gear on them.\n"
+		victoryMessage += "They had " + UnmappedMain.moneyAsString(money) + " worth of money and gear on them.\n"
 		for (PlayerCharacter pc : GameState.getInstance().getParty()) {
 			pc.removeShock(100)
 		}
@@ -52,7 +53,7 @@ public class CombatState {
 	public List<EnemyGroup> getAllGroupsInMelee() {
 		List<EnemyGroup> meleeGroups = new Vector<EnemyGroup>()
 		for (EnemyGroup eg : enemyGroups) {
-			if (eg.getDistance() <= 0) {
+			if ((eg.getDistance() <= 0) && (eg.hasValidEnemies())) {
 				meleeGroups.add(eg)
 			}
 		}

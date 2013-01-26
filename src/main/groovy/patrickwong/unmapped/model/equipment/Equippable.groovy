@@ -208,6 +208,10 @@ public class Equippable extends GameItem {
 		// NOTE - SHIRTS
 		
 		"shirt_wittyquote":new Equippable(key:"shirt_wittyquote", name:"Shirt with Witty Quote", desc:"Shark + Laser =\nShark cut in half by laser", baseValue: 24, slotType:"shirt"),
+		"shirt_badgirl":new Equippable(key:"shirt_badgirl", name:"Bad Girl Shirt", desc:"It is a very tight-fitting shirt", baseValue: 24, slotType:"shirt"),
+		"shirt_muscle":new Equippable(key:"shirt_muscle", name:"Muscle Shirt", desc:"Big biceps and shoulders are recommended", baseValue: 24, slotType:"shirt"),
+		"shirt_tanktop":new Equippable(key:"shirt_tanktop", name:"Tanktop", desc:"Its other common name is very unfortunate", baseValue: 12, slotType:"shirt"),
+		"shirt_lacybuttonup":new Equippable(key:"shirt_lacybutton", name:"Lacy Button-Up Shirt", desc:"It also has a rounded collar", baseValue: 48, slotType:"shirt"),
 		
 		// NOTE - DRESSES
 		
@@ -226,7 +230,7 @@ public class Equippable extends GameItem {
 		"ring_steel":new Equippable(key:"ring_steel", name:"Steel Ring", desc:"Simple ring for decoration", baseValue: 12, slotType:"ring"),
 		"ring_silver":new Equippable(key:"ring_silver", name:"Silver Ring", desc:"Very malleable ring", baseValue: 48, slotType:"ring"),
 		"ring_gold":new Equippable(key:"ring_gold", name:"Gold Ring", desc:"Ring that indicates high status", baseValue: 480, slotType:"ring"),
-		"ring_diamond":new Equippable(key:"ring_diamond", name:"Diamond Ring", desc:"The gemstone is made of one of the most common\nelements in the dirt, compressed by pressure", baseValue: 1, slotType:"ring"),
+		"ring_diamond":new Equippable(key:"ring_diamond", name:"Diamond Ring", desc:"The gemstone is made of one of the most common\nelements in ordinary dirt, compressed by pressure", baseValue: 1, slotType:"ring"),
 		
 		// NOTE - STRAPS
 		

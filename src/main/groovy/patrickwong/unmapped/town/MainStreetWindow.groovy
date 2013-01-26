@@ -22,6 +22,6 @@ public class MainStreetWindow extends Window {
 		addComponent(new Button("...caravans and wagon trains passing through", new CaravanStreetAction()));
 		addComponent(new Button("...inspect your party", new PartyMenuAction(new MainStreetAction())));
 		addComponent(new Button("...the tavern, which is also a well-reputed inn", new TavernAction()));
-		addComponent(new Button("...the front gate leading into the outside world"));
+		addComponent(new Button("...the front gate leading to the outside world", new ExitGateAction()));
 	}
 }

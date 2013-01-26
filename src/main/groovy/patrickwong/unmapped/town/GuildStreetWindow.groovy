@@ -44,7 +44,7 @@ public class GuildStreetWindow extends Window {
 					GameState.getInstance().partyMoney -= 12;
 					pc.addItem(ItemDatabase.getGrippableItem("shortweapon_knife"))
 					MessageBox.showMessageBox(UnmappedMain.getGUI(), pc.name + " buys a weapon", pc.name + " buys a knife")
-					toArmorShop()
+					toWeaponShop()
 				}
 			),
 			new ShopItem(name:"Spear", actionName:"buy a spear", listedPrice: 48,
@@ -52,7 +52,7 @@ public class GuildStreetWindow extends Window {
 					GameState.getInstance().partyMoney -= 48;
 					pc.addItem(ItemDatabase.getGrippableItem("spear_spear"))
 					MessageBox.showMessageBox(UnmappedMain.getGUI(), pc.name + " buys a weapon", pc.name + " buys a spear")
-					toArmorShop()
+					toWeaponShop()
 				}
 			),
 			new ShopItem(name:"Warhammer", actionName:"buy a warhammer", listedPrice: 96,
@@ -60,7 +60,7 @@ public class GuildStreetWindow extends Window {
 					GameState.getInstance().partyMoney -= 96;
 					pc.addItem(ItemDatabase.getGrippableItem("blunt_warhammer"))
 					MessageBox.showMessageBox(UnmappedMain.getGUI(), pc.name + " buys a weapon", pc.name + " buys a warhammer")
-					toArmorShop()
+					toWeaponShop()
 				}
 			),
 			new ShopItem(name:"Gladius", actionName:"buy a gladius", listedPrice: 480,
@@ -68,7 +68,7 @@ public class GuildStreetWindow extends Window {
 					GameState.getInstance().partyMoney -= 480;
 					pc.addItem(ItemDatabase.getGrippableItem("swordstraightone_gladius"))
 					MessageBox.showMessageBox(UnmappedMain.getGUI(), pc.name + " buys a weapon", pc.name + " buys a gladius")
-					toArmorShop()
+					toWeaponShop()
 				}
 			),
 			new ShopItem(name:"Longsword (2H)", actionName:"buy a longsword", listedPrice: 960,
@@ -76,7 +76,7 @@ public class GuildStreetWindow extends Window {
 					GameState.getInstance().partyMoney -= 960;
 					pc.addItem(ItemDatabase.getGrippableItem("swordstraighttwo_longsword"))
 					MessageBox.showMessageBox(UnmappedMain.getGUI(), pc.name + " buys a weapon", pc.name + " buys a longsword")
-					toArmorShop()
+					toWeaponShop()
 				}
 			)
 		]

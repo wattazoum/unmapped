@@ -1,26 +1,26 @@
 package patrickwong.unmapped.combat;
 
 import patrickwong.unmapped.DiceRoller
+import patrickwong.unmapped.UnmappedMain
 import patrickwong.unmapped.model.GameState
 
 public class Enemy implements Combatant {
 	String name = "Target Dummy";
-	int challengeLevel = 40;
+	int challengeLevel = DiceRoller.binaryPool(100)
 	int shock = 0;
 	int pain = 0;
 	int wounds = 0;
-	
-	public int getChallengeLevel() {
-		return challengeLevel;
-	}
-
-	public void setChallengeLevel(int challengeLevel) {
-		this.challengeLevel = challengeLevel;
-	}
+	List<String> possibleActions = ["punch"]
+	String currentAction = "punch"
 	
 	@Override
 	public String getAttackVerb() {
-		return " punches ";
+		if (currentAction.equalsIgnoreCase("punch")) {
+			return " punches at ";
+		} else {
+			UnmappedMain.log.error("enemy $name does not have an attack verb")
+			return " BLAH "
+		}
 	}
 	
 	@Override
@@ -34,14 +34,16 @@ public class Enemy implements Combatant {
 	@Override
 	public Integer rollAttackDamage() {
 		int pool = challengeLevel;
-		pool -= shock;
-		pool *= 1.5;
 		return DiceRoller.binaryPool(pool);
 	}
 	
 	@Override
 	public String getAttackDamageType() {
-		return "impact";
+		if (currentAction.equalsIgnoreCase("punch")) {
+			return "impact"
+		}
+		UnmappedMain.log.error("enemy $name does not have a damage type")
+		return "impact"
 	}
 	
 	@Override
@@ -159,9 +161,11 @@ public class Enemy implements Combatant {
 	}
 	
 	public String nextAction() {
-		Combatant target = GameState.getInstance().getRandomLivingCharacter();
+		int rand = DiceRoller.nextInt(possibleActions.size())
+		currentAction = possibleActions.get(rand)
+		Combatant target = GameState.getInstance().getRandomLivingCharacter()
 		if (target != null) {
-			return DefaultCombatUtil.doAttack(this, target);
+			return DefaultCombatUtil.doAttack(this, target)
 		} else {
 			return "$name jeers at the dead characters"
 		}
