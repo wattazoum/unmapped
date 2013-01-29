@@ -67,7 +67,7 @@ public class VillageBlacksmithWindow extends Window {
 						MessageBox.showMessageBox(UnmappedMain.getGUI(), pc.name + " buys armor", pc.name + " buys a suit of leather armor");
 						toBlacksmithShop()
 					}
-				),
+				)
 			]
 		)
 		return theShop
