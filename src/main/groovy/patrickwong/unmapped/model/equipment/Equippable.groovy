@@ -151,10 +151,8 @@ public class Equippable extends GameItem {
 		"boots_plate":new Equippable(key:"boots_plate", name:"Plate Sabatons", desc:"Protects the feet from stepping on sharp objects", baseValue: 200,
 			slotType:"boots",
 			bonuses: ["resist_cutting":10, "resist_piercing":5, "resist_impact":3, "resist_bullet":3]
-		)
-	]
-	
-	public static final Map<String, Equippable> clothingDatabase = [
+		),
+		
 		// NOTE - CLOAKS
 		"cloak_plain":new Equippable(key:"cloak_plain", name:"Cloak", desc:"An ordinary travelling cloak", baseValue: 12, slotType:"cloak"),
 		"cloak_furtop":new Equippable(key:"cloak_furtop", name:"Fur-Topped Cloak", desc:"Keeps you warm in the north", baseValue: 44, slotType:"cloak"),
@@ -216,7 +214,7 @@ public class Equippable extends GameItem {
 		// NOTE - DRESSES
 		
 		"dress_crystalblue":new Equippable(key:"dress_crystalblue", name:"Crystal Blue Dress", desc:"Good until midnight", baseValue: 5520, slotType:"dress"),
-		"dress_peasant":new Equippable(key:"dress_peasant", name:"Peasant Dress", desc:"Fits a variety of sizes", baseValue: 240, slotType:"dress"),
+		"dress_peasant":new Equippable(key:"dress_peasant", name:"Peasant Dress", desc:"Fits a variety of sizes", baseValue: 24, slotType:"dress"),
 		"dress_gothloli":new Equippable(key:"dress_gothloli", name:"Gothloli Dress", desc:"Goes well with creepy eyes", baseValue: 5520, slotType:"dress"),
 		
 		// NOTE - PIERCINGS

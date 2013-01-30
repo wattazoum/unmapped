@@ -42,7 +42,7 @@ public class VillageBlacksmithWindow extends Window {
 						GameState.getInstance().partyMoney -= 12;
 						pc.addItem(ItemDatabase.getGrippableItem("shortweapon_knife"))
 						MessageBox.showMessageBox(UnmappedMain.getGUI(), pc.name + " buys a weapon", pc.name + " buys a knife")
-						toBlacksmithShop()
+						toBlacksmithShop(vt)
 					}
 				),
 				new ShopItem(name:"Spear", actionName:"buy a spear", listedPrice: 48,
@@ -50,7 +50,7 @@ public class VillageBlacksmithWindow extends Window {
 						GameState.getInstance().partyMoney -= 48;
 						pc.addItem(ItemDatabase.getGrippableItem("spear_spear"))
 						MessageBox.showMessageBox(UnmappedMain.getGUI(), pc.name + " buys a weapon", pc.name + " buys a spear")
-						toBlacksmithShop()
+						toBlacksmithShop(vt)
 					}
 				),
 				new ShopItem(name:"Leather Armor", actionName:"buy leather armor", listedPrice: 120,
@@ -65,15 +65,31 @@ public class VillageBlacksmithWindow extends Window {
 						pc.equipItem(ItemDatabase.getEquippableItem("gloves_leather"), "gloves");
 						pc.equipItem(ItemDatabase.getEquippableItem("boots_leather"), "boots");
 						MessageBox.showMessageBox(UnmappedMain.getGUI(), pc.name + " buys armor", pc.name + " buys a suit of leather armor");
-						toBlacksmithShop()
+						toBlacksmithShop(vt)
+					}
+				),
+				new ShopItem(name:"Farmer Hat", actionName:"buy a farmer hat", listedPrice: 20,
+					check: { PlayerCharacter pc ->
+						GameState.getInstance().partyMoney -= 20
+						pc.equipItem(ItemDatabase.getEquippableItem("hat_farmer"), "hat")
+						MessageBox.showMessageBox(UnmappedMain.getGUI(), pc.name + " buys clothes", pc.name + " buys a farmer hat")
+						toBlacksmithShop(vt)
+					}
+				),
+				new ShopItem(name:"Peasant Dress", actionName:"buy a peasant dress", listedPrice: 48,
+					check: { PlayerCharacter pc ->
+						GameState.getInstance().partyMoney -= 48
+						pc.equipItem(ItemDatabase.getEquippableItem("dress_peasant"), "dress")
+						MessageBox.showMessageBox(UnmappedMain.getGUI(), pc.name + " buys clothes", pc.name + " buys a peasant dress")
+						toBlacksmithShop(vt)
 					}
 				)
 			]
 		)
 		return theShop
 	}
-	private void toBlacksmithShop() {
-		InterfaceState.nextWindow = new ShopWindow(blacksmithShop)
+	public static void toBlacksmithShop(String vt) {
+		InterfaceState.nextWindow = new ShopWindow(genBlacksmithShop(vt))
 		UnmappedMain.closeCurrent()
 	}
 	def blacksmithShopAction = {

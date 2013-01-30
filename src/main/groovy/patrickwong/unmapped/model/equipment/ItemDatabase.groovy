@@ -56,7 +56,6 @@ public class ItemDatabase {
 			"last_item":new GameItem(key:"last_item", name:"The very last item in the DB", desc:"So that I avoid errors relating to an extra comma at the end")
 		]
 		equippableDatabase = Equippable.armorDatabase
-		equippableDatabase.putAll(Equippable.clothingDatabase)
 		grippableDatabase = Grippable.weaponDatabase
 	}
 	
