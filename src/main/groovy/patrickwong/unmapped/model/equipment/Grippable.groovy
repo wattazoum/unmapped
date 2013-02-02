@@ -68,7 +68,26 @@ public class Grippable extends Equippable {
 		return new Grippable(key:"right_fist", name:"Right Fist", desc:"This is your right hand, a fast but weak weapon", stackSize:0, stackable:false)
 	}
 	public static Grippable getLeftFist() {
-		return new Grippable(key:"left_fist", name:"Left Fist", desc:"This is your left hand, a fast but weak weapon", stackSize:0, stackable: false)
+		return new Grippable(key:"left_fist", name:"Left Fist", desc:"This is your left hand, a fast but weak weapon", stackSize:0, stackable:false)
+	}
+	public static Grippable getRockToss() {
+		return new Grippable(key:"rock_toss", name:"Rock Toss", desc:"This is the most basic ranged attack", stackSize:0, stackable:false,
+			getAttackVerb: { PlayerCharacter pc ->
+				return " throws a rock at "
+			},
+			rollAttackAccuracy: { PlayerCharacter pc ->
+				int result = pc.rollStat("DEX") + pc.rollSkill("fighting") + pc.rollSkill("ranged_fighting") + pc.rollSkill("throwing_weapons")
+				return result
+			},
+			rollAttackDamage: { PlayerCharacter pc ->
+				int result = pc.rollStat("DEX") + pc.rollStat("STR")
+				result = (result / 2)
+				result += pc.rollBonuses("cause_impact")
+				return result
+			},
+			getAttackDamageType: { return "impact" },
+			melee: false, ranged: true
+		)
 	}
 	
 	// NOTE - MELEE WEAPONS
@@ -296,8 +315,42 @@ public class Grippable extends Equippable {
 			},
 			attackWeight: 1,
 			defenseWeight: 60
+		),
+		// NOTE - RANGED WEAPONS
+		"bow_shortbow":new Grippable(key:"bow_shortbow", name:"Shortbow", desc:"A bow that is small enough for children to handle", baseValue: 24,
+			getAttackVerb: { PlayerCharacter pc ->
+				return " shoots an arrow at "
+			},
+			rollAttackAccuracy: { PlayerCharacter pc ->
+				int result = pc.rollStat("DEX") + pc.rollSkill("fighting") + pc.rollSkill("ranged_fighting") + pc.rollSkill("bows")
+				return result
+			},
+			rollAttackDamage: { PlayerCharacter pc ->
+				int result = pc.rollStat("DEX") + pc.rollStat("REF")
+				result = (result / 2)
+				result += pc.rollBonuses("cause_piercing")
+				return result
+			},
+			getAttackDamageType: { return "piercing" },
+			melee: false, ranged: true
+		),
+		"bow_longbow":new Grippable(key:"bow_longbow", name:"Longbow", desc:"A bow that is nearly as tall as a man", baseValue: 48,
+			getAttackVerb: { PlayerCharacter pc ->
+				return " shoots an arrow at "
+			},
+			rollAttackAccuracy: { PlayerCharacter pc ->
+				int result = pc.rollStat("DEX") + pc.rollSkill("fighting") + pc.rollSkill("ranged_fighting") + pc.rollSkill("bows")
+				return result
+			},
+			rollAttackDamage: { PlayerCharacter pc ->
+				int result = pc.rollStat("DEX") + pc.rollStat("REF")
+				result = (result / 2)
+				result += pc.rollBonuses("cause_piercing") + DiceRoller.binaryPool(20)
+				return result
+			},
+			getAttackDamageType: { return "piercing" },
+			melee: false, ranged: true
 		)
-		
 	]
 	
 	@Override

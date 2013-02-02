@@ -59,6 +59,15 @@ public class CombatState {
 		}
 		return meleeGroups
 	}
+	public List<EnemyGroup> getAllGroupsAtRange() {
+		List<EnemyGroup> rangeGroups = new Vector<EnemyGroup>()
+		for (EnemyGroup eg : enemyGroups) {
+			if ((eg.getDistance() > 0) && (eg.hasValidEnemies())) {
+				rangeGroups.add(eg)
+			}
+		}
+		return rangeGroups
+	}
 	public EnemyGroup getFirstGroupInMelee() {
 		List<EnemyGroup> meleeGroups = getAllGroupsInMelee()
 		if (meleeGroups.size() <= 0) {
@@ -74,6 +83,15 @@ public class CombatState {
 		}
 		int rand = DiceRoller.nextInt(meleeGroups.size())
 		return meleeGroups.get(rand)
+	}
+	
+	public EnemyGroup getRandomGroupAtRange() {
+		List<EnemyGroup> rangeGroups = getAllGroupsAtRange()
+		if (rangeGroups.size() <= 0) {
+			return null
+		}
+		int rand = DiceRoller.nextInt(rangeGroups.size())
+		return rangeGroups.get(rand)
 	}
 	
 	public int countEnemies() {

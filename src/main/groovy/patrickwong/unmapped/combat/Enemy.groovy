@@ -50,7 +50,8 @@ public class Enemy implements Combatant {
 	public Integer rollMeleeEvade() {
 		int pool = challengeLevel;
 		pool -= shock;
-		pool *= 2;
+		pool = (pool * 3);
+		pool = (pool / 2);
 		return DiceRoller.binaryPool(pool);
 	}
 
@@ -58,7 +59,8 @@ public class Enemy implements Combatant {
 	public Integer rollRangeEvade() {
 		int pool = challengeLevel;
 		pool -= shock;
-		pool *= 2;
+		pool = (pool * 3);
+		pool = (pool / 2);
 		return DiceRoller.binaryPool(pool);
 	}
 

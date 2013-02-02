@@ -39,6 +39,8 @@ public class ChildhoodSelectWindow extends Window {
 			tempCharacter.setChildhood("starving");
 			String[] bonuses = {"STR", "TGH", "END", "HLT", "WIT"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"gathering","hunting","streetwise","gambling","stealth","praying"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endChildhood();
 		}
 	}
@@ -49,6 +51,8 @@ public class ChildhoodSelectWindow extends Window {
 			tempCharacter.setChildhood("begging");
 			String[] bonuses = {"VER", "REF", "END", "HLT", "WIT"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"gathering","intimdate","streetwise","gambling","stealth","short_weapons"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endChildhood();
 		}
 	}
@@ -59,6 +63,8 @@ public class ChildhoodSelectWindow extends Window {
 			tempCharacter.setChildhood("stealing");
 			String[] bonuses = {"DEX", "AGI", "END", "HLT", "MEM"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"gathering","climbing","streetwise","gambling","stealth","short_weapons"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endChildhood();
 		}
 	}
@@ -69,6 +75,8 @@ public class ChildhoodSelectWindow extends Window {
 			tempCharacter.setChildhood("working");
 			String[] bonuses = {"DEX", "TGH", "END", "VER", "MEM"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"farming","cooking","axes","streetwise","woodworking","metalworking"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endChildhood();
 		}
 	}
@@ -79,6 +87,8 @@ public class ChildhoodSelectWindow extends Window {
 			tempCharacter.setChildhood("learning");
 			String[] bonuses = {"LOG", "MEM", "VER", "DEX", "STR"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"legal","stoneworking","etiquette","ancient_languages","swords_straight_one","alchemy"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endChildhood();
 		}
 	}
@@ -89,6 +99,8 @@ public class ChildhoodSelectWindow extends Window {
 			tempCharacter.setChildhood("playing");
 			String[] bonuses = {"AGI", "DEX", "STR", "HLT", "REF"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"streetwise","intimdate","unarmed","gambling","stealth","climbing"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endChildhood();
 		}
 	}
@@ -99,6 +111,8 @@ public class ChildhoodSelectWindow extends Window {
 			tempCharacter.setChildhood("wrestling");
 			String[] bonuses = {"STR", "TGH", "END", "HLT", "REF"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"unarmed","weaponcatching","melee_fighting","melee_evasion","ranged_evasion","intimidate"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endChildhood();
 		}
 	}

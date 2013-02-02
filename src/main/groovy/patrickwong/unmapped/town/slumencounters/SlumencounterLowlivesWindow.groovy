@@ -31,13 +31,12 @@ public class SlumencounterLowlivesWindow extends Window {
 		addComponent(new Button("...walk up to them and start shoving them", genCombatAction(0)))
 		addComponent(new Button("...threaten them because they better not mess with you", threatenAction))
 		addComponent(new Button("...throw a Potion of Sapkowski to instagib them (not implemented)"))
-		addComponent(new Button("...invoke the power of X (not implemented)"))
+		addComponent(new Button("...invoke the power of X to make them respect you (not implemented)"))
 		addComponent(new Button("...leave them be, as they are clearly not worth it", new SlumDistrictAction()))
 	}
 	
 	private Enemy genEnemy(String enemyName) {
-		int level = DiceRoller.binaryPool(70)
-		Enemy enemy = new Enemy(name: enemyName, challengeLevel: level)
+		Enemy enemy = new Enemy(name: enemyName)
 		return enemy
 	}
 	
@@ -94,9 +93,11 @@ public class SlumencounterLowlivesWindow extends Window {
 	def threatenCheck = {
 		PlayerCharacter pc ->
 		int result = 0
+		result += pc.rollStat("VER")
 		result += pc.rollStat("TGH")
+		result = (result / 2)
 		result += pc.rollSkill("socializing")
-		result += pc.rollSkill("streetwise")
+		result += pc.rollSkill("intimidate")
 		if (result > 50) {
 			MessageBox.showMessageBox(UnmappedMain.getGUI(), "Threatening the Lowlives - Success", "The lowlives back off when they see you mean business.")
 			InterfaceState.nextWindow = new SlumDistrictWindow()

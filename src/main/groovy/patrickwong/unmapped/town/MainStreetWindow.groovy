@@ -16,6 +16,7 @@ public class MainStreetWindow extends Window {
 		addComponent(new Button("...the central plaza", new CentralPlazaAction()));
 		addComponent(new Button("...the market streets where daily essentials are", new MarketStreetAction()));
 		addComponent(new Button("...guild halls and other buildings of business", new GuildStreetAction()));
+		addComponent(new Button("...fashions and fancies in the garment district", new GarmentDistrictAction()));
 		addComponent(new Button("...the financial district", new FinancialDistrictAction()));
 		addComponent(new Button("...slums and tenements forsaken by snobby folk", new SlumDistrictAction()));
 		addComponent(new Button("...a quiet park in the town", new QuietParkAction()));

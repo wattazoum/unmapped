@@ -21,7 +21,7 @@ public class PlayerCharacter implements Comparable, Combatant {
 	String adulthood = "default adulthood"
 	String firstJob = "default first job"
 	String hobby = "default hobby"
-	Boolean usingRangedWeapon = false
+	String description = "describe character here"
 	
 	Integer shock = 0
 	Integer pain = 0
@@ -31,8 +31,11 @@ public class PlayerCharacter implements Comparable, Combatant {
 	List<CharacterSkill> skills = CharacterSkill.getDefaultSkills()
 	List<GameItem> inventory = new Vector<GameItem>()
 	List<EquipSlot> equipment = EquipSlot.getDefaultEquipSlots()
+	Grippable rangedWeapon = Grippable.getRockToss();
 	Grippable rightHand = Grippable.getRightFist()
 	Grippable leftHand = Grippable.getLeftFist()
+	boolean activeDefense = false
+	boolean attackingWithRanged = false
 	boolean attackingWithRight = true
 	boolean defendingWithRight = true
 	
@@ -45,8 +48,6 @@ Teenage: ${teenage}
 Adulthood: ${adulthood}
 First Job: ${firstJob}
 Hobby: ${hobby}"""
-		summaryString += "\n\n"
-		summaryString += getStatus()
 	}
 	
 	// NOTE - FUNCTIONS FOR STATS
@@ -103,6 +104,14 @@ Hobby: ${hobby}"""
 		return DiceRoller.binaryPool(getStatValue(shortName))
 	}
 	
+	public void setStatValue(String shortName, int value) {
+		getStat(shortName).setValue(value)
+	}
+	
+	public void setStatExp(String shortName, int exp) {
+		getStat(shortName).setExp(exp)
+	}
+	
 	// NOTE - FUNCTIONS FOR SKILLS
 	
 	public CharacterSkill getSkill(String codeName) {
@@ -155,6 +164,14 @@ Hobby: ${hobby}"""
 	public Integer rollSkill(String codeName) {
 		skillAddExp(codeName)
 		return DiceRoller.binaryPool(getSkillValue(codeName))
+	}
+	
+	public void setSkillValue(String codeName, int value) {
+		getSkill(codeName).setValue(value)
+	}
+	
+	public void setSkillExp(String codeName, int exp) {
+		getSkill(codeName).setExp(exp)
 	}
 	
 	// NOTE - FUNCTIONS FOR INVENTORY AND EQUIPMENT
@@ -241,11 +258,31 @@ Hobby: ${hobby}"""
 			return null
 		}
 	}
-	public List<Grippable> getGrippablesFromInventory() {
+	public List<Grippable> getMeleeGrippablesFromInventory() {
 		List<Grippable> matches = new Vector<Grippable>()
 		for (GameItem gi : inventory) {
 			if (gi instanceof Grippable) {
-				matches.add(gi)
+				Grippable possibleMatch = (Grippable)gi
+				if (possibleMatch.melee) {
+					matches.add(gi)
+				}
+			}
+		}
+		if (matches.size() > 0) {
+			return matches
+		} else {
+			return null
+		}
+		return matches
+	}
+	public List<Grippable> getRangedGrippablesFromInventory() {
+		List<Grippable> matches = new Vector<Grippable>()
+		for (GameItem gi : inventory) {
+			if (gi instanceof Grippable) {
+				Grippable possibleMatch = (Grippable)gi
+				if (possibleMatch.ranged) {
+					matches.add(gi)
+				}
 			}
 		}
 		if (matches.size() > 0) {
@@ -300,6 +337,14 @@ Hobby: ${hobby}"""
 		} else {
 			addItem(leftHand)
 			leftHand = Grippable.getLeftFist()
+		}
+	}
+	public void unequipRangedWeapon() {
+		if (rangedWeapon.key.equalsIgnoreCase("rock_toss")) {
+			return
+		} else {
+			addItem(rangedWeapon)
+			rangedWeapon = Grippable.getRockToss()
 		}
 	}
 	public void equipItem(Equippable item, String equipSlotKey) {
@@ -365,7 +410,9 @@ Hobby: ${hobby}"""
 	
 	public String getAttackVerb() {
 		chooseHandForAttack()
-		if (attackingWithRight) {
+		if (attackingWithRanged) {
+			return rangedWeapon.getAttackVerb(this)
+		} else if (attackingWithRight) {
 			return rightHand.getAttackVerb(this)
 		} else {
 			return leftHand.getAttackVerb(this)
@@ -374,7 +421,9 @@ Hobby: ${hobby}"""
 	
 	public Integer rollAttackAccuracy() {
 		int result = 0
-		if (attackingWithRight) {
+		if (attackingWithRanged) {
+			result += rangedWeapon.rollAttackAccuracy(this);
+		} else if (attackingWithRight) {
 			result += rightHand.rollAttackAccuracy(this);
 		} else {
 			result += leftHand.rollAttackAccuracy(this);
@@ -385,7 +434,9 @@ Hobby: ${hobby}"""
 	
 	public Integer rollAttackDamage() {
 		int result = 0
-		if (attackingWithRight) {
+		if (attackingWithRanged) {
+			result += rangedWeapon.rollAttackDamage(this)
+		} else if (attackingWithRight) {
 			result += rightHand.rollAttackDamage(this)
 		} else {
 			result += leftHand.rollAttackDamage(this)
@@ -394,7 +445,9 @@ Hobby: ${hobby}"""
 	}
 	
 	public String getAttackDamageType() {
-		if (attackingWithRight) {
+		if (attackingWithRanged) {
+			return rangedWeapon.getAttackDamageType()
+		} else if (attackingWithRight) {
 			return rightHand.getAttackDamageType()
 		} else {
 			return leftHand.getAttackDamageType()
@@ -410,7 +463,10 @@ Hobby: ${hobby}"""
 		result += rollSkill("melee_defense")
 		result += rollSkill("melee_evasion")
 		result = (result / 2)
-		if (defendingWithRight) {
+		if (activeDefense) {
+			result += rightHand.rollMeleeDefense(this)
+			result += leftHand.rollMeleeDefense(this)
+		} else if (defendingWithRight) {
 			result += rightHand.rollMeleeDefense(this)
 		} else {
 			result += leftHand.rollMeleeDefense(this)
@@ -427,7 +483,10 @@ Hobby: ${hobby}"""
 		result += rollSkill("ranged_defense")
 		result += rollSkill("ranged_evasion")
 		result = (result / 2)
-		if (defendingWithRight) {
+		if (activeDefense) {
+			result += rightHand.rollRangedDefense(this)
+			result += leftHand.rollRangedDefense(this)
+		} else if (defendingWithRight) {
 			result += rightHand.rollRangedDefense(this)
 		} else {
 			result += leftHand.rollRangedDefense(this)
@@ -545,7 +604,7 @@ Hobby: ${hobby}"""
 		}
 	}
 	public void endRoundLogic() {
-		
+		activeDefense = false
 	}
 	
 	public boolean isDead() {

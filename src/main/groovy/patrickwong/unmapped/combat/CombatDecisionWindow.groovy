@@ -1,5 +1,6 @@
 package patrickwong.unmapped.combat
 
+import patrickwong.unmapped.DiceRoller
 import patrickwong.unmapped.InterfaceState
 import patrickwong.unmapped.UnmappedMain
 import patrickwong.unmapped.model.GameState
@@ -48,7 +49,7 @@ public class CombatDecisionWindow extends Window {
 	def attackAction = {
 		cd.setClosure {
 			String action = ""
-			Combatant target = DefaultCombatUtil.pcChooseTarget(state)
+			Combatant target = DefaultCombatUtil.pcChooseTarget(pc, state)
 			if (target == null) {
 				action += pc.getName() + pc.getAttackVerb() + "thin air"
 				return action
@@ -62,7 +63,8 @@ public class CombatDecisionWindow extends Window {
 	
 	def defendAction = {
 		cd.setClosure {
-			String action = pc.getName() + " defends (not implemented)"
+			String action = pc.getName() + " defends with both hands"
+			pc.activeDefense = true
 			return action
 		}
 		Closure toNextDecision = CombatProcessUtil.genToNextDecisionClosure()
@@ -86,6 +88,7 @@ public class CombatDecisionWindow extends Window {
 	def passAction = {
 		cd.setClosure {
 			String action = pc.getName() + " passes"
+			pc.removeShock(DiceRoller.binaryPool(20))
 			return action
 		}
 		Closure toNextDecision = CombatProcessUtil.genToNextDecisionClosure()

@@ -40,6 +40,8 @@ public class TeenageSelectWindow extends Window {
 			tempCharacter.setTeenage("herding");
 			String[] bonuses = {"VER", "REF", "END", "HLT", "MEM"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"farming","cooking","gathering","woodwise","bows","ranged_fighting"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endTeenage();
 		}
 	}
@@ -50,6 +52,8 @@ public class TeenageSelectWindow extends Window {
 			tempCharacter.setTeenage("exploited");
 			String[] bonuses = {"END", "REF", "VER", "TGH", "DEX"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"etiquette","streetwise","gambling","socializing","performing","melee_evasion"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endTeenage();
 		}
 	}
@@ -60,6 +64,8 @@ public class TeenageSelectWindow extends Window {
 			tempCharacter.setTeenage("fighting");
 			String[] bonuses = {"STR", "TGH", "AGI", "DEX", "END"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"fighting","melee_fighting","melee_defense","ranged_fighting","ranged_defense","unarmed"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endTeenage();
 		}
 	}
@@ -70,6 +76,8 @@ public class TeenageSelectWindow extends Window {
 			tempCharacter.setTeenage("school");
 			String[] bonuses = {"DEX", "MEM", "LOG", "VER", "STR"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"education","ancient_languages","legal","alchemy","etiquette","glassworking"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endTeenage();
 		}
 	}
@@ -80,6 +88,8 @@ public class TeenageSelectWindow extends Window {
 			tempCharacter.setTeenage("studying religion");
 			String[] bonuses = {"WIT", "MEM", "DEX", "VER", "SIX"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"education","exegesis","supernatural","meditating","etiquette","exorcism"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endTeenage();
 		}
 	}
@@ -90,6 +100,8 @@ public class TeenageSelectWindow extends Window {
 			tempCharacter.setTeenage("partying");
 			String[] bonuses = {"WIT", "REF", "DEX", "VER", "END"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"socializing","streetwise","gambling","climbing","missile_catching","performing"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endTeenage();
 		}
 	}
@@ -100,6 +112,8 @@ public class TeenageSelectWindow extends Window {
 			tempCharacter.setTeenage("wandering");
 			String[] bonuses = {"END", "HLT", "REF", "MEM", "SIX"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"outdoors","woodwise","hunting","gathering","ranged_fighting","ranged_defense"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endTeenage();
 		}
 	}

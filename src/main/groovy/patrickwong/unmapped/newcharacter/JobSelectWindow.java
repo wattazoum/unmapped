@@ -38,6 +38,8 @@ public class JobSelectWindow extends Window {
 			tempCharacter.setFirstJob("farmer");
 			String[] bonuses = {"STR", "TGH", "END", "MEM", "SIX"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"crafting","farming","gathering","cooking","woodwise","ranged_fighting"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endJobSelect();
 		}
 	}
@@ -48,6 +50,8 @@ public class JobSelectWindow extends Window {
 			tempCharacter.setFirstJob("fisher");
 			String[] bonuses = {"STR", "REF", "DEX", "MEM", "HLT"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"outdoors","farming","gathering","cooking","woodwise","hunting"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endJobSelect();
 		}
 	}
@@ -58,6 +62,8 @@ public class JobSelectWindow extends Window {
 			tempCharacter.setFirstJob("prostitute");
 			String[] bonuses = {"VER", "WIT", "MEM", "END", "DEX"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"socializing","streetwise","etiquette","gambling","performing","hunting"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endJobSelect();
 		}
 	}
@@ -68,6 +74,8 @@ public class JobSelectWindow extends Window {
 			tempCharacter.setFirstJob("priest");
 			String[] bonuses = {"MEM", "LOG", "VER", "DEX", "SIX"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"supernatural","exegesis","socializing","meditating","praying","fourdimensional"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endJobSelect();
 		}
 	}
@@ -78,6 +86,8 @@ public class JobSelectWindow extends Window {
 			tempCharacter.setFirstJob("scribe");
 			String[] bonuses = {"LOG", "DEX", "AGI", "MEM", "SIX"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"education","legal","exegesis","alchemy","ancient_languages","meditating"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endJobSelect();
 		}
 	}
@@ -88,6 +98,8 @@ public class JobSelectWindow extends Window {
 			tempCharacter.setFirstJob("performer");
 			String[] bonuses = {"DEX", "AGI", "VER", "WIT", "REF"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"socializing","throwing_weapons","etiquette","ranged_fighting","performing","ranged_evasion"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endJobSelect();
 		}
 	}
@@ -98,6 +110,8 @@ public class JobSelectWindow extends Window {
 			tempCharacter.setFirstJob("bandit");
 			String[] bonuses = {"DEX", "TGH", "AGI", "REF", "WIT"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"ranged_fighting","bows","blowguns","stealth","athletics","woodwise"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endJobSelect();
 		}
 	}

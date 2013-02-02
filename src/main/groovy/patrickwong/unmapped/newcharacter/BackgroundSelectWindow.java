@@ -39,6 +39,8 @@ public class BackgroundSelectWindow extends Window {
 			tempCharacter.setBackground("low slave");
 			String[] bonuses = {"STR", "TGH", "END", "HLT", "VER"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"farming","unarmed","gambling","gathering","praying","blunt_weapons"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endBackground();
 		}
 	}
@@ -49,6 +51,8 @@ public class BackgroundSelectWindow extends Window {
 			tempCharacter.setBackground("high slave");
 			String[] bonuses = {"STR", "VER", "END", "HLT", "TGH"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"farming","unarmed","gambling","cooking","streetwise","spears"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endBackground();
 		}
 	}
@@ -59,6 +63,8 @@ public class BackgroundSelectWindow extends Window {
 			tempCharacter.setBackground("servant");
 			String[] bonuses = {"DEX", "AGI", "END", "HLT", "VER"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"farming","etiquette","gambling","cooking","hunting","bows"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endBackground();
 		}
 	}
@@ -69,6 +75,8 @@ public class BackgroundSelectWindow extends Window {
 			tempCharacter.setBackground("tenant");
 			String[] bonuses = {"STR", "LOG", "END", "REF", "DEX"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"farming","etiquette","gambling","cooking","polearms","bows"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endBackground();
 		}
 	}
@@ -79,6 +87,8 @@ public class BackgroundSelectWindow extends Window {
 			tempCharacter.setBackground("landowner");
 			String[] bonuses = {"LOG", "MEM", "VER", "REF", "END"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"farming","etiquette","hunting","shield_blocking","polearms","bows"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endBackground();
 		}
 	}
@@ -89,6 +99,8 @@ public class BackgroundSelectWindow extends Window {
 			tempCharacter.setBackground("nobility");
 			String[] bonuses = {"WIT", "REF", "VER", "AGI", "DEX"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"swords_straight_one","etiquette","hunting","shield_blocking","polearms","bows"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endBackground();
 		}
 	}
@@ -99,6 +111,8 @@ public class BackgroundSelectWindow extends Window {
 			tempCharacter.setBackground("traveller");
 			String[] bonuses = {"TGH", "END", "HLT", "REF", "LOG"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"gathering","stealth","hunting","climbing","woodwise","bows"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endBackground();
 		}
 	}

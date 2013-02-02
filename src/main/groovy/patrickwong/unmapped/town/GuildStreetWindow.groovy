@@ -24,12 +24,11 @@ public class GuildStreetWindow extends Window {
 		addComponent(new Button("...the weaponsmith guild", weaponShopAction));
 		addComponent(new Button("...the shieldsmith guild", shieldShopAction));
 		addComponent(new Button("...the armorer guild", armorShopAction));
-		addComponent(new Button("...the tailor guild (not implemented)"));
 		addComponent(new Button("...the physician guild", physicianShopAction));
 		addComponent(new Button("...the professional chef guild (not implemented)"));
 		addComponent(new Button("...martial arts schools", martialArtsSchoolAction));
 		addComponent(new Button("...inspect your party", new PartyMenuAction(new GuildStreetAction())));
-		addComponent(new Button("...the financial district", new FinancialDistrictAction()));
+		addComponent(new Button("...the garment district", new GarmentDistrictAction()));
 		addComponent(new Button("...caravan street", new CaravanStreetAction()));
 		addComponent(new Button("...main street", new MainStreetAction()));
 	}
@@ -76,6 +75,22 @@ public class GuildStreetWindow extends Window {
 					GameState.getInstance().partyMoney -= 960;
 					pc.addItem(ItemDatabase.getGrippableItem("swordstraighttwo_longsword"))
 					MessageBox.showMessageBox(UnmappedMain.getGUI(), pc.name + " buys a weapon", pc.name + " buys a longsword")
+					toWeaponShop()
+				}
+			),
+			new ShopItem(name:"Shortbow", actionName:"buy a shortbow", listedPrice: 48,
+				check: { PlayerCharacter pc ->
+					GameState.getInstance().partyMoney -= 48;
+					pc.addItem(ItemDatabase.getGrippableItem("bow_shortbow"))
+					MessageBox.showMessageBox(UnmappedMain.getGUI(), pc.name + " buys a weapon", pc.name + " buys a shortbow")
+					toWeaponShop()
+				}
+			),
+			new ShopItem(name:"Longbow", actionName:"buy a shortbow", listedPrice: 96,
+				check: { PlayerCharacter pc ->
+					GameState.getInstance().partyMoney -= 96;
+					pc.addItem(ItemDatabase.getGrippableItem("bow_longbow"))
+					MessageBox.showMessageBox(UnmappedMain.getGUI(), pc.name + " buys a weapon", pc.name + " buys a longbow")
 					toWeaponShop()
 				}
 			)
@@ -204,8 +219,6 @@ public class GuildStreetWindow extends Window {
 	def armorShopAction = {
 		toArmorShop()
 	} as Action
-	
-	// NOTE - TAILOR GUILD
 	
 	// NOTE - PHYSICIAN GUILD
 	private static ShopState physicianShop = new ShopState(

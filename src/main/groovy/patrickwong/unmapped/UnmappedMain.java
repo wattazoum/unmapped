@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import patrickwong.unmapped.mainmenu.MainMenuWindow;
 import patrickwong.unmapped.model.GameState;
-import patrickwong.unmapped.model.XmlExporter;
 
 import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.gui.GUIScreen;
@@ -57,8 +56,6 @@ public class UnmappedMain {
 		}
 		
 		textGUI.getScreen().stopScreen();
-		log.info("Dump of the game state:");
-		log.info(XmlExporter.makeXml());
 	}
 	
 	public static GUIScreen getGUI() {

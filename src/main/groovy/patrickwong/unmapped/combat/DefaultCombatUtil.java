@@ -1,21 +1,49 @@
 package patrickwong.unmapped.combat;
 
 import patrickwong.unmapped.DiceRoller;
+import patrickwong.unmapped.UnmappedMain;
+import patrickwong.unmapped.model.PlayerCharacter;
 
 
 public class DefaultCombatUtil {
 	
 	// TODO - implement logic for ranged attacks
-	public static Combatant pcChooseTarget(CombatState state) {
+	public static Combatant pcChooseTarget(PlayerCharacter pc, CombatState state) {
 		Combatant target = null;
+		boolean willDoMelee = false;
+		// first searching for enemies in melee
 		EnemyGroup eg = state.getRandomGroupInMelee();
+		Enemy validEnemy = null;
 		if (eg == null) {
-			return null;
+			UnmappedMain.log.debug("pc " + pc.getName() + " could not find enemy group in melee");
+		} else {
+			willDoMelee = true;
 		}
-		Enemy validEnemy = eg.getRandomValidEnemy();
+		if (willDoMelee) {
+			validEnemy = eg.getRandomValidEnemy();
+		}
 		if (validEnemy == null) {
+			UnmappedMain.log.debug("pc " + pc.getName() + " could not find living enemy in melee");
+		} else {
+			willDoMelee = true;
+		}
+		if (willDoMelee) {
+			pc.setAttackingWithRanged(false);
+			target = validEnemy;
+			return target;
+		}
+		// now searching for enemies at range
+		eg = state.getRandomGroupAtRange();
+		if (eg == null) {
+			UnmappedMain.log.debug("pc " + pc.getName() + " could not find enemy group at range");
 			return null;
 		}
+		validEnemy = eg.getRandomValidEnemy();
+		if (validEnemy == null) {
+			UnmappedMain.log.debug("pc " + pc.getName() + " could not find living enemy at range");
+			return null;
+		}
+		pc.setAttackingWithRanged(true);
 		target = validEnemy;
 		return target;
 	}

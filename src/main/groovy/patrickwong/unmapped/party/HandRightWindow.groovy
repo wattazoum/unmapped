@@ -22,7 +22,7 @@ public class HandRightWindow extends Window {
 		rta = returnAction
 		addComponent(new Label("Currently equipped: " + playerCharacter.rightHand.getReadableName()))
 		
-		List<Grippable> possibleItems = pc.getGrippablesFromInventory()
+		List<Grippable> possibleItems = pc.getMeleeGrippablesFromInventory()
 		if ((possibleItems == null) || (possibleItems.size() <= 0)) {
 			addComponent(new Label("no possible replacements for the right hand"))
 		} else {

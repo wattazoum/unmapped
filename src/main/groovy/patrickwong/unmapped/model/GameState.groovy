@@ -8,7 +8,7 @@ import patrickwong.unmapped.town.TavernAction
 import com.googlecode.lanterna.gui.Action
 
 public class GameState {
-	private boolean hello = false
+	String gameName = "New Game"
 	Boolean gameInProgress = false
 	PlayerCharacter tempCharacter = new PlayerCharacter()
 	List<PlayerCharacter> party = new Vector<PlayerCharacter>()

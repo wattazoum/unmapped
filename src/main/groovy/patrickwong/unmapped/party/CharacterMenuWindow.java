@@ -8,7 +8,6 @@ import patrickwong.unmapped.model.PlayerCharacter;
 import com.googlecode.lanterna.gui.Action;
 import com.googlecode.lanterna.gui.Window;
 import com.googlecode.lanterna.gui.component.Button;
-import com.googlecode.lanterna.gui.dialog.MessageBox;
 
 public class CharacterMenuWindow extends Window {
 	private GameState gs;
@@ -24,7 +23,8 @@ public class CharacterMenuWindow extends Window {
 		addComponent(new Button("Summary", new Action() {
 			@Override
 			public void doAction() {
-				MessageBox.showMessageBox(getOwner(), pc.getName(), pc.summaryString());
+				InterfaceState.nextWindow = new CharacterSummaryWindow(pc, rta);
+				UnmappedMain.closeCurrent();
 			}
 		}));
 		

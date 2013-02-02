@@ -54,7 +54,7 @@ public class EnemyGroup {
 	}
 	
 	public String getSummary() {
-		String summary = "A " + groupName;
+		String summary = "" + groupName;
 		
 		if (distance > 0) {
 			summary +=  " (" + distance + " rounds away)";

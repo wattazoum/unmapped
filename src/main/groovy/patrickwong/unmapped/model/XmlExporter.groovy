@@ -1,25 +1,29 @@
 package patrickwong.unmapped.model
 
 import groovy.xml.MarkupBuilder
-import patrickwong.unmapped.model.equipment.GameItem;
+import patrickwong.unmapped.model.equipment.GameItem
+import patrickwong.unmapped.model.equipment.Grippable
 
 public class XmlExporter {
 	public static String makeXml() {
 		GameState gs = GameState.getInstance()
 		PlayerCharacter tc = gs.getTempCharacter()
-		def xmlBuilder = new MarkupBuilder()
+		// NOTE - it is very important that the MarkupBuilder is using a StringWriter for my purposes
+		// Otherwise, the MarkupBuilder will print directly to console and leave nothing behind
+		def writer = new StringWriter()
+		def xmlBuilder = new MarkupBuilder(writer)
 		
-		String xml = xmlBuilder.gameState(partyMoney: gs.partyMoney,
+		xmlBuilder.gameState(
+			gameName: gs.gameName,
+			partyMoney: gs.partyMoney,
 			currentLocation: gs.currentLocation,
-			currentRegion: gs.currentRegion,
-			currentTime: gs.currentTime
+			currentRegion: gs.currentRegion
 		) {
-			tempCharacter(order: tc.order, name: tc.name, gender: tc.gender, background: tc.background, childhood: tc.childhood, teenage: tc.teenage, adulthood: tc.adulthood, firstJob: tc.firstJob, hobby: tc.hobby) {
-				for (CharacterStat st : tc.stats) {
-					stat(shortName: st.shortName, value: st.value, exp: st.exp)
-				}
-				for (CharacterSkill sk : tc.skills) {
-					skill(codeName: sk.codeName, value: sk.value, exp: sk.exp)
+			for (Quest qu : gs.quests) {
+				quest(key: qu.key) {
+					for (QuestPhase qp : qu.phases) {
+						questPhase(key: qp.key, order: qp.order, description: qp.description)
+					}
 				}
 			}
 			for (PlayerCharacter pc : gs.party) {
@@ -33,10 +37,20 @@ public class XmlExporter {
 					for (GameItem gi : pc.inventory) {
 						item(key: gi.key, stackSize: gi.stackSize)
 					}
+					for (EquipSlot es : pc.equipment) {
+						if (es.isFilled()) {
+							equip(slot: es.key, key: es.slot.key)
+						}
+					}
+					if (!(pc.rightHand.key.equalsIgnoreCase(Grippable.getRightFist().key))) {
+						rightHand(key: pc.rightHand.key)
+					}
+					if (!(pc.leftHand.key.equalsIgnoreCase(Grippable.getLeftFist().key))) {
+						leftHand(key: pc.leftHand.key)
+					}
 				}
 			}
 		}
-		
-		return xml
+		return writer.toString()
 	}
 }

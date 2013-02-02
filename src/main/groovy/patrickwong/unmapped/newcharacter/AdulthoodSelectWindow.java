@@ -38,6 +38,8 @@ public class AdulthoodSelectWindow extends Window {
 			tempCharacter.setAdulthood("taking a life");
 			String[] bonuses = {"STR", "TGH", "END", "AGI", "DEX"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"hunting","melee_fighting","ranged_fighting","fighting","axes","blunt_weapons"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endAdulthoodSelect();
 		}
 	}
@@ -48,6 +50,8 @@ public class AdulthoodSelectWindow extends Window {
 			tempCharacter.setAdulthood("losing virginity");
 			String[] bonuses = {"DEX", "VER", "END", "WIT", "MEM"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"socializing","streetwise","athletics","spears","polearms","glassworking"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endAdulthoodSelect();
 		}
 	}
@@ -58,6 +62,8 @@ public class AdulthoodSelectWindow extends Window {
 			tempCharacter.setAdulthood("war");
 			String[] bonuses = {"STR", "REF", "END", "AGI", "HLT"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"fighting","melee_defense","ranged_defense","shield_blocking","parrying","polearms"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endAdulthoodSelect();
 		}
 	}
@@ -68,6 +74,8 @@ public class AdulthoodSelectWindow extends Window {
 			tempCharacter.setAdulthood("independence");
 			String[] bonuses = {"VER", "WIT", "REF", "TGH", "HLT"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"gathering","legal","hunting","crafting","cooking","streetwise"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endAdulthoodSelect();
 		}
 	}
@@ -78,6 +86,8 @@ public class AdulthoodSelectWindow extends Window {
 			tempCharacter.setAdulthood("graduation");
 			String[] bonuses = {"LOG", "MEM", "VER", "DEX", "STR"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"education","legal","ancient_languages","alchemy","gathering","stoneworking"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endAdulthoodSelect();
 		}
 	}
@@ -88,6 +98,8 @@ public class AdulthoodSelectWindow extends Window {
 			tempCharacter.setAdulthood("responsibility");
 			String[] bonuses = {"LOG", "VER", "MEM", "DEX", "WIT"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"athletics","legal","cooking","farming","gathering","woodworking"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endAdulthoodSelect();
 		}
 	}
@@ -98,6 +110,8 @@ public class AdulthoodSelectWindow extends Window {
 			tempCharacter.setAdulthood("ritual");
 			String[] bonuses = {"DEX", "END", "HLT", "TGH", "SIX"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"supernatural","exorcism","meditating","fourdimensional","exegesis","alchemy"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endAdulthoodSelect();
 		}
 	}

@@ -25,15 +25,21 @@ public class PutItemInSlotWindow extends Window {
 		
 		if (gi instanceof Grippable) {
 			Grippable gripItem = (Grippable)gi
-			String rightHandString = "Right Hand: " + pc.rightHand.getReadableName()
-			String leftHandString = "Left Hand: " + pc.leftHand.getReadableName()
-			if (gripItem.twoHanded) {
-				addComponent(new Label(rightHandString))
-				addComponent(new Label(leftHandString))
-				addComponent(new Button("Equip to both hands", equipToBothHandsAction))
-			} else {
-				addComponent(new Button(rightHandString, equipToRightHandAction))
-				addComponent(new Button(leftHandString, equipToLeftHandAction))
+			if (gripItem.melee) {
+				String rightHandString = "Right Hand: " + pc.rightHand.getReadableName()
+				String leftHandString = "Left Hand: " + pc.leftHand.getReadableName()
+				if (gripItem.twoHanded) {
+					addComponent(new Label(rightHandString))
+					addComponent(new Label(leftHandString))
+					addComponent(new Button("Equip to both hands", equipToBothHandsAction))
+				} else {
+					addComponent(new Button(rightHandString, equipToRightHandAction))
+					addComponent(new Button(leftHandString, equipToLeftHandAction))
+				}
+			}
+			if (gripItem.ranged) {
+				String rangedHandString = "Ranged: " + pc.rangedWeapon.getReadableName()
+				addComponent(new Button(rangedHandString))
 			}
 			
 		} else {
@@ -82,6 +88,13 @@ public class PutItemInSlotWindow extends Window {
 		InterfaceState.nextWindow = new CharacterInventoryWindow(pc, rta)
 		UnmappedMain.closeCurrent()
 	} as Action
+	
+	def equipToRangedHandAction = {
+		pc.unequipRangedWeapon()
+		pc.rangedWeapon = pc.takeItem(gi.key)
+		InterfaceState.nextWindow = new CharacterInventoryWindow(pc, rta)
+		UnmappedMain.closeCurrent()
+	}
 	
 	def cancelAction = {
 		InterfaceState.nextWindow = new CharacterInventoryWindow(pc, rta)

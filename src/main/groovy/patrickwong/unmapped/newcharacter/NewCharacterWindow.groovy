@@ -36,10 +36,10 @@ public class NewCharacterWindow extends Window {
 			new NameCollisionAction(nameInput).doAction();
 			return;
 		} else if (nameInput == null) {
-			MessageBox.showMessageBox(getOwner(), "Blank Name!", "If your character has no name, then enter 'Nameless'\nor something like that, please.");
+			MessageBox.showMessageBox(UnmappedMain.getGUI(), "Blank Name!", "If your character has no name, then enter 'Nameless'\nor something like that, please.");
 			return;
 		} else if (nameInput.length() <= 0) {
-			MessageBox.showMessageBox(getOwner(), "Blank Name!", "If your character has no name, then enter 'Nameless'\nor something like that, please.");
+			MessageBox.showMessageBox(UnmappedMain.getGUI(), "Blank Name!", "If your character has no name, then enter 'Nameless'\nor something like that, please.");
 			return;
 		}
 		tempCharacter.setName(nameInput);

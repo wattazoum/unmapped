@@ -38,6 +38,8 @@ public class HobbySelectWindow extends Window {
 			tempCharacter.setHobby("fighting");
 			String[] bonuses = {"WIT", "END", "AGI", "DEX", "REF"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"fighting","melee_fighting","melee_defense","melee_evasion","parrying","swords_straight_one"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endHobbySelect();
 		}
 	}
@@ -48,6 +50,8 @@ public class HobbySelectWindow extends Window {
 			tempCharacter.setHobby("carousing");
 			String[] bonuses = {"WIT", "VER", "END", "DEX", "MEM"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"socializing","gambling","streetwise","stealth","weaponcatching","intimidate"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endHobbySelect();
 		}
 	}
@@ -58,6 +62,8 @@ public class HobbySelectWindow extends Window {
 			tempCharacter.setHobby("athletics");
 			String[] bonuses = {"END", "HLT", "AGI", "REF", "STR"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"athletics","climbing","melee_evasion","stealth","weaponcatching","ranged_evasion"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endHobbySelect();
 		}
 	}
@@ -68,6 +74,8 @@ public class HobbySelectWindow extends Window {
 			tempCharacter.setHobby("reading");
 			String[] bonuses = {"LOG", "MEM", "SIX", "DEX", "WIT"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"education","legal","exegesis","cooking","gathering","ancient_languages"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endHobbySelect();
 		}
 	}
@@ -78,6 +86,8 @@ public class HobbySelectWindow extends Window {
 			tempCharacter.setHobby("crafting");
 			String[] bonuses = {"DEX", "END", "STR", "MEM", "LOG"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"crafting","woodworking","metalworking","glassworking","stoneworking","cooking"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endHobbySelect();
 		}
 	}
@@ -88,6 +98,8 @@ public class HobbySelectWindow extends Window {
 			tempCharacter.setHobby("cooking");
 			String[] bonuses = {"END", "DEX", "MEM", "HLT", "SIX"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"crafting","cooking","gathering","hunting","woodworking","farming"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endHobbySelect();
 		}
 	}
@@ -98,6 +110,8 @@ public class HobbySelectWindow extends Window {
 			tempCharacter.setHobby("ranging");
 			String[] bonuses = {"TGH", "END", "REF", "HLT", "WIT"};
 			tempCharacter.statsAddExp(bonuses, 200);
+			String[] skillBonuses = {"outdoors","woodwise","athletics","climbing","gathering","hunting"};
+			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endHobbySelect();
 		}
 	}

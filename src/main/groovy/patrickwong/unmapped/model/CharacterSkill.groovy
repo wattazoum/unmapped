@@ -52,22 +52,38 @@ public class CharacterSkill implements Comparable<CharacterSkill> {
 		skills.add(new CharacterSkill(codeName: "socializing", order: 10000, name: "Socializing", levelupMessage:"is more skilled at socializing", skillDifficulty: 5))
 		skills.add(new CharacterSkill(codeName: "gambling", order: 10100, name: "Gambling", levelupMessage:"is luckier at gambling"))
 		skills.add(new CharacterSkill(codeName: "streetwise", order: 11000, name: "Streetwise", levelupMessage:"is more streetwise"))
+		skills.add(new CharacterSkill(codeName: "intimidate", order: 11100, name: "Intimidate", levelupMessage:"is more intimidating"))
 		skills.add(new CharacterSkill(codeName: "etiquette", order: 12000, name: "Etiquette", levelupMessage:"possesses more etiquette"))
+		skills.add(new CharacterSkill(codeName: "performing", order: 13000, name: "Performing", levelupMessage:"is a better performer"))
 		
 		skills.add(new CharacterSkill(codeName: "education", order: 20000, name: "Education", levelupMessage:"is more educated", skillDifficulty: 5))
 		skills.add(new CharacterSkill(codeName: "ancient_languages", order: 20100, name: "Ancient Languages", levelupMessage:"is more knowledgeable about ancient languages"))
+		skills.add(new CharacterSkill(codeName: "legal", order: 20200, name: "Legal", levelupMessage:"can handle more complex legal cases"))
 		skills.add(new CharacterSkill(codeName: "alchemy", order: 21000, name: "Alchemy", levelupMessage:"has unlocked more secrets of alchemy"))
+		skills.add(new CharacterSkill(codeName: "exegesis", order: 22000, name: "Exegesis", levelupMessage:"is more correct with exegesis of texts"))
 		
 		skills.add(new CharacterSkill(codeName: "supernatural", order: 30000, name: "Supernatural", levelupMessage:"knows more about the supernatural", skillDifficulty: 5))
 		skills.add(new CharacterSkill(codeName: "exorcism", order: 30100, name: "Exorcism", levelupMessage:"is more consistent with exorcism"))
+		skills.add(new CharacterSkill(codeName: "praying", order: 30200, name: "Praying", levelupMessage:"is more sincere with praying"))
+		skills.add(new CharacterSkill(codeName: "meditating", order: 30300, name: "Meditating", levelupMessage:"is more steady at meditating"))
+		skills.add(new CharacterSkill(codeName: "fourdimensional", order: 30400, name: "Four-Dimensional", levelupMessage:"can see more of the fourth dimension"))
 		
 		skills.add(new CharacterSkill(codeName: "outdoors", order: 40000, name: "Outdoors", levelupMessage:"is more skilled with the outdoors", skillDifficulty: 5))
 		skills.add(new CharacterSkill(codeName: "woodwise", order: 41000, name: "Woodwise", levelupMessage:"is more woodwise"))
+		skills.add(new CharacterSkill(codeName: "hunting", order: 42000, name: "Hunting", levelupMessage:"is better at hunting"))
+		skills.add(new CharacterSkill(codeName: "gathering", order: 43000, name: "Gathering", levelupMessage:"is better at gathering"))
 		
 		skills.add(new CharacterSkill(codeName: "athletics", order: 50000, name: "Athletics", levelupMessage:"is better at athletics", skillDifficulty: 5))
 		skills.add(new CharacterSkill(codeName: "stealth", order: 51000, name: "Stealth", levelupMessage:"is more stealthy"))
+		skills.add(new CharacterSkill(codeName: "climbing", order: 52000, name: "Climbing", levelupMessage:"can climb more difficult surfaces"))
 		
 		skills.add(new CharacterSkill(codeName: "crafting", order: 60000, name: "Crafting", levelupMessage:"is better at crafting", skillDifficulty: 5))
+		skills.add(new CharacterSkill(codeName: "farming", order: 61000, name: "Farming", levelupMessage:"is better at farming"))
+		skills.add(new CharacterSkill(codeName: "cooking", order: 62000, name: "Cooking", levelupMessage:"is a more consistent cook"))
+		skills.add(new CharacterSkill(codeName: "glassworking", order: 63000, name: "Glassworking", levelupMessage:"is better at working with glass"))
+		skills.add(new CharacterSkill(codeName: "woodworking", order: 63100, name: "Woodworking", levelupMessage:"is better at working with wood"))
+		skills.add(new CharacterSkill(codeName: "stoneworking", order: 63200, name: "Stoneworking", levelupMessage:"is better at working with stone"))
+		skills.add(new CharacterSkill(codeName: "metalworking", order: 63300, name: "Metalworking", levelupMessage:"is better at working with metal"))
 		
 		skills = skills.sort()
 		return skills

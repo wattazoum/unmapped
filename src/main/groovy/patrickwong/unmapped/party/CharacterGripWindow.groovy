@@ -19,6 +19,7 @@ public class CharacterGripWindow extends Window {
 		
 		addComponent(new Button("Right Hand: " + pc.rightHand.getReadableName(), handRightAction))
 		addComponent(new Button("Left Hand: " + pc.leftHand.getReadableName(), handLeftAction))
+		addComponent(new Button("Ranged: " + pc.rangedWeapon.getReadableName(), handRangedAction))
 		addComponent(new Button("Cancel", new CharacterMenuAction(pc, returnAction)))
 	}
 	
@@ -29,6 +30,11 @@ public class CharacterGripWindow extends Window {
 	
 	def handLeftAction = {
 		InterfaceState.nextWindow = new HandLeftWindow(pc, rta)
+		UnmappedMain.closeCurrent()
+	} as Action
+	
+	def handRangedAction = {
+		InterfaceState.nextWindow = new HandRangedWindow(pc, rta)
 		UnmappedMain.closeCurrent()
 	} as Action
 }

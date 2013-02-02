@@ -18,7 +18,7 @@ public class FinancialDistrictWindow extends Window {
 		addComponent(new Button("...the expensive restaurants"));
 		addComponent(new Button("...inspect your party", new PartyMenuAction(new FinancialDistrictAction())));
 		addComponent(new Button("...central plaza", new CentralPlazaAction()));
-		addComponent(new Button("...guild street", new GuildStreetAction()));
+		addComponent(new Button("...the garment district", new GarmentDistrictAction()));
 		addComponent(new Button("...main street", new MainStreetAction()));
 	}
 }

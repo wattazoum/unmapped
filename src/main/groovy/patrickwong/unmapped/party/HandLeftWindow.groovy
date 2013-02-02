@@ -22,7 +22,7 @@ public class HandLeftWindow extends Window {
 		rta = returnAction
 		addComponent(new Label("Currently equipped: " + playerCharacter.leftHand.getReadableName()))
 		
-		List<Grippable> possibleItems = pc.getGrippablesFromInventory()
+		List<Grippable> possibleItems = pc.getMeleeGrippablesFromInventory()
 		if ((possibleItems == null) || (possibleItems.size() <= 0)) {
 			addComponent(new Label("no possible replacements for the right hand"))
 		} else {
@@ -49,7 +49,7 @@ public class HandLeftWindow extends Window {
 				addComponent(new Label("(too many items to list)"));
 			}
 		}
-		if (!(pc.rightHand.key.equalsIgnoreCase("left_fist"))) {
+		if (!(pc.leftHand.key.equalsIgnoreCase("left_fist"))) {
 			addComponent(new Button("Unequip", unequipAction))
 		}
 		addComponent(new Button("Cancel", cancelAction))

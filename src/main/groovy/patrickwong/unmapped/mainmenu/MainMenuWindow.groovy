@@ -25,9 +25,9 @@ public class MainMenuWindow extends Window {
 			addComponent(new Button("Resume Game", GameState.getInstance().currentLocationAction()));
 		}
 		addComponent(new Button("New Game", newGameAction));
-		addComponent(new Button("Load Game (not implemented)", loadGameAction));
+		addComponent(new Button("Load Game", loadGameAction));
 		if (isGameInProgress) {
-			addComponent(new Button("Save Game (not implemented)", saveGameAction));
+			addComponent(new Button("Save Game", saveGameAction));
 		}
 		addComponent(new Button("Quit", quitGameAction));
 	}
