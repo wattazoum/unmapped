@@ -35,6 +35,7 @@ public class XmlImporter {
 			pc.adulthood = it.'@adulthood'
 			pc.firstJob = it.'@firstJob'
 			pc.hobby = it.'@hobby'
+			pc.description = it.'@description'
 			
 			it.stat.each {
 				String shortName = it.'@shortName'
@@ -67,6 +68,10 @@ public class XmlImporter {
 			it.leftHand.each {
 				String key = it.'@key'
 				pc.leftHand = ItemDatabase.getGrippableItem(key)
+			}
+			it.rangedWeapon.each {
+				String key = it.'@key'
+				pc.rangedWeapon = ItemDatabase.getGrippableItem(key)
 			}
 			
 			state.party.add(pc)
