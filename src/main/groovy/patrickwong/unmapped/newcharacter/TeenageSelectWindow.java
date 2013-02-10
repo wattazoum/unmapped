@@ -88,7 +88,7 @@ public class TeenageSelectWindow extends Window {
 			tempCharacter.setTeenage("studying religion");
 			String[] bonuses = {"WIT", "MEM", "DEX", "VER", "SIX"};
 			tempCharacter.statsAddExp(bonuses, 200);
-			String[] skillBonuses = {"education","exegesis","supernatural","meditating","etiquette","exorcism"};
+			String[] skillBonuses = {"illumination","exegesis","supernatural","meditating","etiquette","exorcism"};
 			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endTeenage();
 		}

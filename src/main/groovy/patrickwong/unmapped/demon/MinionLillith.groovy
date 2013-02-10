@@ -10,7 +10,7 @@ public class MinionLillith extends Enemy {
 	
 	public MinionLillith() {
 		super()
-		challengeLevel = DiceRoller.nextInt(120)
+		challengeLevel = DiceRoller.binaryPool(120)
 		possibleActions = ["punch", "kiss", "spear", "sword"]
 	}
 	

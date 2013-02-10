@@ -12,38 +12,42 @@ public class ItemDatabase {
 	private ItemDatabase() {
 		database = [
 			"painkiller":new GameItem(key:"painkiller", name:"Painkiller", desc:"Pill that should relieve pain.", baseValue: 12,
-			actionInField: { PlayerCharacter user ->
-				user.removeItem("painkiller")
-				if (user.getPain() <= 0) {
-					return user.name + " takes a painkiller just for the feeling"
-				}
-				user.removePain(10)
-				return user.name + " swallows a painkiller"
-			}, actionInCombat: { PlayerCharacter user, CombatState state ->
-				user.removeItem("painkiller")
-				if (user.getPain() <= 0) {
-					return user.name + " bites on a painkiller for the feeling of it"
-				}
-				user.removePain(5)
-				return user.name + " tries to quickly swallow a painkiller"
-			}),
+				actionInField: { PlayerCharacter user ->
+					user.removeItem("painkiller")
+					if (user.getPain() <= 0) {
+						return user.name + " takes a painkiller just for the feeling"
+					}
+					user.removePain(10)
+					return user.name + " swallows a painkiller"
+				} as ItemFieldAction,
+				actionInCombat: { PlayerCharacter user, CombatState state ->
+					user.removeItem("painkiller")
+					if (user.getPain() <= 0) {
+						return user.name + " bites on a painkiller for the feeling of it"
+					}
+					user.removePain(5)
+					return user.name + " tries to quickly swallow a painkiller"
+				} as ItemCombatAction
+			),
 			
 			"bandage":new GameItem(key:"bandage", name:"Bandage", desc:"For wrapping around wounds.", baseValue: 1,
-			actionInField: { PlayerCharacter user ->
-				user.removeItem("bandage")
-				if (user.getWounds() <= 0) {
-					return user.name + " wears a bandage for decoration"
-				}
-				user.removeWounds(10)
-				return user.name + " applies a bandage"
-			}, actionInCombat: { PlayerCharacter user, CombatState state ->
-				user.removeItem("bandage")
-				if (user.getWounds() <= 0) {
-					return user.name + " straps on a bandage for style"
-				}
-				user.removeWounds(5)
-				return user.name + " hastily wraps a bandage"
-			}),
+				actionInField: { PlayerCharacter user ->
+					user.removeItem("bandage")
+					if (user.getWounds() <= 0) {
+						return user.name + " wears a bandage for decoration"
+					}
+					user.removeWounds(3)
+					return user.name + " applies a bandage"
+				} as ItemFieldAction,
+				actionInCombat: { PlayerCharacter user, CombatState state ->
+					user.removeItem("bandage")
+					if (user.getWounds() <= 0) {
+						return user.name + " straps on a bandage for style"
+					}
+					user.removeWounds(1)
+					return user.name + " hastily wraps a bandage"
+				} as ItemCombatAction
+			),
 			
 			// NOTE - POTIONS
 			
@@ -51,6 +55,8 @@ public class ItemDatabase {
 			"potion_hexer":new GameItem(key:"potion_hexer", name:"Potion of Hexer"),
 			"potion_sapkowski":new GameItem(key:"potion_sapkowski", name:"Potion of Sapkowski"),
 			"potion_wiedzmin":new GameItem(key:"potion_wiedzmin", name:"Potion of Wiedzmin"),
+			"potion_rivia":new GameItem(key:"potion_rivia", name:"Potion of Rivia"),
+			"potion_merigold":new GameItem(key:"potion_merigold", name:"Potion of Merigold"),
 			
 			// NOTE - FINAL ITEM
 			"last_item":new GameItem(key:"last_item", name:"The very last item in the DB", desc:"So that I avoid errors relating to an extra comma at the end")

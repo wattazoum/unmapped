@@ -23,7 +23,9 @@ public class XmlImporter {
 			state.quests.add(quest)
 		}
 		state.quests = state.quests.sort()
-		
+		data.holybook.each {
+			state.holyBooks.add(it.'@key')
+		}
 		data.playerCharacter.each {
 			PlayerCharacter pc = new PlayerCharacter()
 			pc.order = it.'@order'

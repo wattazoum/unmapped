@@ -4,6 +4,10 @@ import patrickwong.unmapped.InterfaceState;
 import patrickwong.unmapped.UnmappedMain;
 import patrickwong.unmapped.model.GameState;
 import patrickwong.unmapped.model.PlayerCharacter;
+import patrickwong.unmapped.party.equipment.CharacterEquipmentWindow;
+import patrickwong.unmapped.party.equipment.CharacterGripWindow;
+import patrickwong.unmapped.party.equipment.CharacterInventoryWindow;
+import patrickwong.unmapped.party.holybook.ChooseBookAction;
 
 import com.googlecode.lanterna.gui.Action;
 import com.googlecode.lanterna.gui.Window;
@@ -51,6 +55,10 @@ public class CharacterMenuWindow extends Window {
 				UnmappedMain.closeCurrent();
 			}
 		}));
+		
+		if (gs.hasBooksForField()) {
+			addComponent(new Button("Invoke a Holy Book", new ChooseBookAction(pc, rta)));
+		}
 		
 		if (gs.getParty().size() > 1) {
 			int order = pc.getOrder();

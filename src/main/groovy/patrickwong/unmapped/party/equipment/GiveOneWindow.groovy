@@ -1,4 +1,4 @@
-package patrickwong.unmapped.party
+package patrickwong.unmapped.party.equipment
 
 import patrickwong.unmapped.InterfaceState
 import patrickwong.unmapped.UnmappedMain
@@ -10,13 +10,13 @@ import com.googlecode.lanterna.gui.Action
 import com.googlecode.lanterna.gui.Window
 import com.googlecode.lanterna.gui.component.Button
 
-public class GiveAllWindow extends Window {
+public class GiveOneWindow extends Window {
 	private PlayerCharacter pc
 	private GameItem gi
 	private Action rta
 	
-	public GiveAllWindow(PlayerCharacter playerCharacter, GameItem gameItem, Action returnAction) {
-		super(playerCharacter.name + " giving all " + gameItem.getReadableName())
+	public GiveOneWindow(PlayerCharacter playerCharacter, GameItem gameItem, Action returnAction) {
+		super(playerCharacter.name + " giving a " + gameItem.getReadableName())
 		this.pc = playerCharacter
 		this.gi = gameItem
 		this.rta = returnAction
@@ -36,9 +36,9 @@ public class GiveAllWindow extends Window {
 	
 	private Action makeGiveAction(PlayerCharacter receiver) {
 		def giveAction = {
-			pc.removeItemStack(gi.key)
-			receiver.addItemStack(gi)
-			InterfaceState.nextWindow = new CharacterInventoryWindow(pc, rta)
+			GameItem transitingItem = pc.takeItem(gi.key)
+			receiver.addItem(transitingItem)
+			InterfaceState.nextWindow = new ItemWindow(gi, pc, rta)
 			UnmappedMain.closeCurrent()
 		} as Action
 		return giveAction

@@ -26,6 +26,9 @@ public class XmlExporter {
 					}
 				}
 			}
+			for (String hb : gs.holyBooks) {
+				holybook(key: hb)
+			}
 			for (PlayerCharacter pc : gs.party) {
 				playerCharacter(order: pc.order, name: pc.name, gender: pc.gender, background: pc.background, childhood: pc.childhood, teenage: pc.teenage, adulthood: pc.adulthood, firstJob: pc.firstJob, hobby: pc.hobby, description: pc.description) {
 					for (CharacterStat st : pc.stats) {

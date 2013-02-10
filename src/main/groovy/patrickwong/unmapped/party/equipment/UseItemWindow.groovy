@@ -1,4 +1,4 @@
-package patrickwong.unmapped.party;
+package patrickwong.unmapped.party.equipment;
 
 import patrickwong.unmapped.InterfaceState
 import patrickwong.unmapped.UnmappedMain
@@ -18,7 +18,7 @@ public class UseItemWindow extends Window {
 		pc = user
 		rta = returnAction
 		
-		addComponent(new Label(gi.getActionInField().call(pc)))
+		addComponent(new Label(gi.useInField(pc)))
 		addComponent(new Button("OK", okAction))
 	}
 	def okAction = {

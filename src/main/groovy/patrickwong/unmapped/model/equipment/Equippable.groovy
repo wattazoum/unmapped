@@ -168,13 +168,16 @@ public class Equippable extends GameItem {
 		"hat_starcloth":new Equippable(key:"hat_starcloth", name:"Star Hat", desc:"Star-shaped cloth that somehow stays on the head", baseValue: 10, slotType:"hat"),
 		"hat_yarmulke":new Equippable(key:"hat_yarmulke", name:"Yarmulke", desc:"It is preferred by people of a specific religion and/or race.", baseValue: 10, slotType:"hat"),
 		"hat_dorag":new Equippable(key:"hat_dorag", name:"Do Rag", desc:"Works best in combination with a shaved head", baseValue: 10, slotType:"hat"),
+		"hat_bigbandana":new Equippable(key:"hat_bigbandana", name:"Big Bandana", desc:"Its full artistic merit can only be appreciated when it\nis not being worn", baseValue: 10, slotType:"hat"),
+		"hat_baseball":new Equippable(key:"hat_baseball", name:"Baseball Cap", desc:"Covers the eyes from too much sun", baseValue: 12, slotType:"hat"),
 		"hat_animalears":new Equippable(key:"hat_animalears", name:"Animal Ears", desc:"They are supposed to look really cute", baseValue: 48, slotType:"hat"),
+		"hat_miniwings":new Equippable(key:"hat_miniwings", name:"Mini Wings", desc:"They look good both on and under hair", baseValue: 48, slotType:"hat"),
 		
 		// NOTE - FOREHEAD
 		
 		"forehead_bandana":new Equippable(key:"forehead_bandana", name:"Bandana", desc:"The loose straps in back are blown by the wind", baseValue: 6, slotType:"forehead"),
 		"forehead_steelband":new Equippable(key:"forehead_steelband", name:"Steel Headband", desc:"A favorite of warriors", baseValue: 20, slotType:"forehead"),
-		"forehead_flagband":new Equippable(key:"forehead_flagband", name:"Flag Headband", desc:"The best headband... for bandits!", baseValue: 24, slotType:"forehead"),
+		"forehead_flagband":new Equippable(key:"forehead_flagband", name:"Flag Headband", desc:"The best headband for bandits", baseValue: 24, slotType:"forehead"),
 		"forehead_diadem":new Equippable(key:"forehead_diadem", name:"Diadem", desc:"Golden band with valuable jewels", baseValue: 240, slotType:"forehead"),
 		"forehead_numbertwo":new Equippable(key:"forehead_numbertwo", name:"Number Two Headband", desc:"It is a very good headband, but not number one", baseValue: 240, slotType:"forehead"),
 		"forehead_numberone":new Equippable(key:"forehead_numberone", name:"Number One Headband", desc:"It signifies excellent fighting skill", baseValue: 5520, slotType:"forehead"),
@@ -199,6 +202,7 @@ public class Equippable extends GameItem {
 		
 		"necklace_pendant":new Equippable(key:"necklace_pendant", name:"Pendant", desc:"Trinket. No effect, but fond memories comfort travellers.", baseValue: 5, slotType:"necklace"),
 		"necklace_amulet":new Equippable(key:"necklace_amulet", name:"Amulet", desc:"Inscribed with a magical symbol for good luck", baseValue: 24, slotType:"necklace"),
+		"necklace_crucifix":new Equippable(key:"necklace_crucifix", name:"Crucifix Chain", desc:"Actually living by what the crucifix represents is optional", baseValue: 24, slotType:"necklace"),
 		"necklace_leatherchoker":new Equippable(key:"necklace_leatherchoker", name:"Leather Choker", desc:"It is uncertain what the purpose of this is", baseValue: 24, slotType:"necklace"),
 		"necklace_lacechoker":new Equippable(key:"necklace_lacechoker", name:"Lace Choker", desc:"Very fancy item", baseValue: 48, slotType:"necklace"),
 		
@@ -209,6 +213,7 @@ public class Equippable extends GameItem {
 		
 		// NOTE - TABARDS
 		
+		"tabard_butcher":new Equippable(key:"tabard_butcher", name:"Butcher Apron", desc:"Ahhh! Fresh meat!", baseValue: 12, slotType:"tabard"),
 		"tabard_military":new Equippable(key:"tabard_military", name:"Military Tabard", desc:"Bears the coat of arms of a family", baseValue: 240, slotType:"tabard"),
 		"tabard_holy":new Equippable(key:"tabard_holy", name:"Holy Tabard", desc:"Signifies membership in a holy military order", baseValue: 240, slotType:"tabard"),
 		
@@ -227,6 +232,7 @@ public class Equippable extends GameItem {
 		"shirt_badgirl":new Equippable(key:"shirt_badgirl", name:"Bad Girl Shirt", desc:"It is a very tight-fitting shirt", baseValue: 24, slotType:"shirt"),
 		"shirt_muscle":new Equippable(key:"shirt_muscle", name:"Muscle Shirt", desc:"Big biceps and shoulders are recommended", baseValue: 24, slotType:"shirt"),
 		"shirt_tanktop":new Equippable(key:"shirt_tanktop", name:"Tanktop", desc:"Its other common name refers to domestic violence", baseValue: 12, slotType:"shirt"),
+		"shirt_halter":new Equippable(key:"shirt_halter", name:"Halter Top", desc:"For better or worse, it really shows off the shoulders", baseValue: 24, slotType:"shirt"),
 		"shirt_sailor":new Equippable(key:"shirt_sailor", name:"Sailor Shirt", desc:"It also has a small red sailor scarf\nand colorful collars", baseValue: 24, slotType:"shirt"),
 		"shirt_lacybuttonup":new Equippable(key:"shirt_lacybutton", name:"Lacy Button-Up Shirt", desc:"It also has a rounded collar", baseValue: 48, slotType:"shirt"),
 		"shirt_plaidbuttonup":new Equippable(key:"shirt_plaidbuttonup", name:"Plaid Button-Up", desc:"Often worn in combination with jeans", baseValue: 24, slotType:"shirt"),
@@ -242,6 +248,7 @@ public class Equippable extends GameItem {
 		// NOTE - JACKETS
 		
 		"jacket_windbreaker":new Equippable(key:"jacket_windbreaker", name:"Windbreaker", desc:"Only effective in temperate climates", baseValue: 12, slotType:"jacket"),
+		"jacket_sportteam":new Equippable(key:"jacket_sportteam", name:"Sports Team Jacket", desc:"Its bold colors also make it a sort of uniform", baseValue: 24, slotType:"jacket"),
 		"jacket_hightech":new Equippable(key:"jacket_hightech", name:"High-Tech Jacket", desc:"The material permits air but not water", baseValue: 240, slotType:"jacket"),
 		"jacket_knitted":new Equippable(key:"jacket_knitted", name:"Knitted Jacket", desc:"Also has very big wool-covered buttons", baseValue: 24, slotType:"jacket"),
 		
@@ -265,7 +272,7 @@ public class Equippable extends GameItem {
 		
 		"pants_jeans":new Equippable(key:"pants_jeans", name:"Jeans", desc:"Even angels and demons like to wear jeans", baseValue: 12, slotType:"pants"),
 		"pants_carpenter":new Equippable(key:"pants_carpenter", name:"Carpenter Pants", desc:"Their only weak points are the insides of their pockets", baseValue: 48, slotType:"pants"),
-		"pants_tactical":new Equippable(key:"pants_tactical", name:"Tactical Pants", desc:"Naturally, there are at least two slots for knives", baseValue: 24, slotType:"pants"),
+		"pants_tactical":new Equippable(key:"pants_tactical", name:"Tactical Pants", desc:"Naturally, there are at least two slots for knives", baseValue: 48, slotType:"pants"),
 		"pants_puffy":new Equippable(key:"pants_puffy", name:"Puffy Pants", desc:"The favorite of dancers who can't touch this", baseValue: 24, slotType:"pants"),
 		"pants_yoga":new Equippable(key:"pants_yoga", name:"Yoga Pants", desc:"They do not actually help with stretching", baseValue: 48, slotType:"pants"),
 		"pants_khakis":new Equippable(key:"pants_khakis", name:"Khakis", desc:"Accentuates sunlight and clear weather", baseValue: 12, slotType:"pants"),
@@ -282,6 +289,7 @@ public class Equippable extends GameItem {
 		"socks_tightcotton":new Equippable(key:"socks_tightcotton", name:"Tight Cottons", desc:"Hopefully not too scandalous compared to nylons", baseValue: 24, slotType:"socks"),
 		"socks_tightnylon":new Equippable(key:"socks_tightnylon", name:"Tight Nylons", desc:"Works well in combination with low muscle", baseValue: 24, slotType:"socks"),
 		"socks_lacystockings":new Equippable(key:"socks_lacystockings", name:"Lacy Stockings", desc:"They need to be held up by a girdle", baseValue: 24, slotType:"socks"),
+		"socks_stripedstockings":new Equippable(key:"socks_stripedstockings", name:"Striped Stockings", desc:"", baseValue: 24, slotType:"socks"),
 		"socks_bunchedcotton":new Equippable(key:"socks_bunchedcotton", name:"Bunched Cotton Socks", desc:"One author compared them to the feet of a clydesdale horse", baseValue: 24, slotType:"socks"),
 		
 		// NOTE - PIERCINGS

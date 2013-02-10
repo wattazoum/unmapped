@@ -10,7 +10,7 @@ public class MinionBaphomet extends Enemy {
 	
 	public MinionBaphomet() {
 		super()
-		challengeLevel = DiceRoller.nextInt(120)
+		challengeLevel = DiceRoller.binaryPool(120)
 		possibleActions = ["punch", "fireball", "bite", "claw"]
 	}
 	

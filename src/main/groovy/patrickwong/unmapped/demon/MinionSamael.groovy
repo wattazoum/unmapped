@@ -10,7 +10,7 @@ public class MinionSamael extends Enemy {
 	
 	public MinionSamael() {
 		super()
-		challengeLevel = DiceRoller.nextInt(120)
+		challengeLevel = DiceRoller.binaryPool(120)
 		possibleActions = ["headbutt", "acid", "bite", "claw"]
 	}
 	

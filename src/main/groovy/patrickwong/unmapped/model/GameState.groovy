@@ -1,8 +1,10 @@
 package patrickwong.unmapped.model
 
+import java.util.concurrent.ConcurrentSkipListSet
+
 import patrickwong.unmapped.DiceRoller
 import patrickwong.unmapped.UnmappedMain
-import patrickwong.unmapped.model.equipment.GameItem;
+import patrickwong.unmapped.model.equipment.GameItem
 import patrickwong.unmapped.town.TavernAction
 
 import com.googlecode.lanterna.gui.Action
@@ -13,6 +15,7 @@ public class GameState {
 	PlayerCharacter tempCharacter = new PlayerCharacter()
 	List<PlayerCharacter> party = new Vector<PlayerCharacter>()
 	List<Quest> quests = new Vector<Quest>()
+	Set<String> holyBooks = new ConcurrentSkipListSet<String>()
 	List<GameItem> stash = new Vector<GameItem>()
 	int partyMoney = 1000000
 	String currentLocation = "default location"
@@ -34,6 +37,8 @@ public class GameState {
 	public String getMoneyString() {
 		return UnmappedMain.moneyAsString(partyMoney)
 	}
+	
+	// NOTE - PARTY MANAGEMENT
 	
 	public PlayerCharacter getCharacter(String charName) {
 		for (PlayerCharacter pc : party) {
@@ -96,6 +101,7 @@ public class GameState {
 		}
 	}
 	
+	// NOTE - INVENTORY AND STASH MANAGEMENT
 	public boolean partyHasItem(String key) {
 		for (PlayerCharacter pc : party) {
 			GameItem gi = pc.getItem(key)
@@ -152,6 +158,51 @@ public class GameState {
 		questToAddTo.phases = questToAddTo.phases.sort()
 	}
 	
+	// NOTE - HOLY BOOK MANAGEMENT
+	public boolean hasBook(String key) {
+		return holyBooks.contains(key)
+	}
+	
+	public void addBook(String key) {
+		HolyBook hb = HolyBook.holyBooks.get(key)
+		if (hb != null) {
+			holyBooks.add(key)
+		}
+	}
+	
+	public List<HolyBook> getBooksForCombat() {
+		List<HolyBook> books = new Vector<HolyBook>()
+		holyBooks.each {
+			HolyBook hb = HolyBook.holyBooks.get(it)
+			if (hb.usableInCombat()) {
+				books.add(hb)
+			}
+		}
+		return books
+	}
+	
+	public boolean hasBooksForCombat() {
+		List<HolyBook> books = getBooksForCombat()
+		return (books.size() > 0)
+	}
+	
+	public List<HolyBook> getBooksForField() {
+		List<HolyBook> books = new Vector<HolyBook>()
+		holyBooks.each {
+			HolyBook hb = HolyBook.holyBooks.get(it)
+			if (hb.usableInField()) {
+				books.add(hb)
+			}
+		}
+		return books
+	}
+	
+	public boolean hasBooksForField() {
+		List<HolyBook> books = getBooksForField()
+		return (books.size() > 0)
+	}
+	
+	// NOTE - LOCATION MANAGEMENT
 	public Action currentLocationAction() {
 		Action actionToReturn = null
 		

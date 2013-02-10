@@ -28,7 +28,9 @@ public class VillageBlacksmithWindow extends Window {
 		addComponent(new Label("You decide to..."))
 		addComponent(new Button("...buy something from him", blacksmithShopAction))
 		addComponent(new Button("...sneak into his private quarters", spyOnBlacksmithAction))
-		addComponent(new Button("...invoke the power of X to gain insight into him"))
+		if (GameState.getInstance().hasBook("hindsight")) {
+			addComponent(new Button("...invoke the Book of Hindsight to gain insight into him", bookOfHindsightAction))
+		}
 		addComponent(new Button("...return to the village", new VillageAction(vt)))
 	}
 	private static ShopState genBlacksmithShop(String vt) {
@@ -126,6 +128,19 @@ public class VillageBlacksmithWindow extends Window {
 	}
 	def spyOnBlacksmithAction = {
 		InterfaceState.nextWindow = new WhoWillWindow("spy on the blacksmith", spyOnBlacksmithCheck)
+		UnmappedMain.closeCurrent()
+	} as Action
+	
+	def bookOfHindsightCheck = { PlayerCharacter pc ->
+		int result = pc.rollStat("SIX") + pc.rollStat("MEM")
+		result = (result / 2)
+		result += pc.rollSkill("supernatural") + pc.rollSkill("fourdimensional")
+		examineBlacksmith(result > difficulty)
+		InterfaceState.nextWindow = new VillageBlacksmithWindow(vt)
+		UnmappedMain.closeCurrent()
+	}
+	def bookOfHindsightAction = {
+		InterfaceState.nextWindow = new WhoWillWindow("invoke the Book of Hindsight", bookOfHindsightCheck)
 		UnmappedMain.closeCurrent()
 	} as Action
 }

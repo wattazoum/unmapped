@@ -61,6 +61,7 @@ public class CharacterSkill implements Comparable<CharacterSkill> {
 		skills.add(new CharacterSkill(codeName: "legal", order: 20200, name: "Legal", levelupMessage:"can handle more complex legal cases"))
 		skills.add(new CharacterSkill(codeName: "alchemy", order: 21000, name: "Alchemy", levelupMessage:"has unlocked more secrets of alchemy"))
 		skills.add(new CharacterSkill(codeName: "exegesis", order: 22000, name: "Exegesis", levelupMessage:"is more correct with exegesis of texts"))
+		skills.add(new CharacterSkill(codeName: "illumination", order: 22100, name: "Illumination", levelupMessage:"is more skilled at illuminating texts"))
 		
 		skills.add(new CharacterSkill(codeName: "supernatural", order: 30000, name: "Supernatural", levelupMessage:"knows more about the supernatural", skillDifficulty: 5))
 		skills.add(new CharacterSkill(codeName: "exorcism", order: 30100, name: "Exorcism", levelupMessage:"is more consistent with exorcism"))

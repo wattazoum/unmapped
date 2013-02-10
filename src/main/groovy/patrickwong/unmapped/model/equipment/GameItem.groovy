@@ -8,8 +8,8 @@ public class GameItem implements Comparable {
 	String name = "Default item name";
 	String desc = "This is a default item. Not much to it."
 	int baseValue = 0
-	Closure actionInField = null
-	Closure actionInCombat = null
+	ItemFieldAction actionInField = null
+	ItemCombatAction actionInCombat = null
 	int stackSize = 1
 	boolean stackable = true
 	
@@ -32,14 +32,14 @@ public class GameItem implements Comparable {
 		if (!usableInField()) {
 			return null
 		}
-		return actionInField.call(user);
+		return actionInField.useInField(user);
 	}
 	
 	public String useInCombat(PlayerCharacter user, CombatState state) {
 		if (!usableInCombat()) {
 			return null
 		}
-		return actionInCombat.call(user, state)
+		return actionInCombat.useInCombat(user, state)
 	}
 	
 	@Override
@@ -53,17 +53,16 @@ public class GameItem implements Comparable {
 		return key.hashCode()
 	}
 	
-	public boolean equals(GameItem gi) {
-		return key.equalsIgnoreCase(gi.key)
-	}
-	
+	@Override
 	public boolean equals(Object o) {
 		if (o instanceof GameItem) {
-			return equals((GameItem)o)
+			GameItem gi = (GameItem)o
+			return key.equalsIgnoreCase(gi.key)
 		}
 		return key.equalsIgnoreCase(o.toString())
 	}
 	
+	@Override
 	public int compareTo(Object o) {
 		if (o instanceof GameItem) {
 			return name.compareToIgnoreCase(((GameItem)o).name)

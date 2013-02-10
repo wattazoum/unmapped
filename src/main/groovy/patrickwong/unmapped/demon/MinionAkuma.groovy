@@ -8,7 +8,7 @@ public class MinionAkuma extends Enemy {
 	
 	public MinionAkuma() {
 		super()
-		challengeLevel = DiceRoller.nextInt(120)
+		challengeLevel = DiceRoller.binaryPool(120)
 		possibleActions = ["punch", "tetsubo", "bite", "claw"]
 	}
 	

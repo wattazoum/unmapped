@@ -30,8 +30,8 @@ public class CombatDecisionWindow extends Window {
 		
 		addComponent(new Button("Attack", attackAction))
 		addComponent(new Button("Defend", defendAction))
-		addComponent(new Button("Special Action", specialAction))
 		addComponent(new Button("Use an Item", useItemAction))
+		addComponent(new Button("Invoke a Holy Book", holyBookAction))
 		addComponent(new Button("Pass", passAction))
 		addComponent(new Button("Assess the situation", assessAction))
 		
@@ -71,13 +71,9 @@ public class CombatDecisionWindow extends Window {
 		toNextDecision(cd, state)
 	} as Action
 
-	def specialAction = {
-		cd.setClosure {
-			String action = pc.getName() + " does a special action (not implemented)"
-			return action
-		}
-		Closure toNextDecision = CombatProcessUtil.genToNextDecisionClosure()
-		toNextDecision(cd, state)
+	def holyBookAction = {
+		InterfaceState.nextWindow = new WhichBookWindow(pc, state)
+		UnmappedMain.closeCurrent()
 	} as Action
 
 	def useItemAction = {

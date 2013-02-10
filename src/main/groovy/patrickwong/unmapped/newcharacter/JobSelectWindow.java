@@ -74,7 +74,7 @@ public class JobSelectWindow extends Window {
 			tempCharacter.setFirstJob("priest");
 			String[] bonuses = {"MEM", "LOG", "VER", "DEX", "SIX"};
 			tempCharacter.statsAddExp(bonuses, 200);
-			String[] skillBonuses = {"supernatural","exegesis","socializing","meditating","praying","fourdimensional"};
+			String[] skillBonuses = {"supernatural","exegesis","illumination","meditating","praying","fourdimensional"};
 			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endJobSelect();
 		}

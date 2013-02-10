@@ -2,6 +2,7 @@ package patrickwong.unmapped.outdoors.village
 
 import patrickwong.unmapped.InterfaceState
 import patrickwong.unmapped.UnmappedMain
+import patrickwong.unmapped.model.GameState
 import patrickwong.unmapped.model.PlayerCharacter
 import patrickwong.unmapped.party.WhoWillWindow
 
@@ -21,7 +22,9 @@ public class VillageElderWindow extends Window {
 		addComponent(new Label("You decide to..."))
 		addComponent(new Button("...talk to him", talkToElderAction))
 		addComponent(new Button("...spy on him doing his daily business", spyOnElderAction))
-		addComponent(new Button("...invoke the power of X to gain special insight into him"))
+		if (GameState.getInstance().hasBook("hindsight")) {
+			addComponent(new Button("...invoke the Book of Hindsight to gain insight into him", bookOfHindsightAction))
+		}
 		addComponent(new Button("...return to the village", new VillageAction(vt)))
 	}
 	
@@ -59,6 +62,19 @@ public class VillageElderWindow extends Window {
 	}
 	def spyOnElderAction = {
 		InterfaceState.nextWindow = new WhoWillWindow("spy on the elder", spyOnElderCheck)
+		UnmappedMain.closeCurrent()
+	} as Action
+	
+	def bookOfHindsightCheck = { PlayerCharacter pc ->
+		int result = pc.rollStat("SIX") + pc.rollStat("MEM")
+		result = (result / 2)
+		result += pc.rollSkill("supernatural") + pc.rollSkill("fourdimensional")
+		examineElder(result > difficulty)
+		InterfaceState.nextWindow = new VillageElderWindow(vt)
+		UnmappedMain.closeCurrent()
+	}
+	def bookOfHindsightAction = {
+		InterfaceState.nextWindow = new WhoWillWindow("invoke the Book of Hindsight", bookOfHindsightCheck)
 		UnmappedMain.closeCurrent()
 	} as Action
 }

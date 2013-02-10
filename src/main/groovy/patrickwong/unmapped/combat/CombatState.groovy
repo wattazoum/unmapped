@@ -94,6 +94,14 @@ public class CombatState {
 		return rangeGroups.get(rand)
 	}
 	
+	public List<Enemy> getAllEnemies() {
+		List<Enemy> enemies = new Vector<Enemy>()
+		enemyGroups.each {
+			enemies.addAll(it.enemies)
+		}
+		return enemies
+	}
+	
 	public int countEnemies() {
 		int total = 0
 		for (EnemyGroup eg : enemyGroups) {

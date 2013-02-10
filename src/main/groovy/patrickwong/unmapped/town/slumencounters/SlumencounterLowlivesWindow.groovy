@@ -21,6 +21,7 @@ import com.googlecode.lanterna.gui.dialog.MessageBox
 
 public class SlumencounterLowlivesWindow extends Window {
 	private CombatState state
+	private static final int difficulty = 40
 	
 	public SlumencounterLowlivesWindow() {
 		super("Picking a fight - Lowlives")
@@ -31,7 +32,9 @@ public class SlumencounterLowlivesWindow extends Window {
 		addComponent(new Button("...walk up to them and start shoving them", genCombatAction(0)))
 		addComponent(new Button("...threaten them because they better not mess with you", threatenAction))
 		addComponent(new Button("...throw a Potion of Sapkowski to instagib them (not implemented)"))
-		addComponent(new Button("...invoke the power of X to make them respect you (not implemented)"))
+		if (GameState.getInstance().hasBook("lord")) {
+			addComponent(new Button("...invoke the Book of the Lord to make them respect you", bookOfLordAction))
+		}
 		addComponent(new Button("...leave them be, as they are clearly not worth it", new SlumDistrictAction()))
 	}
 	
@@ -98,11 +101,31 @@ public class SlumencounterLowlivesWindow extends Window {
 		result = (result / 2)
 		result += pc.rollSkill("socializing")
 		result += pc.rollSkill("intimidate")
-		if (result > 50) {
+		if (result > difficulty) {
 			MessageBox.showMessageBox(UnmappedMain.getGUI(), "Threatening the Lowlives - Success", "The lowlives back off when they see you mean business.")
 			InterfaceState.nextWindow = new SlumDistrictWindow()
 		} else {
 			MessageBox.showMessageBox(UnmappedMain.getGUI(), "Threatening the Lowlives - Failure", "The lowlives are unimpressed by your threats.\nOne of them shouts, 'You wanna do this? Let's do this!'")
+			CombatState state = genCombat()
+			state.setRange(0)
+			InterfaceState.nextWindow = new CombatWindow(state)
+		}
+		UnmappedMain.closeCurrent()
+	}
+	
+	def bookOfLordAction = {
+		InterfaceState.nextWindow = new WhoWillWindow("invoke the Book of the Lord", bookOfLordCheck)
+		UnmappedMain.closeCurrent()
+	} as Action
+	def bookOfLordCheck = { PlayerCharacter pc ->
+		int result = pc.rollStat("SIX") + pc.rollStat("TGH")
+		result = (result / 2)
+		result += pc.rollSkill("supernatural") + pc.rollSkill("intimidate")
+		if (result > difficulty) {
+			MessageBox.showMessageBox(UnmappedMain.getGUI(), "Invoking the Book of the Lord - success!", "The lowlives break down and cry at the sight of you as they stammer,\n'I'm so sorry man, you are the greatest!'")
+			InterfaceState.nextWindow = new SlumDistrictWindow()
+		} else {
+			MessageBox.showMessageBox(UnmappedMain.getGUI(), "Invoking the Book of the Lord - failure", "The lowlives stare at you for a minute, then shout,\n'WHAT! What was that you punk?' They get into stance for combat.")
 			CombatState state = genCombat()
 			state.setRange(0)
 			InterfaceState.nextWindow = new CombatWindow(state)

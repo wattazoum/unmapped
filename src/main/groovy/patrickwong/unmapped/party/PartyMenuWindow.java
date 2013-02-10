@@ -4,6 +4,7 @@ import java.util.List;
 
 import patrickwong.unmapped.model.GameState;
 import patrickwong.unmapped.model.PlayerCharacter;
+import patrickwong.unmapped.party.holybook.HolyBookListAction;
 
 import com.googlecode.lanterna.gui.Action;
 import com.googlecode.lanterna.gui.Window;
@@ -25,6 +26,7 @@ public class PartyMenuWindow extends Window {
 			leftColumn.addComponent(new Button(pc.getName(), new CharacterMenuAction(pc.getName(), returnAction)));
 		}
 		rightColumn.addComponent(new Button("Quests", new QuestListAction(returnAction)));
+		rightColumn.addComponent(new Button("Holy Books", new HolyBookListAction(returnAction)));
 		mainPanel.addComponent(leftColumn);
 		mainPanel.addComponent(rightColumn);
 		addComponent(mainPanel);

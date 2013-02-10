@@ -1,9 +1,10 @@
-package patrickwong.unmapped.party;
+package patrickwong.unmapped.party.equipment;
 
 import java.util.List;
 
 import patrickwong.unmapped.model.PlayerCharacter;
 import patrickwong.unmapped.model.equipment.GameItem;
+import patrickwong.unmapped.party.CharacterMenuAction;
 
 import com.googlecode.lanterna.gui.Action;
 import com.googlecode.lanterna.gui.Window;

@@ -1,4 +1,4 @@
-package patrickwong.unmapped.party
+package patrickwong.unmapped.party.equipment
 
 import patrickwong.unmapped.InterfaceState
 import patrickwong.unmapped.UnmappedMain

@@ -74,7 +74,7 @@ public class HobbySelectWindow extends Window {
 			tempCharacter.setHobby("reading");
 			String[] bonuses = {"LOG", "MEM", "SIX", "DEX", "WIT"};
 			tempCharacter.statsAddExp(bonuses, 200);
-			String[] skillBonuses = {"education","legal","exegesis","cooking","gathering","ancient_languages"};
+			String[] skillBonuses = {"education","legal","exegesis","cooking","illumination","ancient_languages"};
 			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endHobbySelect();
 		}

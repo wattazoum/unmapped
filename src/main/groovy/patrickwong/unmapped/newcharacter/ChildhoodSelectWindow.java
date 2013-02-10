@@ -87,7 +87,7 @@ public class ChildhoodSelectWindow extends Window {
 			tempCharacter.setChildhood("learning");
 			String[] bonuses = {"LOG", "MEM", "VER", "DEX", "STR"};
 			tempCharacter.statsAddExp(bonuses, 200);
-			String[] skillBonuses = {"legal","stoneworking","etiquette","ancient_languages","swords_straight_one","alchemy"};
+			String[] skillBonuses = {"legal","stoneworking","etiquette","ancient_languages","illumination","alchemy"};
 			tempCharacter.skillsAddExp(skillBonuses, 100);
 			endChildhood();
 		}
