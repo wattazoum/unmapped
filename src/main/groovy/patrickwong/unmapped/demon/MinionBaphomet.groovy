@@ -12,6 +12,7 @@ public class MinionBaphomet extends Enemy {
 		super()
 		challengeLevel = DiceRoller.binaryPool(120)
 		possibleActions = ["punch", "fireball", "bite", "claw"]
+		possibleRangedActions = ["fire_toss", "snake_toss"]
 	}
 	
 	@Override
@@ -24,6 +25,10 @@ public class MinionBaphomet extends Enemy {
 			return " bites at "
 		} else if (currentAction.equalsIgnoreCase("claw")) {
 			return " claws at "
+		} else if (currentAction.equalsIgnoreCase("fire_toss")) {
+			return " throws a fireball at "
+		} else if (currentAction.equalsIgnoreCase("snake_toss")) {
+			return " throws a snake at "
 		}
 		UnmappedMain.log.error("enemy $name does not have an attack verb")
 		UnmappedMain.log.error("currentAction: $currentAction")
@@ -40,6 +45,10 @@ public class MinionBaphomet extends Enemy {
 			return "piercing"
 		} else if (currentAction.equalsIgnoreCase("claw")) {
 			return "cutting"
+		} else if (currentAction.equalsIgnoreCase("fire_toss")) {
+			return "elemental"
+		} else if (currentAction.equalsIgnoreCase("snake_toss")) {
+			return "piercing"
 		}
 		UnmappedMain.log.error("enemy $name does not have a damage type")
 		return "impact"

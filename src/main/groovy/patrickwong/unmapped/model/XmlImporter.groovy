@@ -28,7 +28,7 @@ public class XmlImporter {
 		}
 		data.playerCharacter.each {
 			PlayerCharacter pc = new PlayerCharacter()
-			pc.order = it.'@order'
+			pc.order = it.'@order'.toInteger()
 			pc.name = it.'@name'
 			pc.gender = it.'@gender'
 			pc.background = it.'@background'

@@ -12,6 +12,7 @@ public class MinionSamael extends Enemy {
 		super()
 		challengeLevel = DiceRoller.binaryPool(120)
 		possibleActions = ["headbutt", "acid", "bite", "claw"]
+		possibleActions = ["buzzsaw_shot", "knife_toss"]
 	}
 	
 	@Override
@@ -24,6 +25,10 @@ public class MinionSamael extends Enemy {
 			return " bites at "
 		} else if (currentAction.equalsIgnoreCase("claw")) {
 			return " claws at "
+		} else if (currentAction.equalsIgnoreCase("buzzsaw_shot")) {
+			return " shoots a buzzsaw at "
+		} else if (currentAction.equalsIgnoreCase("knife_toss")) {
+			return " throws a knife at "
 		}
 		UnmappedMain.log.error("enemy $name does not have an attack verb")
 		UnmappedMain.log.error("currentAction: $currentAction")
@@ -40,6 +45,10 @@ public class MinionSamael extends Enemy {
 			return "piercing"
 		} else if (currentAction.equalsIgnoreCase("claw")) {
 			return "cutting"
+		} else if (currentAction.equalsIgnoreCase("buzzsaw_shot")) {
+			return "cutting"
+		} else if (currentAction.equalsIgnoreCase("knife_toss")) {
+			return "piercing"
 		}
 		UnmappedMain.log.error("enemy $name does not have a damage type")
 		return "impact"

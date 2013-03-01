@@ -28,6 +28,15 @@ public class CombatDecisionWindow extends Window {
 		
 		state.removeDecision(pc.getName())
 		
+		if (pc.isDead()) {
+			cd.setClosure {
+				String action = pc.getName() + " lays dead"
+				return action
+			}
+			Closure toNextDecision = CombatProcessUtil.genToNextDecisionClosure()
+			toNextDecision(cd, state)
+		}
+		
 		addComponent(new Button("Attack", attackAction))
 		addComponent(new Button("Defend", defendAction))
 		addComponent(new Button("Use an Item", useItemAction))
@@ -54,7 +63,7 @@ public class CombatDecisionWindow extends Window {
 				action += pc.getName() + pc.getAttackVerb() + "thin air"
 				return action
 			}
-			action = DefaultCombatUtil.doAttack(pc, target)
+			action = DefaultCombatUtil.doAttack(pc, target, pc.attackingWithRanged)
 			return action
 		}
 		Closure toNextDecision = CombatProcessUtil.genToNextDecisionClosure()

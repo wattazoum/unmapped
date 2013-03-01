@@ -6,9 +6,10 @@ import patrickwong.unmapped.UnmappedMain
 import patrickwong.unmapped.combat.CombatState
 import patrickwong.unmapped.combat.Enemy
 import patrickwong.unmapped.combat.EnemyGroup
+import patrickwong.unmapped.demon.EvilVillager
 import patrickwong.unmapped.demon.MinionBaphomet
 import patrickwong.unmapped.model.GameState
-import patrickwong.unmapped.model.QuestPhase;
+import patrickwong.unmapped.model.QuestPhase
 import patrickwong.unmapped.outdoors.OutsideWindow
 
 import com.googlecode.lanterna.gui.dialog.MessageBox
@@ -54,7 +55,7 @@ public class CombatStateVillageBaphomet extends CombatState {
 			List<Enemy> evilVillagers = new Vector<Enemy>()
 			int fillerVillagers = DiceRoller.binaryPool(20)
 			for (int i = 0; i < fillerVillagers; i++) {
-				evilVillagers.add(new Enemy(name: ("Baphomet Thrall " + (i + 1))))
+				evilVillagers.add(new EvilVillager(name: ("Baphomet Thrall " + (i + 1))))
 			}
 			enemyGroups = [
 				new EnemyGroup(groupName: "Baphomet Acolytes", distance: 0,

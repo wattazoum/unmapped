@@ -85,6 +85,7 @@ public class CharacterSkill implements Comparable<CharacterSkill> {
 		skills.add(new CharacterSkill(codeName: "woodworking", order: 63100, name: "Woodworking", levelupMessage:"is better at working with wood"))
 		skills.add(new CharacterSkill(codeName: "stoneworking", order: 63200, name: "Stoneworking", levelupMessage:"is better at working with stone"))
 		skills.add(new CharacterSkill(codeName: "metalworking", order: 63300, name: "Metalworking", levelupMessage:"is better at working with metal"))
+		skills.add(new CharacterSkill(codeName: "locksmithing", order: 64000, name: "Locksmithing", levelupMessage:"is more skilled at locksmithing"))
 		
 		skills = skills.sort()
 		return skills

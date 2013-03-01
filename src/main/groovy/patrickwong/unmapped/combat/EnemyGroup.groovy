@@ -1,6 +1,7 @@
 package patrickwong.unmapped.combat;
 
 import patrickwong.unmapped.DiceRoller
+import patrickwong.unmapped.UnmappedMain
 
 /**
  * 
@@ -12,6 +13,8 @@ public class EnemyGroup {
 	String groupName = "Group of default enemies";
 	int distance = 2;
 	List<Enemy> enemies = new Vector<Enemy>();
+	int meleeWeight = 20
+	int rangedWeight = 10
 	
 	public EnemyGroup() {
 		groupName = "Default Group";
@@ -86,20 +89,38 @@ public class EnemyGroup {
 	public String nextAction() {
 		String nextActionString = groupName + " takes its turn.\n";
 		if (distance > 0) {
-			distance -= 1;
-			nextActionString += groupName + " advances!\n";
-			if (distance <= 0) {
-				distance = 0;
+			int total = meleeWeight + rangedWeight
+			int rand = DiceRoller.nextInt(total)
+			UnmappedMain.log.debug("meleeWeight: $meleeWeight")
+			UnmappedMain.log.debug("rangedWeight: $rangedWeight")
+			UnmappedMain.log.debug("total: $total")
+			UnmappedMain.log.debug("rand: $rand")
+			if (rand < meleeWeight) {
+				UnmappedMain.log.debug("enemy group prefers melee")
+				distance -= 1;
+				nextActionString += groupName + " advances!\n";
+				if (distance <= 0) {
+					distance = 0;
+				}
+			} else {
+				UnmappedMain.log.debug("enemy group tries ranged")
+				enemies.each {
+					if (!it.isDead()) {
+						it.midRoundLogic()
+						nextActionString += it.nextRangedAction()
+						nextActionString += "\n"
+					}
+				}
 			}
 		} else {
 			for (Enemy enemy : enemies) {
 				if (!enemy.isDead()) {
-					enemy.midRoundLogic();
-					nextActionString += enemy.nextAction();
-					nextActionString += "\n";
+					enemy.midRoundLogic()
+					nextActionString += enemy.nextAction()
+					nextActionString += "\n"
 				}
 			}
 		}
-		return nextActionString;
+		return nextActionString
 	}
 }

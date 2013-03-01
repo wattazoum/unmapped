@@ -1,5 +1,6 @@
 package patrickwong.unmapped.outdoors
 
+import patrickwong.unmapped.outdoors.raubritter.RaubritterEnterAction
 import patrickwong.unmapped.outdoors.village.VillageAction
 import patrickwong.unmapped.party.PartyMenuAction
 import patrickwong.unmapped.party.camp.CampAction
@@ -18,7 +19,7 @@ public class OutsideWindow extends Window {
 		addComponent(new Button("...approach the town", new EnterGateAction()))
 		addComponent(new Button("...explore the countryside"))
 		addComponent(new Button("...visit one of the villages", new VillageAction()))
-		addComponent(new Button("...march towards one of the imposing dark castles"))
+		addComponent(new Button("...march towards the imposing dark tower of a raubritter", new RaubritterEnterAction()))
 		addComponent(new Button("...seek out a quiet lone building"))
 		addComponent(new Button("...camp out in the open", new CampAction(outdoorsCampState())))
 		addComponent(new Button("...inspect your party", new PartyMenuAction(new OutsideAction())))

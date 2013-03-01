@@ -12,6 +12,7 @@ public class MinionLillith extends Enemy {
 		super()
 		challengeLevel = DiceRoller.binaryPool(120)
 		possibleActions = ["punch", "kiss", "spear", "sword"]
+		possibleRangedActions = ["fluid_shot", "heart_shot"]
 	}
 	
 	@Override
@@ -24,6 +25,10 @@ public class MinionLillith extends Enemy {
 			return " thrusts at "
 		} else if (currentAction.equalsIgnoreCase("sword")) {
 			return " slashes at "
+		} else if (currentAction.equalsIgnoreCase("fluid_shot")) {
+			return " shoots fluids at "
+		} else if (currentAction.equalsIgnoreCase("heart_shot")) {
+			return " blows a magical heart at "
 		}
 		UnmappedMain.log.error("enemy $name does not have an attack verb")
 		UnmappedMain.log.error("currentAction: $currentAction")
@@ -40,6 +45,10 @@ public class MinionLillith extends Enemy {
 			return "piercing"
 		} else if (currentAction.equalsIgnoreCase("sword")) {
 			return "cutting"
+		} else if (currentAction.equalsIgnoreCase("fluid_shot")) {
+			return "elemental"
+		} else if (currentAction.equalsIgnoreCase("heart_shot")) {
+			return "piercing"
 		}
 		UnmappedMain.log.error("enemy $name does not have a damage type")
 		return "impact"

@@ -10,6 +10,7 @@ public class MinionAkuma extends Enemy {
 		super()
 		challengeLevel = DiceRoller.binaryPool(120)
 		possibleActions = ["punch", "tetsubo", "bite", "claw"]
+		possibleRangedActions = ["rock_toss", "axe_toss"]
 	}
 	
 	@Override
@@ -22,6 +23,10 @@ public class MinionAkuma extends Enemy {
 			return " bites at "
 		} else if (currentAction.equalsIgnoreCase("claw")) {
 			return " claws at "
+		} else if (currentAction.equalsIgnoreCase("rock_toss")) {
+			return " throws a rock at "
+		} else if (currentAction.equalsIgnoreCase("axe_toss")) {
+			return " throws an axe at "
 		}
 		UnmappedMain.log.error("enemy $name does not have an attack verb")
 		UnmappedMain.log.error("currentAction: $currentAction")
@@ -37,6 +42,10 @@ public class MinionAkuma extends Enemy {
 		} else if (currentAction.equalsIgnoreCase("bite")) {
 			return "piercing"
 		} else if (currentAction.equalsIgnoreCase("claw")) {
+			return "cutting"
+		} else if (currentAction.equalsIgnoreCase("rock_toss")) {
+			return "impact"
+		} else if (currentAction.equalsIgnoreCase("axe_toss")) {
 			return "cutting"
 		}
 		UnmappedMain.log.error("enemy $name does not have a damage type")

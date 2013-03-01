@@ -10,13 +10,17 @@ public class Enemy implements Combatant {
 	int shock = 0;
 	int pain = 0;
 	int wounds = 0;
+	boolean rangedAttack = false
 	List<String> possibleActions = ["punch"]
+	List<String> possibleRangedActions = ["rock_toss"]
 	String currentAction = "punch"
 	
 	@Override
 	public String getAttackVerb() {
 		if (currentAction.equalsIgnoreCase("punch")) {
-			return " punches at ";
+			return " punches at "
+		} else if (currentAction.equalsIgnoreCase("rock_toss")) {
+			return " throws a rock at "
 		} else {
 			UnmappedMain.log.error("enemy $name does not have an attack verb")
 			return " BLAH "
@@ -40,6 +44,8 @@ public class Enemy implements Combatant {
 	@Override
 	public String getAttackDamageType() {
 		if (currentAction.equalsIgnoreCase("punch")) {
+			return "impact"
+		} else if (currentAction.equalsIgnoreCase("rock_toss")) {
 			return "impact"
 		}
 		UnmappedMain.log.error("enemy $name does not have a damage type")
@@ -163,15 +169,29 @@ public class Enemy implements Combatant {
 	}
 	
 	public String nextAction() {
+		rangedAttack = false
 		int rand = DiceRoller.nextInt(possibleActions.size())
 		currentAction = possibleActions.get(rand)
 		Combatant target = GameState.getInstance().getRandomLivingCharacter()
 		if (target != null) {
-			return DefaultCombatUtil.doAttack(this, target)
+			return DefaultCombatUtil.doAttack(this, target, false)
 		} else {
 			return "$name jeers at the dead characters"
 		}
 	}
+	
+	public String nextRangedAction() {
+		rangedAttack = true
+		int rand = DiceRoller.nextInt(possibleRangedActions.size())
+		currentAction = possibleRangedActions.get(rand)
+		Combatant target = GameState.getInstance().getRandomLivingCharacter()
+		if (target != null) {
+			return DefaultCombatUtil.doAttack(this, target, true)
+		} else {
+			return "$name spits at the dead characters from afar"
+		}
+	}
+	
 	public void beginRoundLogic() {
 		shock += pain;
 	}

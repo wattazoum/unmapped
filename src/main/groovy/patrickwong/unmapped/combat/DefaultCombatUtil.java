@@ -49,11 +49,20 @@ public class DefaultCombatUtil {
 	}
 	
 	public static String doAttack(Combatant attacker, Combatant target) {
+		return doAttack(attacker, target, false);
+	}
+	
+	public static String doAttack(Combatant attacker, Combatant target, boolean ranged) {
 		String attackString = "";
 		attackString += attacker.getName();
 		attackString += attacker.getAttackVerb() + target.getName();
 		int attackerAccuracy = attacker.rollAttackAccuracy();
-		int targetEvade = target.rollMeleeEvade();
+		int targetEvade = 0;
+		if (ranged) {
+			targetEvade = target.rollRangeEvade();
+		} else {
+			targetEvade = target.rollMeleeEvade();
+		}
 		if (attackerAccuracy > targetEvade) {
 			attackString += " and hits";
 			int damagePoolBonus = attackerAccuracy - targetEvade;
