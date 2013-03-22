@@ -183,6 +183,10 @@ public class HolyBook implements Comparable {
 				}
 				return (user.name + " invokes the Book of the Tsunami!")
 			} as ItemCombatAction
+		),
+		"sun":new HolyBook(key:"sun",shortName:"Sun",
+			fullName: "Book of the Sun",
+			description: "Praise the sun!"
 		)
 	]
 }

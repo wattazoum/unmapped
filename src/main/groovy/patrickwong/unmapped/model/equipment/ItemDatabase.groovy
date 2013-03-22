@@ -49,6 +49,9 @@ public class ItemDatabase {
 				} as ItemCombatAction
 			),
 			
+			// NOTE - SPECIAL ITEMS
+			"special_nortoncoin":new GameItem(key:"special_nortoncoin", name:"Norton Coin", desc:"These ancient coins were minted by order of Emperor Norton. They can\nbe redeemed for special services in town. Speaking of Emperor Norton,\nnow that was a good cyning."),
+			
 			// NOTE - POTIONS
 			
 			"potion_witcher":new GameItem(key:"potion_witcher", name:"Potion of Witcher"),

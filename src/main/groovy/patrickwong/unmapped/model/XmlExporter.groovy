@@ -30,7 +30,7 @@ public class XmlExporter {
 				holybook(key: hb)
 			}
 			for (PlayerCharacter pc : gs.party) {
-				playerCharacter(order: pc.order, name: pc.name, gender: pc.gender, background: pc.background, childhood: pc.childhood, teenage: pc.teenage, adulthood: pc.adulthood, firstJob: pc.firstJob, hobby: pc.hobby, description: pc.description) {
+				playerCharacter(order: pc.order, name: pc.name, gender: pc.gender, background: pc.background, childhood: pc.childhood, teenage: pc.teenage, adulthood: pc.adulthood, firstJob: pc.firstJob, hobby: pc.hobby, description: pc.description, shock: pc.shock, pain: pc.pain, wounds: pc.wounds) {
 					for (CharacterStat st : pc.stats) {
 						stat(shortName: st.shortName, value: st.value, exp: st.exp)
 					}

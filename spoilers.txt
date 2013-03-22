@@ -1,0 +1,29 @@
+﻿COMBAT
+
+There are three types of damage: shock, pain, and wounds.
+
+Shock - "slightly shaken", "unbalanced", "stumbling", "staggered", "totally rocked", "falling down" - Shock is the type of damage that you should be most worried about, because it is a penalty to all combat rolls. If Shock gets too high then a character will be wide-open to taking the other two types of damage. One user reported that while "totally rocked", his character died from a single punch!
+
+Pain - "lightly bruised", "hurt", "feeling pain", "hurting badly", "in extreme pain", "fainting from pain", "going into shock" - Pain adds Shock every round, although this effect is slightly mitigated by character stats. If a character is starting to take Pain damage then you should be concerned.
+
+Wounds - "slightly scratched", "bloodied", "bleeding", "seriously wounded", "critically wounded", "about to die!", "amazingly still alive!" - Wounds have no effect until they exceed the Health stat, which results in death. If a character takes any amount of wounds at all, then it probably means that the character also has a lot of Shock and Pain, which is a danger sign.
+
+The most efficient way to remove damage is to get plenty of rest. Painkillers and bandages can also be used in a pinch when rest is not possible.
+
+DIFFICULTY CURVE
+
+The game's difficulty is designed like this:
+- The only way to quickly see what is easy and what is dangerous is by either reading this file, or looking at a wiki.
+- You do not know whether or not you should run from a fight until you see how the first round or two of the fight goes.
+- You must always be careful of how you approach a random encounter, even if you have seen it many times before.
+- Relying heavily on non-combat skill checks should be helpful.
+
+Each encounter has a difficulty rating, although the way the skill checks are done may vary from encounter to encounter.
+
+Each enemy has a challenge rating, and furthermore, the challenge ratings are randomized on a bell curve just like stat and skill checks. So, it is possible to meet a raubritter who is a pushover, or a random gangster in the slums who can take on a whole party.
+
+The easiest fights are to be found in the slums.
+
+Then, outdoor encounters are significantly more difficult than the slums.
+
+Raubritters are especially-tough, both in quality and in quantity.

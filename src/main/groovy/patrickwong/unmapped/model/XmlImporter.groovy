@@ -1,5 +1,6 @@
 package patrickwong.unmapped.model
 
+import patrickwong.unmapped.UnmappedMain
 import patrickwong.unmapped.model.equipment.GameItem
 import patrickwong.unmapped.model.equipment.ItemDatabase
 
@@ -38,7 +39,19 @@ public class XmlImporter {
 			pc.firstJob = it.'@firstJob'
 			pc.hobby = it.'@hobby'
 			pc.description = it.'@description'
-			
+			try {
+				pc.shock = it.'@shock'.toInteger()
+				pc.pain = it.'@pain'.toInteger()
+				pc.wounds = it.'@wounds'.toInteger()
+			} catch (Exception e) {
+				UnmappedMain.log.error("exception parsing character damage for $pc.name")
+				e.printStackTrace()
+				UnmappedMain.log.error("possible cause: loading an old save game")
+				UnmappedMain.log.error("using default values")
+				pc.shock = 0
+				pc.pain = 0
+				pc.wounds = 0
+			}
 			it.stat.each {
 				String shortName = it.'@shortName'
 				pc.setStatValue(shortName, it.'@value'.toInteger())

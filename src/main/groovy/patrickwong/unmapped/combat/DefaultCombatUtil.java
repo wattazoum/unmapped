@@ -196,7 +196,9 @@ public class DefaultCombatUtil {
 		}
 		
 		String shockString = "";
-		if (target.getShock() > 80) {
+		if (target.getShock() > 100) {
+			shockString += "falling down";
+		} else if (target.getShock() > 80) {
 			shockString += "totally rocked";
 		} else if (target.getShock() > 60) {
 			shockString += "staggered";

@@ -6,7 +6,6 @@ import patrickwong.unmapped.UnmappedMain
 import patrickwong.unmapped.combat.CombatState
 import patrickwong.unmapped.combat.Enemy
 import patrickwong.unmapped.combat.EnemyGroup
-import patrickwong.unmapped.demon.HumanGuard
 import patrickwong.unmapped.demon.HumanSergeant
 import patrickwong.unmapped.model.GameState
 import patrickwong.unmapped.outdoors.OutsideWindow

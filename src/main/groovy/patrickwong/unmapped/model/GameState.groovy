@@ -5,6 +5,7 @@ import java.util.concurrent.ConcurrentSkipListSet
 import patrickwong.unmapped.DiceRoller
 import patrickwong.unmapped.UnmappedMain
 import patrickwong.unmapped.model.equipment.GameItem
+import patrickwong.unmapped.outdoors.OutsideAction
 import patrickwong.unmapped.town.TavernAction
 
 import com.googlecode.lanterna.gui.Action
@@ -208,6 +209,8 @@ public class GameState {
 		
 		if (currentLocation.equalsIgnoreCase("tavern")) {
 			actionToReturn = new TavernAction()
+		} else if (currentLocation.equalsIgnoreCase("outside")) {
+			actionToReturn = new OutsideAction()
 		} else {
 			actionToReturn = new TavernAction()
 		}

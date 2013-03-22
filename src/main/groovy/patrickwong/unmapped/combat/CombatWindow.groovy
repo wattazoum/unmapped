@@ -80,6 +80,9 @@ public class CombatWindow extends Window {
 	} as Action
 	
 	def runAction = {
+		gs.party.each {
+			it.removeShock(1000)
+		}
 		UnmappedMain.closeCurrent()
 		state.afterRunning()
 	} as Action

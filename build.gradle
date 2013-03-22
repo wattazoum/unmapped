@@ -12,7 +12,7 @@ apply plugin: "eclipse"
 defaultTasks "clean", "installApp", "distZip"
 
 group = "patrickwong"
-version = "0.0.7-SNAPSHOT"
+version = "0.0.8-SNAPSHOT"
 mainClassName = "patrickwong.unmapped.UnmappedMain"
 
 configurations {
@@ -26,7 +26,7 @@ repositories {
 }
 
 dependencies {
-	groovy group: "org.codehaus.groovy", name: "groovy-all", version: "2.0.6"
+	groovy group: "org.codehaus.groovy", name: "groovy-all", version: "2.1.2"
 	
 	compile group: "com.googlecode.lanterna", name: "lanterna", version: "2.1.2"
 	compile group: "com.googlecode.soundlibs", name: "jorbis", version: "0.0.17-1"

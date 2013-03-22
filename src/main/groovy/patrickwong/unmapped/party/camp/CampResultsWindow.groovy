@@ -16,6 +16,7 @@ public class CampResultsWindow extends Window {
 			if (pc.isDead()) {
 				addComponent(new Label(pc.name + " is dead"))
 			} else {
+				pc.removeShock(100)
 				CampDecision decision = state.getDecision(pc.name)
 				addComponent(new Label(decision.onAction()))
 			}

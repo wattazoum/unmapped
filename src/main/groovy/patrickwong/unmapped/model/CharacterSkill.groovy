@@ -73,6 +73,7 @@ public class CharacterSkill implements Comparable<CharacterSkill> {
 		skills.add(new CharacterSkill(codeName: "woodwise", order: 41000, name: "Woodwise", levelupMessage:"is more woodwise"))
 		skills.add(new CharacterSkill(codeName: "hunting", order: 42000, name: "Hunting", levelupMessage:"is better at hunting"))
 		skills.add(new CharacterSkill(codeName: "gathering", order: 43000, name: "Gathering", levelupMessage:"is better at gathering"))
+		skills.add(new CharacterSkill(codeName: "riding", order: 44000, name: "Riding", levelupMessage:"is a more skilled rider"))
 		
 		skills.add(new CharacterSkill(codeName: "athletics", order: 50000, name: "Athletics", levelupMessage:"is better at athletics", skillDifficulty: 5))
 		skills.add(new CharacterSkill(codeName: "stealth", order: 51000, name: "Stealth", levelupMessage:"is more stealthy"))

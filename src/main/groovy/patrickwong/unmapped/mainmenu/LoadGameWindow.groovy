@@ -29,6 +29,7 @@ public class LoadGameWindow extends Window {
 	private Action genLoadGameAction(File saveFile) {
 		def theAction = {
 			XmlImporter.importXml(saveFile.getText())
+			GameState.getInstance().gameInProgress = true
 			GameState.getInstance().currentLocationAction().doAction()
 		} as Action
 		return theAction

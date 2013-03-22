@@ -4,9 +4,12 @@ import patrickwong.unmapped.InterfaceState
 import patrickwong.unmapped.UnmappedMain
 import patrickwong.unmapped.combat.CombatWindow
 import patrickwong.unmapped.model.GameState
+import patrickwong.unmapped.model.PlayerCharacter
 import patrickwong.unmapped.model.QuestPhase
+import patrickwong.unmapped.model.equipment.ItemDatabase
 import patrickwong.unmapped.outdoors.OutsideWindow
 import patrickwong.unmapped.party.PartyMenuAction
+import patrickwong.unmapped.party.WhoWillWindow
 
 import com.googlecode.lanterna.gui.Action
 import com.googlecode.lanterna.gui.Window
@@ -25,6 +28,7 @@ public class VillageMeetingWindow extends Window {
 		addComponent(new Button("...accuse the blacksmith of evil", accuseBlacksmithAction))
 		addComponent(new Button("...accuse the priest of evil", accusePriestAction))
 		addComponent(new Button("...accuse everyone in the village of evil", accuseEveryoneAction))
+		addComponent(new Button("...start a party because this village is not evil", startPartyAction))
 		addComponent(new Button("...inspect your party", new PartyMenuAction(new VillageMeetingAction(vt))))
 		addComponent(new Button("...return to the village", new VillageAction(vt)))
 	}
@@ -34,7 +38,7 @@ public class VillageMeetingWindow extends Window {
 	private static final QuestPhase beginSamael = new QuestPhase(key:"begin", order:0, description:"There is an evil being named 'Samael'\nIt dwells within the darkest parts of the soul")
 	private static final QuestPhase beginAkuma = new QuestPhase(key:"begin", order:0, description:"There is an evil being named 'Akuma-sama'\nIt is violent and hungry for human flesh")
 	
-	def accuseElderAction = {
+	Action accuseElderAction = {
 		if (vt.equalsIgnoreCase("lillith_elder")) {
 			MessageBox.showMessageBox(UnmappedMain.getGUI(), "Accusing the elder - correct", "The people gasp as the elder takes off all his clothes.\n'I just wanted to bring light into my life!' he screams.\nHe draws weapons and continues, 'Lillith curse you all!'")
 			GameState.getInstance().addQuestPhase("Lillith", beginLillith)
@@ -61,7 +65,7 @@ public class VillageMeetingWindow extends Window {
 		UnmappedMain.closeCurrent()
 	} as Action
 	
-	def accuseBlacksmithAction = {
+	Action accuseBlacksmithAction = {
 		if (vt.equalsIgnoreCase("lillith_blacksmith")) {
 			MessageBox.showMessageBox(UnmappedMain.getGUI(), "Accusing the blacksmith - correct", "A woman dripping blood between her legs steps forward\nand confirms, 'Aye, the blacksmith did this to me!'\nHe grunts and draws a weapon.")
 			GameState.getInstance().addQuestPhase("Lillith", beginLillith)
@@ -88,7 +92,7 @@ public class VillageMeetingWindow extends Window {
 		UnmappedMain.closeCurrent()
 	} as Action
 	
-	def accusePriestAction = {
+	Action accusePriestAction = {
 		if (vt.equalsIgnoreCase("lillith_priest")) {
 			MessageBox.showMessageBox(UnmappedMain.getGUI(), "Accusing the priest - correct", "The priest rationalizes, 'The pope said it was okay!'\nThe other villagers will have none of it as they prepare to cast stones.\nThe priest then draws weapons.")
 			GameState.getInstance().addQuestPhase("Lillith", beginLillith)
@@ -115,7 +119,7 @@ public class VillageMeetingWindow extends Window {
 		UnmappedMain.closeCurrent()
 	} as Action
 	
-	def accuseEveryoneAction = {
+	Action accuseEveryoneAction = {
 		if (vt.equalsIgnoreCase("lillith_all")) {
 			MessageBox.showMessageBox(UnmappedMain.getGUI(), "Accusing everyone - correct", "The whole village takes up weapons as they ask you,\n'How do you not see the beauty of Lillith's ways?'")
 			GameState.getInstance().addQuestPhase("Lillith", beginLillith)
@@ -148,4 +152,37 @@ public class VillageMeetingWindow extends Window {
 		UnmappedMain.closeCurrent()
 	} as Action
 	
+	Action startPartyAction = {
+		if (vt.equalsIgnoreCase("lillith_all")) {
+			MessageBox.showMessageBox(UnmappedMain.getGUI(), "Starting a party - wrong", "The villagers smirk at you, and one of them pokes you in the chest.\n'Oh-ho-ho, I don't think YOU can handle the way we party. Mmmmyes.'\nYou get the feeling that you are not welcome here any longer.")
+			InterfaceState.nextWindow = new OutsideWindow()
+		} else if (vt.equalsIgnoreCase("baphomet_all")) {
+			MessageBox.showMessageBox(UnmappedMain.getGUI(), "Starting a party - wrong", "The villagers look at each other, then back at you. One of them says,\n'We do not share our celebratory rituals with outsiders like you.\nBegone!' As they walk you back out of the village, another villager\nmumbles, 'Their blood probably isn't fresh anyways.'")
+			InterfaceState.nextWindow = new OutsideWindow()
+		} else if (vt.equalsIgnoreCase("samael_all")) {
+			MessageBox.showMessageBox(UnmappedMain.getGUI(), "Starting a party - wrong", "The villagers run away in horror at your suggestion that they should\nhave a party. When you look outside, there is nobody there. An\nexhaustive search reveals that the village is actually in great disrepair.\nThere is nothing more to see here.")
+			InterfaceState.nextWindow = new OutsideWindow()
+		} else if (vt.equalsIgnoreCase("akumasama_all")) {
+			MessageBox.showMessageBox(UnmappedMain.getGUI(), "Starting a party - wrong", "The villagers glare at you sternly. One of them shouts, 'Why should we\nshare food and drink with you?' After some more hostile interactions,\nyou are rushed out of the village.")
+			InterfaceState.nextWindow = new OutsideWindow()
+		} else if (vt.equalsIgnoreCase("lillith_elder") || vt.equalsIgnoreCase("baphomet_elder") || vt.equalsIgnoreCase("samael_elder") || (vt.equalsIgnoreCase("akumasama_elder"))) {
+			MessageBox.showMessageBox(UnmappedMain.getGUI(), "Starting a party - wrong", "Just when the villagers start to get excited about the prospect of a\nparty, the elder interrupts. 'Uh, we only sing songs that everyone knows.\nWe only drink beer that we know to be clean. Please don't corrupt\nour village with your strange ways.' The elder then rallies the village\nto escort you outside.")
+			InterfaceState.nextWindow = new OutsideWindow()
+		} else if (vt.equalsIgnoreCase("lillith_blacksmith") || vt.equalsIgnoreCase("baphomet_blacksmith") || vt.equalsIgnoreCase("samael_blacksmith") || (vt.equalsIgnoreCase("akumasama_blacksmith"))) {
+			MessageBox.showMessageBox(UnmappedMain.getGUI(), "Starting a party - wrong", "The blacksmith points at the structural supports of the area. He grunts,\n'Ain't safe to have a party here. Roof'll fall on ya.' The buzz is so\nthoroughly killed that you find yourself unable to stay in the village\nany longer.")
+			InterfaceState.nextWindow = new OutsideWindow()
+		} else if (vt.equalsIgnoreCase("lillith_priest") || vt.equalsIgnoreCase("baphomet_priest") || vt.equalsIgnoreCase("samael_priest") || (vt.equalsIgnoreCase("akumasama_priest"))) {
+			MessageBox.showMessageBox(UnmappedMain.getGUI(), "Starting a party - wrong", "The priest steps out in front and announces, 'Our weekly potlucks and\nchoirs are sufficient! We must be content with what we have!' He herds\nthe rest of the villagers back to their homes and shoos you out.")
+			InterfaceState.nextWindow = new OutsideWindow()
+		} else {
+			MessageBox.showMessageBox(UnmappedMain.getGUI(), "Starting a party - correct", "The village seldom gets any outside visitors, much less ones who throw\nparties. They are overjoyed at your presence and party themselves to\nexhaustion. The village elder presents you with an ancient Norton Coin,\nthen passes out.")
+			InterfaceState.nextWindow = new WhoWillWindow("receive a Norton Coin", receiveCoin)
+		}
+	} as Action
+	
+	Closure receiveCoin = { PlayerCharacter pc ->
+		pc.addItem(ItemDatabase.getItem("special_nortoncoin"))
+		InterfaceState.nextWindow = new OutsideWindow()
+		UnmappedMain.closeCurrent()
+	}
 }
